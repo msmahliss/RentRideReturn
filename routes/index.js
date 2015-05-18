@@ -20,7 +20,7 @@ module.exports = function (app, passport) {
         if (req.user) {
             res.redirect('/intro');
         } else {
-            res.render('index', {title: 'Rent Ride return', layout: false});
+            res.render('index', {title: 'Rent Ride Return', layout: false});
         }
     });
 
