@@ -932,7 +932,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 .section-container {
     display: inline-block;
-    margin-top: -20px;
+    margin-top: 0px;
 }
 
 .lt-ie9 .section-container,
@@ -943,18 +943,38 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 .section-container .dest-section{
 	width: 960px;
 	border-top :2px solid #ccc;
-	margin-top: 25px;
-	padding-top: 25px;
+	margin-top: 5px;
+	padding-top: 5px;
 }
 .section-container .pull-left{
 	float: left;	
 }
 
 .section-container .pull-right{
+	background-color: white;
 	float: right;
 }
 
 .section-container h3 {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 6px;
+  margin-top: 10px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-transform: uppercase;
+  font-size: 23px;
+  background-color: rgb(240, 240, 240);
+  font-weight: normal;
+  letter-spacing: 2.7px;
+  text-align: center;
+}
+.section-container .box {
+  width: 290px;
+  float: left;
+}
+
+.section-container .box-title {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   margin-bottom: 6px;
@@ -966,13 +986,6 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   font-weight: normal;
   letter-spacing: 2.7px;
   text-align: center;
-}
-.section-container .box {
-  width: 290px;
-  float: left;
-}
-
-.section-container .box-title {
   font-family: Times New Roman;
   font-weight: normal;
   font-style: italic;
@@ -982,11 +995,21 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 
 .section-container .dest-title {
-  font-family: futura-pt, 'Futura Std';
 /*  line-height: 38px;*/
-  font-size: 80px;
+  display: inline;
+  font-size: 40px;
   letter-spacing: 0.4px;
   text-align: left;
+  text-transform: uppercase;
+}
+
+.section-container .full-title {
+/*  line-height: 38px;*/
+  font-size: 40px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  color: rgb(77, 77, 74);
+  text-transform: uppercase;
 }
 
 .section-container .red-title {
@@ -1007,7 +1030,6 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 
 .section-container .dest-text {
-  font-family: futura-pt, 'Futura Std';
   line-height: 38px;
   font-size: 26px;
   letter-spacing: 1.4px;
@@ -1015,16 +1037,27 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 
 .section-container .pull-left .dest-img {
-	width: 400px;	
+	width: 750px;	
 	float: left;
 	padding-right: 20px;
-	border-radius: 100px;
 }
 
 .section-container .pull-right .dest-img {
-	width: 400px;	
+	width: 480px;
 	float: right;
-	border-radius: 100px;
+}
+
+.section-container .pull-left .full-img {
+	margin-top: -60px;
+	width: 960px;	
+	height: 420px;
+	float: left;
+}
+
+.section-container .pull-left .banner-img {
+	float: left;
+	margin-left: -0px;
+	height: 220px;
 }
 
 .section-container a {
