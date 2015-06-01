@@ -41,7 +41,9 @@
 </style>
 
 <link rel="stylesheet" href="/css/main.css" />
-  
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css">
 <style>
     .monoQ  {
         background-image: url('/media/images/productDetail/monogram_sprite_v2_m56577569832079182.gif');
@@ -443,13 +445,6 @@
 </head>
 <body id="categoryPlus" class="jcrew" bgcolor="#ffffff" leftmargin="0" marginwidth="0" marginheight="0" topmargin="0">
 
-<style>
-#wishlistNew, #globalHeaderWishlistNew, #wishlistTout .item-remove, #wishlistTout .carat,  .content-button-secondary-confirmation .icon {
-    background-image: url('/media/images/sprites/wishlist-sprite_v2_m56577569832109007.png');
-}
-</style>
-
-
 <header id="globalHeader" class="jcrew ">
   
     <section id="globalHeaderMessageContainer">       
@@ -515,37 +510,37 @@
   
   <section id="globalHeaderMenuContainer" class="global-header-section">
     <nav id="globalHeaderNavContainer" >
-      
       <ul id="globalHeaderNav">
               <li >
-                
                   <a href="#" name="&lpos=top_nav>women">HOME</a>
-                
               </li>
-              <li >
-                
-                  <a href="#" name="&lpos=top_nav>baby">BEACH</a>
-                
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beach<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">Far Rockaway</a></li>
+                      <li><a href="#">Jacob Riis/Fort Tilden</a></li>
+                      <li><a href="#">Jones Beach</a></li>
+                      <li><a href="#">Robert Moses/Fire Island</a></li>                  
+                  </ul>
               </li>
-              <li >
-                
-                  <a href="#" name="&lpos=top_nav>men">SNOW</a>
-                
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snow<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">Mountain Creek</a></li>
+                      <li><a href="#">Gore Mountain</a></li>
+                      <li><a href="#">Whiteface</a></li>
+                  </ul>
               </li>
-              <li >
-                
-                  <a href="#" name="&lpos=top_nav>girl">CAMPING</a>
-                
-              </li>
-              <li >
-                
-                  <a href="#" name="&lpos=top_nav>boy">HIKING</a>
-                
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adventures<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">Camping</a></li>
+                      <li><a href="#">Hiking</a></li>
+                      <li><a href="#">Storm King</a></li>
+                  </ul>
               </li>
       </ul>
-      
     </nav>
-
     
     <div id="globalHeaderSearchContainer">
       <a href="#how-it-works">How it Works <span class="caret"> &rsaquo;</span></a>
@@ -594,8 +589,93 @@
       <img class="full-img" src="img/chair.jpg">
     </div>
     <div class="dest-section pull-left">
-      <img class="banner-img" src="img/beachchair.jpg">
-      <div class="dest-text">Beach chairs<br>They're cheap and stuff <br> More stuff <br> Buy Beach</div></span>
+      <div class="panel-body order-form">
+        <form name="form" id="orderform" method="post" action="/rent" enctype="multipart/form-data" class="trueblue1 form-horizontal">
+          <div class="dest-text">Get Your Gear On</div></span>
+          <hr class="lightline">
+<!--           <ul class="listmenu listmenu33">
+          <li>
+            <div class="input-group date" id="dp3" data-date-format="mm-dd-yyyy">
+                <input class="form-control" style="border: 1px solid #ccc" placeholder="Booking Date" type="text" readonly="" name="date" value="">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            </div>
+           </li>
+          </ul> -->
+          <div>
+            <ul class="listmenu listheaders">
+              <li><span>Rental Item <i class="fa fa-caret-down"></i></span></li>
+              <li><span>Price <i class="fa fa-caret-down"></i></span></li>
+              <li><span>Quantity <i class="fa fa-caret-down"></i></span></li>
+            </ul>
+            <ul class="listmenu">
+              <li>
+                <label for="card" class="rental-item">
+                <select name="rental-item" id="beach-chair" onChange="">
+              <option value="chair">Beach Chair</option>
+              </select></label>
+              </li>
+              <li>
+                <label for="card" class="rental-item">
+                <select name="rental-item" onChange="">
+              <option value="10.00">$10</option>
+              </select></label>
+              </li>
+              <li>
+                <label for="card">
+                <select name="quantity" onChange="">
+              <option value="" selected="">0</option>
+              <option value="1"> 1 </option>
+              <option value="2"> 2 </option>
+              <option value="3"> 3 </option>
+              <option value="4"> 4 </option>
+              </select></label>
+              </li>
+            </ul>
+
+            <ul class="listmenu">
+            <li><label for="card" class="rental-item">
+              <select name="rental-item" id="beach-umbrella" onChange="">
+            <option value="Williamsburg">Beach Umbrella</option>
+            </select></label></li>
+            <li><label for="card" class="rental-item">
+              <select name="rental-item" onChange="">
+            <option value="15.00">$15</option>
+            </select></label></li>
+            <li><label for="card">
+                <select name="quantity" onChange="">
+            <option value="" selected="">0</option>
+            <option value="1" > 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+            </select></label></li>
+            </ul>
+
+            <ul class="listmenu">
+            <li><label for="card" class="rental-item">
+              <select name="rental-item" id="cooler" onChange="">
+            <option value="Williamsburg">Ice Cooler</option>
+            </select></label></li>
+            <li><label for="card" class="rental-item">
+              <select name="rental-item" onChange="">
+            <option value="15.00">$8</option>
+            </select></label></li>
+            <li><label for="card">
+                <select name="quantity" onChange="">
+            <option value="" selected="">0</option>
+            <option value="1" > 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+            </select></label></li>
+            </ul>
+            <ul class="listmenu">
+              <li><input type="submit" value="Place Order" class="button" id="paymentbtn"></li>
+            </ul>
+          </div>
+        </form>
+        <img class="order-img" src="img/beachchair.jpg">
+      </div>
     </div>    
     <div class="dest-section pull-left">
       <img class="dest-img" src="img/snow1.jpg">
@@ -908,201 +988,6 @@ LIKE BEING FIRST?
 </footer>
 
 <script>
-if (document.getElementById("welcome_all")!=null){
-    $(document).ready(function(){showWelcomeMat();});
-}
-</script>
- <script>globalObj.config.restrictedCookieCntry = false;</script>
-
-
-<script>
-var s_account="jcrewcom,jcrewglobalrollup";
-var lp_unit = "jcrew"; 
-var lp_num = "1338460";	
-var pageUrl = window.location.href;
-var brandOrCategory = '';
-if (pageUrl.indexOf("#catTitle") > 0) {
-	brandOrCategory = pageUrl.substring(pageUrl.indexOf("#catTitle") + 9);	
-	brandOrCategory = brandOrCategory.toLowerCase().replace(/[^a-z]/gi,'');
-}
-
-function omniFlashTrack(pageName) {	
-	var s=s_gi(s_account);
-	s.linkTrackVars="pageName,channel,prop9,prop10,prop11,prop12,prop13,prop14,prop19,prop23,eVar5,eVar11,eVar12,eVar13,eVar15,eVar29,eVar30,eVar33,eVar37,list1";
-	s.pageName=pageName;
-	s.channel="JCrew";
-	s.prop9="Womens";
-	s.prop10="JCrew";
-	s.prop11="Editorial Feature";
-	s.prop12="WeddingsParties:Womens:Wedding_Features";
-	s.prop13="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection";
-	s.prop14="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection";
-	s.prop19="Logged Out";
-	s.prop23="No Type";
-	s.eVar5="Editorial Feature";
-	s.eVar11=s.prop12;
-	s.eVar12=s.prop13;
-	s.eVar13=s.prop14;
-	s.eVar15=s.prop9;
-	s.eVar29=s.prop10;
-	s.eVar30="USD";
-	s.eVar33="US";
-	s.eVar37=s.prop19;
-	s.list1=s.prop23;
-	s.t();	
-}
-</script>
-
-<script>
-
-s.pageName="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection"
-s.server="p15"
-s.channel="JCrew"
-s.pageType=""
-s.prop1=""
-s.prop2=""
-s.prop3=""
-s.prop4=""
-s.prop5=""
-s.prop6=""
-s.prop7=""
-s.prop8=""
-s.prop9="Womens"
-s.prop10="JCrew"
-s.prop11="Editorial Feature"
-s.prop12="WeddingsParties:Womens:Wedding_Features"
-s.prop13="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection"
-s.prop14="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection"
-if (brandOrCategory) {
-	s.prop14=s.prop14+':'+brandOrCategory;
-}
-s.prop15=""
-s.prop16=""
-s.prop17=""
-s.prop18=""
-s.prop19="Logged Out"
-s.prop20=""
-s.prop21=""
-s.prop23="No Type"
-s.prop44=""
-
-s.campaign=""
-s.state=""
-s.zip=""
-s.events=""
-
-s.products=""
-s.purchaseID=""
-s.eVar1=""
-s.eVar2=""
-s.eVar3=""
-s.eVar4=""
-s.eVar5="Editorial Feature"
-s.eVar6=""
-s.eVar7=""
-s.eVar8=""
-s.eVar9=""
-s.eVar10=""
-s.eVar11="WeddingsParties:Womens:Wedding_Features"
-s.eVar12="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection"
-s.eVar13="WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection"
-if (brandOrCategory) {
-	s.eVar13=s.eVar13+':'+brandOrCategory;
-}
-s.eVar14=""
-s.eVar15="Womens"
-s.eVar16=""
-s.eVar17=""
-s.eVar18=""
-s.eVar19=""
-s.eVar20=""
-s.eVar21=""
-s.eVar22=""
-s.eVar23=""
-s.eVar24=""
-s.eVar25=""
-s.eVar26=""
-s.eVar27=""
-s.eVar28=""
-s.eVar29="JCrew"
-s.eVar30="USD" 
-s.eVar31=""
-s.eVar32=""
-s.eVar33="US" 
-s.eVar34=""
-s.eVar35=""
-s.eVar36=""
-s.eVar37=s.prop19;
-s.eVar38=""
-s.eVar39=""
-s.eVar44=""
-s.eVar57=""
-s.eVar62=""
-s.list1=s.prop23;
-</script>
-<script>
-var pageCacheable = true
-if (pageCacheable){
-  if (typeof HeadAjax !== 'undefined' 
-      && typeof HeadAjax.jsonResponse !== 'undefined' 
-      && typeof HeadAjax.jsonResponse.omnitureVars === 'object') {
-
-    var omnitureVars = HeadAjax.jsonResponse.omnitureVars;
-    var omEvents = omnitureVars.events;
-    if (typeof omEvents !== 'undefined') {
-        if (s.events !== 'undefined' && s.events.length > 0) {
-            s.events = s.events + "," + omEvents
-        } else {
-            s.events = omEvents;
-        }
-        delete omnitureVars.events;
-    }
-    
-    for (key in omnitureVars) {
-      if (omnitureVars.hasOwnProperty(key)) {
-        s[key] = omnitureVars[key];
-      } 
-    }
-  } else if (dynamicOmniture) {
-      s.eVar37 = 'Logged Out';
-      s.prop19 = 'Logged Out';
-      s.prop23 = 'unknown';
-      s.list1 = 'unknown';
-      s.prop44 = 'unknown';
-      s.eVar44 = 'unknown';
-      s.eVar57 = 'unknown';
-      s.server = 'unknown';
-  }
-}
-</script>
-
-<script>
-
-var s_code=s.t();if(s_code)document.write(s_code)</script>
-
-	<script>
-		var div_node = document.getElementById('lpButton');
-		if(div_node!=null)
-		{
-		div_node.id = 'lpMCButtonWomen';
-		}
-	</script>
-	
-			<script>
-				if (typeof(lpUnit)=='undefined') var lpUnit='jcrew';
-			</script>
-           
-        <script>
-              dataLayer=[];
-              dataLayer.push({
-                'pageTitle': 'WeddingsParties:Womens:Wedding_Features:WeddingsPartiesCollection',
-                'visitorType': 'No Type',
-                'userId':''
-
-              });
-            </script>
- 
-<script>
 	function getLink(loc) {
 		var body  = document.getElementsByTagName("body").item(0);
 		switch(loc) {
@@ -1114,13 +999,10 @@ var s_code=s.t();if(s_code)document.write(s_code)</script>
 		} 
 	}
 </script>
-
-<style>
-#ftr_emailsignupform {white-space: nowrap;} 
-.ftr_emailsignup {height:20px; width:202px; width:196px !ie; height:18px !ie;} 
-.ftr_submit_btn {top: 1px !ie;} 
-</style>
-
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src=src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
 
 <script>
 
