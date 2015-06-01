@@ -6,7 +6,7 @@ var path=require("path");
 
 //Database Model Requirements
 var mongoose = require("mongoose");
-var User = require('../models/orders');
+var Order = require('../models/orders');
 var ObjectID = require('mongodb').ObjectID;
 
 module.exports = function (app, passport) {
@@ -25,12 +25,24 @@ module.exports = function (app, passport) {
     });
 
     // PROFILE SECTION =========================
-    app.get('/profile', getCurrentPath, function (req, res) {
-        var user = req.user;
-        user.vidcodes = user.vidcodes.reverse();
-        user.inProgressProjects = user.inProgressProjects.reverse();
+    app.get('/order', getCurrentPath, function (req, res) {
+        var newOrder = new Order();
+        // var user = req.user;
+        newOrder.amount = req.body.amount;
+        newOrder.item = req.body.amount;
+        newOrder.orderTimestamp = (new Date()).toISOString();
+
         user.subscription = user.subscription || {};
-        res.render('profile', {user: user});
+        
+        newOrder.save(function(err){
+            if (err){
+                // send err
+            } else {
+                // do stuff
+            }
+        });
+
+        res.render('order', {user: user});
     });
 
 // =============================================================================
