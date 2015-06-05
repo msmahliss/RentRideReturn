@@ -7,9 +7,12 @@ var orderSchema = mongoose.Schema({
     created: {type: Date, default: Date.now},
     lastRequestTimestamp: {type: Date},
     username: String,
-    imageLibrary: {type: Array, default: []},
-    vidcodes: {type: Array, default: []},
-    vidcode: {
+    images: {type: Array, default: []},
+    chair_qty: Number,
+    umbrella_qty: Number,
+    cooler_qty: Number,
+    total: Number,
+    account: {
         email: {type: String, trim: true},
         password: String
     },

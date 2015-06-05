@@ -948,14 +948,17 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 	border-top :2px solid #ccc;
 	margin-top: 5px;
 	padding-top: 5px;
+/*background-image: url(http://pagead2.googlesyndication.com/pagead/imgad?id=CICAgKDTuLXEcRABGAEyCOnd6WqBwkJZ); background-size: cover; background-repeat: no-repeat;	*/
+
 }
 .section-container .pull-left{
 	float: left;	
 }
 
 .section-container .pull-right{
-	background-color: white;
+	background-image: url(/img/camping2.jpg); background-size: cover; background-repeat: no-repeat;	
 	float: right;
+	height: 500px;
 }
 
 .section-container h3 {
@@ -1103,9 +1106,23 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 
 /*******************FORM STYLING****************/
 
+.order-form {
+	background-image: url(/img/beach_pretty.jpg); background-size: cover; background-repeat: no-repeat;	
+	height: 500px;
+}
+
 .order-img {
 	float: right;
 	height: 220px;
+}
+
+.calendar-input {
+	float: left;
+}
+
+#paymentbtn {
+	float: right;
+	margin: 10px 25px 10px 0px;
 }
 
 h1 {
@@ -1221,13 +1238,14 @@ legend { margin-bottom: 5px !important;}
   margin-bottom: 0px !important;
 }
 .panel-body {
-background: #f1f5f8 url(/img/booker-rnd-sp.gif) -640px bottom no-repeat;
+	/*background: rgba(0,0,0,.5);*/
 }
 form {
-	float: left;
-  margin: 0 auto;
-  padding:0px;
-  border-radius: 1em;
+	float: right;
+	margin: 0 auto; 
+	padding: 10px 0px 0px 15px;
+	border-radius: 1em; 
+	background-color: rgba(0, 0, 0, 0.15);
 }
 
 

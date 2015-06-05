@@ -24,25 +24,30 @@ module.exports = function (app, passport) {
         }
     });
 
-    // PROFILE SECTION =========================
-    app.get('/order', getCurrentPath, function (req, res) {
-        var newOrder = new Order();
-        // var user = req.user;
-        newOrder.amount = req.body.amount;
-        newOrder.item = req.body.amount;
-        newOrder.orderTimestamp = (new Date()).toISOString();
+    app.get('/destinations', function (req, res) {
+        res.render('destinations', {title: 'Rent Ride Return', layout: false});
+    });
 
-        user.subscription = user.subscription || {};
-        
+    // PROFILE SECTION =========================
+    app.post('/placeOrder', function (req, res) {
+        var newOrder = new Order();
+        console.log(req.body);
+        newOrder.username = req.body.last_name;
+        newOrder.chair_qty = req.body.chair_qty;
+        newOrder.umbrella_qty = req.body.umbrella_qty;
+        newOrder.cooler_qty = req.body.cooler_qty;
+        newOrder.total = (10*newOrder.chair_qty)+(15*newOrder.umbrella_qty)+(8*newOrder.cooler_qty);
+        newOrder.orderTimestamp = (new Date()).toISOString();
         newOrder.save(function(err){
             if (err){
                 // send err
+                res.send(err);
             } else {
                 // do stuff
+                res.render('confirm', {order: newOrder, layout: false});
             }
         });
 
-        res.render('order', {user: user});
     });
 
 // =============================================================================
