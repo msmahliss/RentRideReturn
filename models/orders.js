@@ -6,12 +6,17 @@ var bcrypt = require('bcrypt-nodejs');
 var orderSchema = mongoose.Schema({
     created: {type: Date, default: Date.now},
     lastRequestTimestamp: {type: Date},
+    orderDate: {type: Date, default: Date.now},
     username: String,
     images: {type: Array, default: []},
-    chair_qty: Number,
-    umbrella_qty: Number,
-    cooler_qty: Number,
-    total: Number,
+    items: [
+        {
+          type: {type: String},
+          price: {type: Number},
+          qty: {type: Number, default: 0}
+        }
+    ],
+    total:  {type: Number, default: 0},
     account: {
         email: {type: String, trim: true},
         password: String
@@ -24,5 +29,5 @@ orderSchema.methods.generateHash = function (password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-// create the model for users and expose it to our app
+// create the model for orders and expose it to our app
 module.exports = mongoose.model('Order', orderSchema);

@@ -17,19 +17,24 @@
 </head>
 
 <body>
-Thanks for your order, {{order.username}}!
+
+Thanks for your order
+{{#if order.username}}
+	,{{order.username}}
+{{/if}}
+!
 
 You ordered:
 <ul>
-<li>{{order.chair_qty}} beach chairs</li>
-<li>{{order.umbrella_qty}} umbrellas</li>
-<li>{{order.cooler_qty}} coolers</li>
+{{#each order.items}}
+	<li> {{this.type}}s: {{this.qty}}</li>
+{{/each}}
 
 Order Total: ${{order.total}}
 </ul>
 Right now this is all free.
 
-Congrats on being RentRider!
+Congrats on being a RentRider! #yourock
 </body>
 
 </html>

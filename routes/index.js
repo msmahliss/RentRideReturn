@@ -9,6 +9,8 @@ var mongoose = require("mongoose");
 var Order = require('../models/orders');
 var ObjectID = require('mongodb').ObjectID;
 
+var max_orders = 100;
+
 module.exports = function (app, passport) {
 
 // =============================================================================
@@ -30,14 +32,31 @@ module.exports = function (app, passport) {
 
     // PROFILE SECTION =========================
     app.post('/placeOrder', function (req, res) {
-        var newOrder = new Order();
         console.log(req.body);
-        newOrder.username = req.body.last_name;
-        newOrder.chair_qty = req.body.chair_qty;
-        newOrder.umbrella_qty = req.body.umbrella_qty;
-        newOrder.cooler_qty = req.body.cooler_qty;
-        newOrder.total = (10*newOrder.chair_qty)+(15*newOrder.umbrella_qty)+(8*newOrder.cooler_qty);
+
+        var newOrder = new Order();
         newOrder.orderTimestamp = (new Date()).toISOString();
+        newOrder.username = req.body.last_name;
+
+        var chairOrder = {};
+        chairOrder.type = "chair";
+        chairOrder.price = 10.00;
+        chairOrder.qty = req.body.chair_qty ? req.body.chair_qty : 0;
+
+        var umbrellaOrder = {};
+        umbrellaOrder.type = "umbrella";
+        umbrellaOrder.price = 15.00;
+        umbrellaOrder.qty = req.body.umbrella_qty ? req.body.umbrella_qty: 0;
+
+        var coolerOrder = {};
+        coolerOrder.type = "cooler";
+        coolerOrder.price = 8.00;
+        coolerOrder.qty = req.body.cooler_qty ? req.body.cooler_qty : 0;
+
+        newOrder.items = [chairOrder,umbrellaOrder,coolerOrder];
+
+        newOrder.total = (chairOrder.price*chairOrder.qty) + (umbrellaOrder.price*umbrellaOrder.qty) + (coolerOrder.price*coolerOrder.qty);
+        
         newOrder.save(function(err){
             if (err){
                 // send err
@@ -68,6 +87,7 @@ module.exports = function (app, passport) {
 // MIDDLEWARE AND UTILITY FUNCTIONS  ===========================================
 // =============================================================================
 
+
 function getCurrentPath(req, res, next) {
     req.session.redirectTo = req.path;
     return next();
@@ -82,47 +102,28 @@ function getDateMMDDYYYY() {
     return m + "-" + d + "-" + y;
 }
 
-function getInstagramVideos(req, res, next) {
-    var user = req.user;
-    if (user) {
-        var apiCall = "https://api.instagram.com/v1/users/self/media/recent/?access_token=";
-        var token = user.instagram.token;
-        var media_json,
-            media,
-            next_max_id = "",
-            pages = 0,
-            urls = [];
+function getOrderStatus(item, date) {
+    //find out how many of each item has been booked for this date
 
-        function igApiCall(next_page) {
-            request.get(apiCall + token + "&max_id=" + next_page, function (err, resp, body) {
-                if (!err) {
-                    pages++;
-                    media_json = JSON.parse(body);
-                    next_page = media_json.pagination.next_max_id;
-                    media = media_json.data;
-                    var item;
+    // db.orders.aggregate(
+    //     {$unwind:"$items"},
+    //     {$match:{"items.type":"cooler"}},
+    //     {$group:{
+    //         _id: "$items.type",
+    //         total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
+    //         total_ordered:{$sum:1}
+    //     }
+    // })
 
-                    for (var i = 0; i < media.length; i++) {
-                        item = media[i];
-                        if (item.hasOwnProperty("videos") && (urls.length < 4)) {
-                            urls.push(item.videos.standard_resolution.url);
-                        }
-                    }
-                } else {
-                    res.send('error with Instagram API');
-                    return;
-                }
-                if (next_page && (pages < 5)) {
-                    igApiCall(next_page);
-                } else {
-
-                    req.user.instagram.IGvideos = urls;
-                    req.user.save();
-                    return next();
-                }
-            });
+    Order.aggregate({ $group:{_id: "$accountActive",total:{$sum:"$total"},num_orders:{$sum:1}} },
+        function (err, result) {
+        if (!result) {
+            //none ordered. max avail.
+            res.send("No orders");
+        } else {
+            //aggregate by this item
+            console.log(result);
+            res.end();
         }
-
-        igApiCall(next_max_id);
-    }
+    });
 }
