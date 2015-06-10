@@ -30,6 +30,14 @@ module.exports = function (app, passport) {
         res.render('destinations', {title: 'Rent Ride Return', layout: false});
     });
 
+    app.get('/confirm/:order', function (req, res) {
+        var order = req.params.order;
+        console.log(order.length);
+
+        res.render('confirm', {order: order, layout: false});
+    });
+
+
     // PROFILE SECTION =========================
     app.post('/placeOrder', function (req, res) {
         console.log(req.body);
@@ -50,7 +58,7 @@ module.exports = function (app, passport) {
 
         var coolerOrder = {};
         coolerOrder.type = "cooler";
-        coolerOrder.price = 8.00;
+        coolerOrder.price = 10.00;
         coolerOrder.qty = req.body.cooler_qty ? req.body.cooler_qty : 0;
 
         newOrder.items = [chairOrder,umbrellaOrder,coolerOrder];
@@ -63,7 +71,9 @@ module.exports = function (app, passport) {
                 res.send(err);
             } else {
                 // do stuff
-                res.render('confirm', {order: newOrder, layout: false});
+                res.redirect('confirm/:'+newOrder);
+
+                // res.render('confirm', {order: newOrder, layout: false});
             }
         });
 
