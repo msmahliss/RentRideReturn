@@ -33,16 +33,33 @@ module.exports = function (app, passport) {
     app.get('/confirm/:order', function (req, res) {
         var order = req.params.order;
         console.log(order.length);
-
         res.render('confirm', {order: order, layout: false});
     });
 
+    app.get('/paymentConfirm', function (req, res) {
+        //go query the order by ordernum and mark orderStatus as paid
+        console.log("orderNum = "+req.session.orderNumber);
+        
+        Order.findOne({orderNumber: req.session.orderNumber}, function(err,order){
+            if(!err){
+                console.log(order);
+            }
 
-    // PROFILE SECTION =========================
+        });
+
+        res.render('paymentConfirm', {title: 'Rent Ride Return', layout: false});
+    });
+
+    app.get('/payment', function (req, res) {
+        res.render('payment', {title: 'Rent Ride Return', layout: false});
+    });
+
+
+    // ORDER SECTION =========================
     app.post('/placeOrder', function (req, res) {
         console.log(req.body);
-
         var newOrder = new Order();
+        newOrder.orderNumber = Math.floor(Math.random()*1000000);
         newOrder.orderTimestamp = (new Date()).toISOString();
         newOrder.username = req.body.last_name;
 
@@ -51,32 +68,45 @@ module.exports = function (app, passport) {
         chairOrder.price = 10.00;
         chairOrder.qty = req.body.chair_qty ? req.body.chair_qty : 0;
 
+        var fancyChairOrder = {};
+        fancyChairOrder.type = "chair";
+        fancyChairOrder.price = 13.00;
+        fancyChairOrder.qty = req.body.fancyChair_qty ? req.body.fancyChair_qty : 0;
+
         var umbrellaOrder = {};
         umbrellaOrder.type = "umbrella";
         umbrellaOrder.price = 15.00;
         umbrellaOrder.qty = req.body.umbrella_qty ? req.body.umbrella_qty: 0;
 
-        var coolerOrder = {};
-        coolerOrder.type = "cooler";
-        coolerOrder.price = 10.00;
-        coolerOrder.qty = req.body.cooler_qty ? req.body.cooler_qty : 0;
+        // var coolerOrder = {};
+        // coolerOrder.type = "cooler";
+        // coolerOrder.price = 10.00;
+        // coolerOrder.qty = req.body.cooler_qty ? req.body.cooler_qty : 0;
 
-        newOrder.items = [chairOrder,umbrellaOrder,coolerOrder];
+        newOrder.items = [chairOrder,fancyChairOrder,umbrellaOrder];
 
-        newOrder.total = (chairOrder.price*chairOrder.qty) + (umbrellaOrder.price*umbrellaOrder.qty) + (coolerOrder.price*coolerOrder.qty);
+        newOrder.total = (chairOrder.price*chairOrder.qty) +
+        (fancyChairOrder.price*fancyChairOrder.qty)+
+        (umbrellaOrder.price*umbrellaOrder.qty);
         
         newOrder.save(function(err){
             if (err){
                 // send err
                 res.send(err);
             } else {
+                req.session.orderNumber =  newOrder.orderNumber;
+                res.render('payment', {orderNumber:newOrder.orderNumber, orderTotal:newOrder.total, layout: false});
                 // do stuff
-                res.redirect('confirm/:'+newOrder);
-
+                // res.redirect('confirm/:'+newOrder);
                 // res.render('confirm', {order: newOrder, layout: false});
             }
         });
 
+    });
+
+    app.get('/getOrderStatus', function(req, res){
+        var result = getOrderStatus();
+        res.send(result);
     });
 
 // =============================================================================
@@ -115,25 +145,34 @@ function getDateMMDDYYYY() {
 function getOrderStatus(item, date) {
     //find out how many of each item has been booked for this date
 
-    // db.orders.aggregate(
-    //     {$unwind:"$items"},
-    //     {$match:{"items.type":"cooler"}},
-    //     {$group:{
-    //         _id: "$items.type",
-    //         total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
-    //         total_ordered:{$sum:1}
-    //     }
-    // })
-
-    Order.aggregate({ $group:{_id: "$accountActive",total:{$sum:"$total"},num_orders:{$sum:1}} },
+    db.orders.aggregate(
+        {$unwind:"$items"},
+        {$match:{"items.type":"cooler"}},
+        {$group:{
+            _id: "$items.type",
+            total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
+            total_ordered:{$sum:"$items.qty"}
+        }},
         function (err, result) {
         if (!result) {
             //none ordered. max avail.
-            res.send("No orders");
+            return null;
         } else {
             //aggregate by this item
             console.log(result);
-            res.end();
+            return result;
         }
     });
+    
+    // Order.aggregate({ $group:{_id: "$accountActive",total:{$sum:"$total"},num_orders:{$sum:1}} },
+    //     function (err, result) {
+    //     if (!result) {
+    //         //none ordered. max avail.
+    //         return null;
+    //     } else {
+    //         //aggregate by this item
+    //         console.log(result);
+    //         return result;
+    //     }
+    // });
 }

@@ -6,6 +6,8 @@ var bcrypt = require('bcrypt-nodejs');
 var orderSchema = mongoose.Schema({
     created: {type: Date, default: Date.now},
     lastRequestTimestamp: {type: Date},
+    orderNumber: {type: Number},
+    orderStatus: {type: String, default:"Unpaid"},
     orderDate: {type: Date, default: Date.now},
     username: String,
     images: {type: Array, default: []},

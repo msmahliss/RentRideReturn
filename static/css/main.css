@@ -1122,6 +1122,22 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 	float: left;
 }
 
+.glyphicon-calendar{
+    float: right;
+    margin-top: -29px;
+    margin-right: 4px;
+    z-index: 100000;
+}
+
+#subTotal {
+	float: left;
+	margin: 10px 25px 10px 0px;
+	border: none;
+	border-radius: 2px;
+	padding: 9px 17px;
+	background-color: #16CE99;
+}
+
 #paymentbtn {
 	float: right;
 	margin: 10px 25px 10px 0px;
@@ -1130,6 +1146,80 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 	padding: 9px 17px;
 	background-color: #16CE99;
 }
+
+.rental-item{
+  z-index: 1;
+  position: relative;
+  float: left;
+  border: 3px solid #eee;
+  width: 144px;
+  height: 40px;
+  padding: 10px !important;
+  margin: 0px !important;
+}
+
+.rental-qty{
+  z-index: 1;
+  position: relative;
+  float: left;
+  border: 3px solid #eee;
+  width: 100px;
+  height: 40px;
+  padding: 10px !important;
+  margin: 0px !important;
+}
+
+.rental-location{
+  z-index: 1;
+  position: relative;
+  float: left;
+  border: 3px solid #eee;
+  width: 200px;
+  height: 40px;
+  padding: 10px !important;
+  margin: 0px !important;
+}
+
+.trueblue1 ul.listmenu li{
+	padding-left :16px;
+	margin:1px 5px;
+	list-style:none;
+	width:30%;
+	min-weight:110px;
+	float:left;
+	text-align: left;
+}
+
+.trueblue1 ul.listmenu li span {
+	text-align: left; 
+	font-size: 15px; 
+	font-weight: bold; 
+	float: left; 
+	width: 100%; 
+	padding-left: 2px;
+}
+
+button, input[type="text"], select, textarea {
+ font-size: 100%;
+  margin: 0;
+  vertical-align: baseline;
+  /* width: 110px; */
+  padding: 2px 30px 2px 2px;
+  border: none;
+  background: none;
+}
+
+
+.datepicker table tr td, .datepicker table tr th {text-align: center;
+  width: 25px !important;
+  height: 25px !important;
+  border-radius: 4px;
+  border: 0;}
+
+.datepicker.dropdown-menu th, .datepicker.dropdown-menu td { padding: 2px 2px !important;}
+
+
+/*******************END FORM STYLING****************/
 
 h1 {
   margin-top: 0;
@@ -1158,42 +1248,6 @@ h1 {
 .form-group .col2 { width:2%; float:left;}
 .form-group .col3 { width:28%; float:left;}
 
-.datepicker table tr td, .datepicker table tr th {text-align: center;
-  width: 25px !important;
-  height: 25px !important;
-  border-radius: 4px;
-  border: 0;}
-
-.datepicker.dropdown-menu th, .datepicker.dropdown-menu td { padding: 2px 2px !important;}
-div#dp3 {
-  position: relative;
-  display: table;
-  border-collapse: separate;
-  width: 100% !important;
-  float: left !important;
-}
-#leave1 { width:100%; float:left;}
-#leave2 { width:100%; float:left;}
-
-#leave1 div { width:100%; float:left;}
-#leave2 div{ width:100%; float:left;}
-
-#leave1 input { float:left; }
-#leave1 label{ background: none !important;
-  padding: 0px;
-  border: none;
-  margin: 0px;
-  height: 25px;
-  line-height: 22px;
-  margin-left: 10px; }
-#leave2 input { float:left; }
-#leave2 label{ background: none !important;
-  padding: 0px;
-  border: none;
-  margin: 0px;
-  height: 25px;
-  line-height: 22px;
-  margin-left: 10px;}
 #title_2
 {
   
@@ -1407,156 +1461,6 @@ html.ie9 .trueblue1 input {
 	}
 .trueblue1 ul{padding:0px; margin:1px 0px; list-style:none; width:100%;}
 
-
-
-.trueblue1 ul.listmenu li label{
-	width: 150px; 
-	height: 40px; 
-	white-space: nowrap;
-}
-.trueblue1 ul.listmenu li label{
-  width: 150px;
-  border: 3px solid #eee;
-  height: 40px;
-  white-space: nowrap;
-}
-
-.trueblue1 ul.listmenu li label.rental-item{
-/*z-index: 1;
-  cursor: pointer;
-  position: relative;
-  float: left;
-  background: transparent url(img/drop-down-bg.png?v=1.3) -86px -367px no-repeat;
-  border: 3px solid #eee;
-  width: 210px;
-  height: 41px;
-  white-space: nowrap;
-*/
-}
-.trueblue1 ul.mainul li ul.innerul li.term { width:98% !important; float:left; }
-
-.trueblue1 ul.listmenu li label.going_to{
-z-index: 1;
-  cursor: pointer;
-  position: relative;
-  float: left;
-  background: transparent url(img/drop-down-bg.png?v=1.3) -86px -367px no-repeat;
-  border: 3px solid #eee;
-  width: 210px;
-  height: 41px;
-  white-space: nowrap;
-
-}
-
-.trueblue1 ul.listmenu li label select {
-  width: 144px !important;
-  height: 37px;
-  padding: 0px !important;
-  margin: 0px !important;
-  font-weight: normal;
-  font-size: 13px;
-}
-/*.trueblue1 ul.listmenu li label.rental-item select,.trueblue1 ul.listmenu li label.going_to select {
-	width: 205px !important;
-  height: 40px;
-  padding: 0px !important;
-  margin: 0px !important;
-  font-weight: normal;
-  font-size: 13px;
-}*/
-.trueblue1 ul.mainul li label select {
-width:152px !important;
-  height: 30px;
-}
-#orderform ul.mainul li label{ z-index: 1;
-  cursor: pointer;
-  position: relative;
-  float: left;
-  background: transparent url(img/drop-down-bg.png?v=1.3) 0px 0px no-repeat;
-  width: 73px !important;
-  height: 36px;
-  white-space: nowrap; } 
-#orderform ul.mainul li label select {
-width: 82px !important;
-  height: 35px;
-  padding: 0px !important;
-  margin: 0px !important;
-}
-#orderform ul.mainul li label input.zipcode{
-width:100px !important;
-}
-
-#paymentbutton {
-
-  display: block !important;
-  background: transparent url(img/purchased-btn.png) 0px 0px no-repeat;
-  color: #ffffff !important;
-  font-family: din-web-jetblue, Arial, Helvetica, sans-serif !important;
-  font-size: 0px !important;
-  font-weight: 700 !important;
-  text-align: center !important;
-  text-transform: uppercase !important;
-  line-height: 25px !important;
-  width: 148px !important;
-  height: 35px !important;
-  border: 0 !important;
-  margin: 0 !important;
-  padding: 3px 0 0 0 !important;
-}
-#paymentbutton1 {
-
-  display: block !important;
-  background: transparent url(img/modify-ticket.png) 0px 0px no-repeat;
-  color: #ffffff !important;
-  font-family: din-web-jetblue, Arial, Helvetica, sans-serif !important;
-  font-size: 0px !important;
-  font-weight: 700 !important;
-  text-align: center !important;
-  text-transform: uppercase !important;
-  line-height: 25px !important;
-  width: 224px !important;
-  height: 35px !important;
-  border: 0 !important;
-  margin: 0 !important;
-  padding: 3px 0 0 0 !important;
-}
-
-/*
-input[type="text"],input[type="submit"], .js .booker select {
-  display: none;
- padding:1px 5px;
-  border: 0;
-  outline: 0;
-}
-*/
-
-button, input[type="text"], select, textarea {
- font-size: 100%;
-  margin: 0;
-  vertical-align: baseline;
-  /* width: 110px; */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 2px 30px 2px 2px;
-  border: none;
-  background: none;
-}
-#purchaseheader {
-  font-size: 18px;
-  border-right: 1px solid grey;
-  padding-right: 10px;
-  font-weight: 700;
-  width: 43%;
-  float: left;
-}
-#paymentform {
-padding: 5px;
-  border: 1px solid #999;
-  float: left;
-  text-align:left;
-  width:100%;
-}
 #ticketsbyphone {
   font-size: 14px;
   margin-top: 3px;
@@ -1594,420 +1498,6 @@ width: 100%;
   width: 100%;
   float: left;
 }
-.trueblue1 ul.listmenu11 li strong { float:left; line-height:35px;}
-
-@media (max-width: 2100px) {
-.trueblue1 ul.listmenu li{ padding:0px; margin:1px 5px; list-style:none; width:30%; min-weight:110px; float:left; text-align: left;}
-
-
-.trueblue1 ul.listmenu33 li { height: 39px;   line-height: 38px; }
-.trueblue1 ul.listmenu li span {text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-float: left;
-  width: 100%;
-  padding-left: 2px; }
-
-.trueblue1 ul.listmenu1 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 48%;
-  min-width:185px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.term label { z-index: 1;
-  cursor: pointer !important;
-  position: relative !important;
-  float: left !important;
-  background: none !important;
-  height: auto !important;
-  width: auto !important;
-  white-space: nowrap !important;
-  margin-left: 5px !important;
-  margin-top: -4px !important;}
-
-.trueblue1 ul.listmenu11 li{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 27%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-.trueblue1 ul.listmenu11 li.passenger{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 12%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.trueblue1 ul.mainul li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 40%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li ul.innerul li{ padding: 0px;
-  margin: 5px 3px;
-  list-style: none;
-  width: 48%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li.first{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 65%;
-  float: left;
-  line-height: 22px;}
-.trueblue1 ul.mainul li.last{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 35%;
-  float: left;
-  line-height: 22px;}
-}
-
-@media (max-width: 1200px) {
-.trueblue1 ul.listmenu li{ padding:0px; margin:1px 5px; list-style:none; width:98%; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu li span.input-group-addon {
-  width: auto !important;
-  float: left !important;
-height: 40px;
-  padding: 10px;
-}
-
-.trueblue1 ul.listmenu33 li { height: 39px;   line-height: 38px; }
-.trueblue1 ul.listmenu li span {text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-float: left;
-  width: 100%;
-  padding-left: 2px; }
-
-.trueblue1 ul.listmenu1 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 48%;
-  min-width:185px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.term label { z-index: 1;
-  cursor: pointer !important;
-  position: relative !important;
-  float: left !important;
-  background: none !important;
-  height: auto !important;
-  width: auto !important;
-  white-space: nowrap !important;
-  margin-left: 5px !important;
-  margin-top: -4px !important;}
-
-.trueblue1 ul.listmenu11 li{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 26%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-.trueblue1 ul.listmenu11 li.passenger{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 15%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.trueblue1 ul.mainul li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 40%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li ul.innerul li{ padding: 0px;
-  margin: 5px 3px;
-  list-style: none;
-  width: 48%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li.first{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 65%;
-  float: left;
-  line-height: 22px;}
-.trueblue1 ul.mainul li.last{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 35%;
-  float: left;
-  line-height: 22px;}
-}
-
-@media (max-width: 820px) {
-.trueblue1 ul.listmenu li{ padding:0px; margin:1px 5px; list-style:none; width:98%; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu li span.input-group-addon {
-  width: auto !important;
-  float: left !important;
-height: 40px;
-  padding: 10px;
-}
-
-.trueblue1 ul.listmenu33 li { height: 39px;   line-height: 38px; }
-.trueblue1 ul.listmenu li span {text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-float: left;
-  width: 100%;
-  padding-left: 2px; }
-
-.trueblue1 ul.listmenu1 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 48%;
-  min-width:185px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.term label { z-index: 1;
-  cursor: pointer !important;
-  position: relative !important;
-  float: left !important;
-  background: none !important;
-  height: auto !important;
-  width: auto !important;
-  white-space: nowrap !important;
-  margin-left: 5px !important;
-  margin-top: -4px !important;}
-
-.trueblue1 ul.listmenu11 li{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 26%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-.trueblue1 ul.listmenu11 li.passenger{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 15%;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.trueblue1 ul.mainul li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 40%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li ul.innerul li{ padding: 0px;
-  margin: 5px 3px;
-  list-style: none;
-  width: 97%;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li.first{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 65%;
-  float: left;
-  line-height: 22px;}
-.trueblue1 ul.mainul li.last{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 35%;
-  float: left;
-  line-height: 22px;}
-}
-
-
-@media (max-width: 620px) {
-.trueblue1 ul.listmenu33 li{ padding:0px; margin:1px 5px; list-style:none; width:64% !important; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu li{ padding:0px; margin:1px 5px; list-style:none; width:30%; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu33 li { height: 39px;   line-height: 38px; }
-.trueblue1 ul.listmenu li span {text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-float: left;
-  width: 100%;
-  padding-left: 2px; }
-
-.trueblue1 ul.listmenu1 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  min-width:185px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-.term label { z-index: 1;
-  cursor: pointer !important;
-  position: relative !important;
-  float: left !important;
-  background: none !important;
-  height: auto !important;
-  width: auto !important;
-  white-space: nowrap !important;
-  margin-left: 5px !important;
-  margin-top: -4px !important;}
-
-.trueblue1 ul.listmenu11 li{   padding: 0px;
-  margin: 5px 5px;
-  list-style: none;
-  width: 23% !important;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.trueblue1 ul.mainul li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 40% !important;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li ul.innerul li{ padding: 0px;
-  margin: 5px 3px;
-  list-style: none;
-  width: 48% !important;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li.first{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  float: left;
-  line-height: 22px;}
-.trueblue1 ul.mainul li.last{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  float: left;
-  line-height: 22px;}
-}
-
-@media (max-width: 620px) {
-.trueblue1 ul.listmenu33 li{ padding:0px; margin:1px 5px; list-style:none; width:64% !important; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu li span.input-group-addon {
-  width: auto !important;
-  float: none !important;
-}
-.trueblue1 ul.listmenu li{ padding:0px; margin:1px 5px; list-style:none; width:95% !important; min-weight:110px; float:left; text-align: left;}
-
-.trueblue1 ul.listmenu5 li {display:none !important;}
-.trueblue1 ul.listmenu li span {text-align: left;
-  font-size: 15px;
-  font-weight: bold;
-float: left;
-  width: 100%;
-  padding-left: 2px; }
-
-
-.term label { z-index: 1;
-  cursor: pointer !important;
-  position: relative !important;
-  float: left !important;
-  background: none !important;
-  height: auto !important;
-  width: auto !important;
-  white-space: nowrap !important;
-  margin-left: 5px !important;
-  margin-top: -4px !important;}
-.trueblue1 ul.listmenu1 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  min-width:185px;
-  float: left;
-  height: 50px;
-  line-height: 22px;}
-.trueblue1 ul.listmenu1 li a{  width: 100% !important;
-  float: left;
-  margin: 3px;
-  text-align: left; }
-
-.trueblue1 ul.listmenu11 li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  min-width:50px;
-  float: left;
-  height: 40px;
-  line-height: 22px;}
-
-
-.trueblue1 ul.mainul li{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 40% !important;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li ul.innerul li{ padding: 0px;
-  margin: 5px 3px;
-  list-style: none;
-  width: 98% !important;
-  float: left;
-  line-height: 22px;}
-
-.trueblue1 ul.mainul li.first{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  float: left;
-  line-height: 22px;}
-.trueblue1 ul.mainul li.last{   padding: 0px;
-  margin: 5px 0px;
-  list-style: none;
-  width: 100% !important;
-  float: left;
-  line-height: 22px;}
-
-.form-group .col1 { width:100% !important; float:left;}
-.form-group .col2 { width:5%; float:left; display:none;}
-.form-group .col3 { width:100% !important; float:left;}
-}
-
-
-
-
-
-
 
 /*--------------------*/
 
