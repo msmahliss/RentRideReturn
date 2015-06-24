@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
+
 	$('.js-rental-qty').change(function(){
 		//update order subtotal
 		//TODO: fix this so instead of price array there is a single point of truth from form prices

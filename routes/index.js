@@ -22,18 +22,22 @@ module.exports = function (app, passport) {
         if (req.user) {
             res.redirect('/intro');
         } else {
-            res.render('index', {title: 'Rent Ride Return', layout: false});
+            res.render('index', {title: 'Rent Ride Return'});
         }
     });
 
     app.get('/destinations', function (req, res) {
-        res.render('destinations', {title: 'Rent Ride Return', layout: false});
+        res.render('destinations', {title: 'Rent Ride Return'});
+    });
+
+    app.get('/winter', function (req, res) {
+        res.render('winter', {title: 'Rent Ride Return'});
     });
 
     app.get('/confirm/:order', function (req, res) {
         var order = req.params.order;
         console.log(order.length);
-        res.render('confirm', {order: order, layout: false});
+        res.render('confirm', {order: order});
     });
 
     app.get('/paymentConfirm', function (req, res) {
@@ -47,11 +51,11 @@ module.exports = function (app, passport) {
 
         });
 
-        res.render('paymentConfirm', {title: 'Rent Ride Return', layout: false});
+        res.render('paymentConfirm', {title: 'Rent Ride Return'});
     });
 
     app.get('/payment', function (req, res) {
-        res.render('payment', {title: 'Rent Ride Return', layout: false});
+        res.render('payment', {title: 'Rent Ride Return'});
     });
 
 
@@ -61,7 +65,7 @@ module.exports = function (app, passport) {
         var newOrder = new Order();
         newOrder.orderNumber = Math.floor(Math.random()*1000000);
         newOrder.orderTimestamp = (new Date()).toISOString();
-        newOrder.username = req.body.last_name;
+        newOrder.orderDate = req.body.date;
 
         var chairOrder = {};
         chairOrder.type = "chair";
@@ -95,7 +99,7 @@ module.exports = function (app, passport) {
                 res.send(err);
             } else {
                 req.session.orderNumber =  newOrder.orderNumber;
-                res.render('payment', {orderNumber:newOrder.orderNumber, orderTotal:newOrder.total, layout: false});
+                res.render('payment', {orderNumber:newOrder.orderNumber, orderTotal:newOrder.total});
                 // do stuff
                 // res.redirect('confirm/:'+newOrder);
                 // res.render('confirm', {order: newOrder, layout: false});
@@ -133,7 +137,7 @@ function getCurrentPath(req, res, next) {
     return next();
 }
 
-function getDateMMDDYYYY() {
+function formatDate() {
     var date = new Date();
 
     var m = (date.getMonth() + 1).toString();

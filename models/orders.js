@@ -8,7 +8,7 @@ var orderSchema = mongoose.Schema({
     lastRequestTimestamp: {type: Date},
     orderNumber: {type: Number},
     orderStatus: {type: String, default:"Unpaid"},
-    orderDate: {type: Date, default: Date.now},
+    orderDate: {type: Date},
     username: String,
     images: {type: Array, default: []},
     items: [
