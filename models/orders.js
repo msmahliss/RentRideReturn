@@ -9,6 +9,7 @@ var orderSchema = mongoose.Schema({
     orderNumber: {type: Number},
     orderStatus: {type: String, default:"Unpaid"},
     orderDate: {type: Date},
+    orderLocation: String,
     username: String,
     images: {type: Array, default: []},
     items: [

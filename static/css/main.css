@@ -3,7 +3,10 @@
 
 
 #globalHeaderLogo {
+	display:block;
 	text-align: center;
+	margin: 10px 0px 1px 0px;
+	padding: 0px;
 }
 
 /* STYLES FOR SLIDESHOW */
@@ -1068,7 +1071,6 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 
 .section-container .box-text {
-  display: inline-block;
   font-family: futura-pt, 'Futura Std';
   font-size: 14px;
   letter-spacing: 1.4px;
@@ -1139,7 +1141,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 #universalBar {
     margin: 0;
     padding: 0;
-    background-image: url("../img/topstripe_background.png");
+    background-image: url("/img/topstripe_background.png");
     background-repeat: repeat-x;
 }
 
@@ -1183,7 +1185,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 #universalBarMenu ul li a:hover
 {
-    background: url("../img/topstripe_selected.png") no-repeat 0 0;
+    background: url("/img/topstripe_selected.png") no-repeat 0 0;
     color: #656565;
 
 }
@@ -1195,10 +1197,10 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 #universalBarMenu ul  li#universalBarCurrent a{
     height:53px; width:63px;
-    background: url("../img/topstripe_current.png") no-repeat 0 0;
+    background: url("/img/topstripe_current.png") no-repeat 0 0;
 }
 #universalBarMenu ul  li#universalBarCurrent a:hover{
-    background: url("../img/topstripe_current.png") no-repeat 0 0;
+    background: url("/img/topstripe_current.png") no-repeat 0 0;
 }
 
 
@@ -1215,24 +1217,18 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 #universalBarMenu #universalBarMenuRight  li a:hover {
     color: #ccc;
 }
-#universalBarHotText  {
+#universalBarHotText h1{
     position: absolute;
     width: 100%;
     left: 0;
     text-align: center;
     margin: auto;
     padding-top: 0px;
-}
-#universalBarHotText h1 {
     margin: 0;
     margin-top:15px;
     font-size: 16px;
     color: #5e5e5e;
-}
-#universalBarHotText p {
-    margin: 0px;
-    line-height:12px;
-    font-size: 12px;
+    text-transform: uppercase;
 }
 
 #universalBarSocial ul {
@@ -1294,22 +1290,16 @@ a.invisButton{ cursor: hand; cursor: pointer;};
     z-index: 100000;
 }
 
-#subTotal {
-	float: left;
-	margin: 10px 25px 10px 0px;
-	border: none;
-	border-radius: 2px;
-	padding: 9px 17px;
-	background-color: #16CE99;
-}
 
-#paymentbtn {
+.pay-button {
 	float: right;
 	margin: 10px 25px 10px 0px;
-	border: none;
+	border: 3px solid rgb(56, 111, 111);
 	border-radius: 2px;
 	padding: 9px 17px;
-	background-color: #16CE99;
+	background-color: rgba(255,255,255,.75);
+	color: #363738;
+	font-weight: bold;
 }
 
 .rental-item{
@@ -1339,7 +1329,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   position: relative;
   float: left;
   border: 3px solid #eee;
-  width: 100px;
+  width: 70px;
   height: 40px;
   padding: 10px !important;
   margin: 0px !important;
@@ -1356,17 +1346,16 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   margin: 0px !important;
 }
 
-.trueblue1 ul.listmenu li{
+form ul.listmenu li{
 	padding-left :16px;
 	margin:1px 5px;
 	list-style:none;
-	width:30%;
 	min-weight:110px;
 	float:left;
 	text-align: left;
 }
 
-.trueblue1 ul.listmenu li span {
+form ul.listmenu li span {
 	text-align: left; 
 	font-size: 15px; 
 	font-weight: bold; 
@@ -1407,36 +1396,7 @@ h1 {
   text-align: left;
   color: #fff;
 }
-#title_1
-{
-  
- top: -7px;
-  cursor: pointer;
-  background: transparent url(img/radio-btn-bg.png) 0 0 no-repeat;
-  width: 14px;
-  background-position: -38px 0;
-  height: 14px;
-  float: left;
-  margin-right: 5px;
-  border:none;
-}
-.form-group .col1 { width:70%; float:left;}
-.form-group .col2 { width:2%; float:left;}
-.form-group .col3 { width:28%; float:left;}
 
-#title_2
-{
-  
- top: -7px;
-  cursor: pointer;
-  background: transparent url(img/radio-btn-bg.png) 0 0 no-repeat;
-  width: 14px;
-  /*background-position: -38px 0;*/
-  height: 14px;
-  float: left;
-  margin-right: 5px;
-border:none;
-}
 #card{
   z-index: 1;
   cursor: pointer;
@@ -1498,7 +1458,7 @@ form {
 	margin: 0px -10px 0px 0px; 
 	padding: 10px 20px 0px 15px;
 	/*border-radius: 4px; */
-	background-color: coral;
+	background-color: rgb(218, 135, 82);
 	/*background-color: rgba(0, 0, 0, 0.15);*/
 }
 

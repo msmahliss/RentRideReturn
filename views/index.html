@@ -1,6 +1,6 @@
 
   <section class="form-section-container">
-     <div class="col-md-5">
+     <div class="col-md-4">
      <form method="post" action="/placeOrder" class="trueblue1 form-horizontal">
           <div class="form-title-text">Get Your Gear On</div></span>
           <hr class="lightline">
@@ -20,13 +20,12 @@
 
             <ul class="listmenu calendar-input">
             <li>
-            <label for="card">
               <select name="location" class="rental-location">
-              <option value="Williamsburg">Far Rockaway</option>
-              <option value="Williamsburg">Riis Park / Fort Tilden</option>
-              <option value="Williamsburg">Jones Beach</option>
-              <option value="Williamsburg">Robert Moses / Fire Island</option>
-              </select></label>
+              <option value="Far Rockaway">Far Rockaway</option>
+              <option value="Riis Park / Fort Tilden">Riis Park / Fort Tilden</option>
+              <option value="Jones Beach">Jones Beach</option>
+              <option value="Robert Moses / Fire Island">Robert Moses / Fire Island</option>
+              </select>
             </li>
             </ul>
 
@@ -40,7 +39,7 @@
               <p class="rental-item">Beach Chair</p>
               </li>
             <li>
-              <p class="js-rental-price rental-item">$10</p>
+              <p class="js-rental-price rental-price">$10</p>
             </li>
               <li><label for="card">
                 <select name="chair_qty" class="rental-qty js-rental-qty" onChange="">
@@ -58,7 +57,7 @@
               <p class="rental-item">Fancy Chair</p>
               </li>
             <li>
-              <p class="js-rental-price rental-item" price=13.00 >$13</p>
+              <p class="js-rental-price rental-price" price=13.00 >$13</p>
             </li>
               <li><label for="card">
                 <select name="fancyChair_qty" class="rental-qty js-rental-qty">
@@ -76,7 +75,7 @@
               <p class="rental-item">Chair & Umbrella</p>
               </li>
             <li>
-              <p class="js-rental-price rental-item">$15</p>
+              <p class="js-rental-price rental-price">$15</p>
             </li>
             <li><label for="card">
                 <select name="umbrella_qty" class="rental-qty js-rental-qty">
@@ -88,13 +87,13 @@
             </select></label></li>
             </ul>
               <p></p>
-              <p id="subTotal">ORDER SUBTOTAL: $0.00</p>           
-              <input type="submit" value="Contine to Payment" class="button" id="paymentbtn">
+              <p id="subTotal" class="pay-button">ORDER SUBTOTAL: $0.00</p>           
+              <input type="submit" value="RENT NOW" class="button pay-button">
         </form>
 
 
               </div>
-      <div class="col-md-7 panel-beach">
+      <div class="col-md-8 panel-beach">
       </div>
 
   </section>   

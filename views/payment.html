@@ -1,14 +1,33 @@
 
 <div id="main">
-FORM HERE
+
+<div class="orderSummary">
+	ORDER SUMMARY
+	*************
+	<div>
+	Items Ordered:
+	<ul>
+
+	{{#each order.items}}
+	<li>
+	Item: {{this.type}}
+	Qty: {{this.qty}}
+	</li>
+	{{/each}}
+	</ul>		
+	</div>
+
+	Order Total: ${{order.total}}
+	
+</div>
+
+
 	<form action="https://www.usaepay.com/gate.php " method="POST">
 	<input type="hidden" name="UMkey" value="RF04Bb4732Ra4P18yEuDit7wmb2Ysmu9">
 	<input type="hidden" name="UMredirApproved"
 	value="http://localhost:5000/paymentConfirm">
-	<input type="hidden" name="UMinvoice" value={{orderNumber}}>
-	<input type="hidden" name="UMamount" value={{orderTotal}}>
-	ORDER SUMMARY
-	Order Total: {{orderTotal}}
+	<input type="hidden" name="UMinvoice" value={{order.orderNumber}}>
+	<input type="hidden" name="UMamount" value={{order.total}}>
 
 	Email address: <input type="text" name="UMemail"><br>
 	Phone number: <input type="text" name="UMphone"><br>

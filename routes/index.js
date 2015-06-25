@@ -63,9 +63,11 @@ module.exports = function (app, passport) {
     app.post('/placeOrder', function (req, res) {
         console.log(req.body);
         var newOrder = new Order();
+        //TODO: Make this a random token gen
         newOrder.orderNumber = Math.floor(Math.random()*1000000);
         newOrder.orderTimestamp = (new Date()).toISOString();
         newOrder.orderDate = req.body.date;
+        newOrder.orderLocation = req.body.location;
 
         var chairOrder = {};
         chairOrder.type = "chair";
@@ -73,7 +75,7 @@ module.exports = function (app, passport) {
         chairOrder.qty = req.body.chair_qty ? req.body.chair_qty : 0;
 
         var fancyChairOrder = {};
-        fancyChairOrder.type = "chair";
+        fancyChairOrder.type = "fancy chair";
         fancyChairOrder.price = 13.00;
         fancyChairOrder.qty = req.body.fancyChair_qty ? req.body.fancyChair_qty : 0;
 
@@ -93,14 +95,17 @@ module.exports = function (app, passport) {
         (fancyChairOrder.price*fancyChairOrder.qty)+
         (umbrellaOrder.price*umbrellaOrder.qty);
         
+
+        console.log(newOrder);
+
         newOrder.save(function(err){
             if (err){
                 // send err
                 res.send(err);
             } else {
                 req.session.orderNumber =  newOrder.orderNumber;
-                res.render('payment', {orderNumber:newOrder.orderNumber, orderTotal:newOrder.total});
-                // do stuff
+                res.render('payment', {order:newOrder});
+
                 // res.redirect('confirm/:'+newOrder);
                 // res.render('confirm', {order: newOrder, layout: false});
             }
@@ -147,7 +152,7 @@ function formatDate() {
 }
 
 function getOrderStatus(item, date) {
-    //find out how many of each item has been booked for this date
+    //find out how many of each item has been booked for this date and location
 
     db.orders.aggregate(
         {$unwind:"$items"},
