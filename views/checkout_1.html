@@ -1,0 +1,37 @@
+
+ <section class="form-section-container">
+	<div class="col-md-6">
+		<form action="/saveOrder" method="POST" class="checkout-form">
+			<input type="hidden" name="UMamount" value={{order.orderTotal}}>
+			<label>Email address <input type="text" name="UMemail" class="form-control" required></label>
+			<label>Phone number <input type="text" name="UMphone" class="form-control" required></label>
+			<label>First Name <input type="text" name="UMname" class="form-control" required></label>
+			<label>Last Name <input type="text" name="UMname" class="form-control" required></label>
+			<input type="submit" class="pay-button" value="Continue to Checkout">
+		</form>
+	</div>
+
+	<div class="col-md-6 orderSummary">
+		<p class="item-header">ORDER SUMMARY</p>
+
+		<div>
+		<label>Items Ordered
+			<ul>
+
+			{{#each order.items}}
+			{{#if this.qty}}
+			<li>
+			Item: {{this.type}}
+			Qty: {{this.qty}}
+			</li>
+			{{/if}}
+			{{/each}}
+			</ul>
+		</label>	
+		</div> 
+		<p id="subTotal" class="subTotal-button">ORDER SUBTOTAL: ${{order.orderTotal}}</p>
+	</div>
+
+</section>
+
+<script src="js/validate.js" language="javascript"></script>

@@ -1274,13 +1274,25 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 
 /*******************FORM STYLING****************/
 
+.order-form {
+	/*float: left;*/
+	/*height: 500px;*/
+	margin: 0px 0px 0px 0px; 
+	padding: 10px 15px 0px 10px;
+	/*border-radius: 4px; */
+	background-color: rgb(218, 135, 82);
+	/*background-color: rgba(0, 0, 0, 0.15);*/
+}
+
+.checkout-form{
+	float: left;
+	/*height: 500px;*/
+	margin: 0px 0px 0px 0px; 
+	padding: 10px 15px 0px 10px;
+}
 .order-img {
 	float: right;
 	height: 220px;
-}
-
-.calendar-input {
-	float: left;
 }
 
 .glyphicon-calendar{
@@ -1290,9 +1302,32 @@ a.invisButton{ cursor: hand; cursor: pointer;};
     z-index: 100000;
 }
 
+form ul.listheaders li span{
+  text-align: left;
+  font-size: 15px;
+  font-weight: bold;
+  /* float: left; */
+  /* width: 100%; */
+  padding-left: 2px;	
+}
+
+.list-header {
+  font-size: 15px;
+  font-weight: bold;	
+}
 
 .pay-button {
-	float: right;
+	margin: 10px 25px 10px 0px;
+	border: 3px solid rgb(56, 111, 111);
+	border-radius: 2px;
+	padding: 9px 17px;
+	background-color: rgba(255,255,255,.75);
+	color: #363738;
+	font-weight: bold;
+}
+
+.subTotal-button {
+	float: left;
 	margin: 10px 25px 10px 0px;
 	border: 3px solid rgb(56, 111, 111);
 	border-radius: 2px;
@@ -1307,7 +1342,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   position: relative;
   float: left;
   border: 3px solid #eee;
-  width: 144px;
+  width: 175px;
   height: 40px;
   padding: 10px !important;
   margin: 0px !important;
@@ -1318,7 +1353,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   position: relative;
   float: left;
   border: 3px solid #eee;
-  width: 70px;
+  width: 50px;
   height: 40px;
   padding: 10px !important;
   margin: 0px !important;
@@ -1329,7 +1364,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   position: relative;
   float: left;
   border: 3px solid #eee;
-  width: 70px;
+  width: 60px;
   height: 40px;
   padding: 10px !important;
   margin: 0px !important;
@@ -1338,7 +1373,6 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 .rental-location{
   z-index: 1;
   position: relative;
-  float: left;
   border: 3px solid #eee;
   width: 225px;
   height: 45px;
@@ -1346,7 +1380,19 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   margin: 0px !important;
 }
 
-form ul.listmenu li{
+.item-width{
+	width: 175px;
+}
+
+.price-width{
+	width: 50px;
+}
+
+.qty-width{
+	width: 60px;
+}
+
+/*form ul.listmenu li{
 	padding-left :16px;
 	margin:1px 5px;
 	list-style:none;
@@ -1354,16 +1400,7 @@ form ul.listmenu li{
 	float:left;
 	text-align: left;
 }
-
-form ul.listmenu li span {
-	text-align: left; 
-	font-size: 15px; 
-	font-weight: bold; 
-	float: left; 
-	width: 100%; 
-	padding-left: 2px;
-}
-
+*/
 button, input[type="text"], select, textarea {
  font-size: 100%;
   margin: 0;
@@ -1394,6 +1431,7 @@ h1 {
   font-size: 26px;
   letter-spacing: 1.4px;
   text-align: left;
+  margin-left: 10px;
   color: #fff;
 }
 
@@ -1441,9 +1479,9 @@ legend { margin-bottom: 5px !important;}
   margin-bottom: 0px !important;
 }
 .panel-beach {
-	background-image: url(/img/beach_pretty.jpg); background-size: cover; background-repeat: no-repeat;	
+	background-image: url(/img/beach_chair.png); background-size: cover; background-repeat: no-repeat;	
 	margin-left: -20px;
-	height: 500px;
+	height: 535px;
 }
 
 .panel-winter {
@@ -1451,17 +1489,6 @@ legend { margin-bottom: 5px !important;}
 	margin-left: -20px;
 	height: 500px;
 }
-
-form {
-	float: left;
-	height: 500px;
-	margin: 0px -10px 0px 0px; 
-	padding: 10px 20px 0px 15px;
-	/*border-radius: 4px; */
-	background-color: rgb(218, 135, 82);
-	/*background-color: rgba(0, 0, 0, 0.15);*/
-}
-
 
 label span{
   display: inline-block;
@@ -1615,16 +1642,6 @@ html.ie9 .trueblue1 input {
   float: left;
   padding: 0px 10px;
 }
-.lightline {
-  display: block;
-  height: 2px;
-  border: 0px;
-  border-top: 2px solid #ccc;
-  margin: 5px 0;
-  padding: 0;
-width: 100%;
-  float: left;
-}
 
 .dashedline {
   border-top: 2px dashed #c0c0c0;
@@ -1634,7 +1651,7 @@ width: 100%;
   height: 3px;
   border: 0px;
   border-top: 2px solid #ccc;
-  margin: 8px 0;
+  margin: 5px 0px 5px 10px;
   padding: 0;
 width: 100%;
   float: left;

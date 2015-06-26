@@ -7,7 +7,7 @@ $(document).ready(function () {
 	$('.js-rental-qty').change(function(){
 		//update order subtotal
 		//TODO: fix this so instead of price array there is a single point of truth from form prices
-		var rentalPrices = [10.00, 13.00, 15.00, 10.00];
+		var rentalPrices = [8.00, 13.00, 15.00, 18.00, 10.00];
 		var rentalQtys = $('.js-rental-qty');
 		var subTotal = 0.00;
 		var qty;

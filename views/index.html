@@ -1,7 +1,7 @@
 
   <section class="form-section-container">
      <div class="col-md-4">
-     <form method="post" action="/placeOrder" class="trueblue1 form-horizontal">
+     <form method="post" action="/placeOrder" class="order-form">
           <div class="form-title-text">Get Your Gear On</div></span>
           <hr class="lightline">
           <ul class="listmenu calendar-input">
@@ -12,13 +12,13 @@
                 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
             </div>
             <!-- <input name="last_name" placeholder="Last Name"> -->
-            </li>
+          </li>
           </ul>
             <ul class="listmenu listheaders">
-              <li><span>Pick-up Location</i></span></li>
+              <li><span>Pick-up Location</span></li>
             </ul>
 
-            <ul class="listmenu calendar-input">
+            <ul class="listmenu">
             <li>
               <select name="location" class="rental-location">
               <option value="Far Rockaway">Far Rockaway</option>
@@ -36,58 +36,91 @@
             </ul>
             <ul class="listmenu">
             <li>
-              <p class="rental-item">Beach Chair</p>
+              <p class="rental-item">Basic half body chair</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price">$10</p>
+              <p class="js-rental-price rental-price">$8</p>
             </li>
-              <li><label for="card">
-                <select name="chair_qty" class="rental-qty js-rental-qty" onChange="">
+              <li>
+                <select name="basicChair_qty" class="rental-qty js-rental-qty" onChange="">
               <option value="0" selected="">0</option>
               <option value="1"> 1 </option>
               <option value="2"> 2 </option>
               <option value="3"> 3 </option>
               <option value="4"> 4 </option>
-              </select></label>
+              </select>
               </li>
             </ul>
 
             <ul class="listmenu">
             <li>
-              <p class="rental-item">Fancy Chair</p>
+              <p class="rental-item">Deluxe full body chair</p>
               </li>
             <li>
               <p class="js-rental-price rental-price" price=13.00 >$13</p>
             </li>
-              <li><label for="card">
-                <select name="fancyChair_qty" class="rental-qty js-rental-qty">
+              <li>
+                <select name="deluxeChair_qty" class="rental-qty js-rental-qty">
               <option value="0" selected="">0</option>
               <option value="1"> 1 </option>
               <option value="2"> 2 </option>
               <option value="3"> 3 </option>
               <option value="4"> 4 </option>
-              </select></label>
+              </select>
               </li>
             </ul>
 
             <ul class="listmenu">
             <li>
-              <p class="rental-item">Chair & Umbrella</p>
+              <p class="rental-item">Basic chair & umbrella</p>
               </li>
             <li>
               <p class="js-rental-price rental-price">$15</p>
             </li>
-            <li><label for="card">
+            <li>
+                <select name="basicCombo_qty" class="rental-qty js-rental-qty">
+            <option value="0" selected="">0</option>
+            <option value="1" > 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+            </select></li>
+            </ul>
+
+            <ul class="listmenu">
+            <li>
+              <p class="rental-item">Deluxe chair & umbrella</p>
+              </li>
+            <li>
+              <p class="js-rental-price rental-price">$18</p>
+            </li>
+            <li>
+                <select name="deluxeCombo_qty" class="rental-qty js-rental-qty">
+            <option value="0" selected="">0</option>
+            <option value="1" > 1 </option>
+            <option value="2"> 2 </option>
+            <option value="3"> 3 </option>
+            <option value="4"> 4 </option>
+            </select></li>
+            </ul>
+
+            <ul class="listmenu">
+            <li>
+              <p class="rental-item">Umbrella</p>
+              </li>
+            <li>
+              <p class="js-rental-price rental-price">$10</p>
+            </li>
+            <li>
                 <select name="umbrella_qty" class="rental-qty js-rental-qty">
             <option value="0" selected="">0</option>
             <option value="1" > 1 </option>
             <option value="2"> 2 </option>
             <option value="3"> 3 </option>
             <option value="4"> 4 </option>
-            </select></label></li>
+            </select></li>
             </ul>
-              <p></p>
-              <p id="subTotal" class="pay-button">ORDER SUBTOTAL: $0.00</p>           
+              <!-- <p id="subTotal" class="pay-button">ORDER SUBTOTAL: $0.00</p>            -->
               <input type="submit" value="RENT NOW" class="button pay-button">
         </form>
 
@@ -101,17 +134,17 @@
   <section class="section-container dest-prev">
  
     <div class="col-md-4">
-      <div class="prev-dest-title">The Ultimate VIP Beach Experience</div>
-      <div class="prev-dest-text">Portable/lightweight chair and umbrella rentals starting at $8</div></span>
-    <a class="dest-img-wrapper" href="/">
-      <img src="/img/chair.jpg" class="dest-img">
+      <div class="prev-dest-title">Remove the cost barrier and gear up the right way</div>
+      <div class="prev-dest-text">At over 90% off retail, skiing just got more affordable</div></span>
+    <a class="dest-img-wrapper" href="/winter">
+      <img src="/img/skis1.jpg" class="dest-img">
     </a>
     </div>
-    <div class="col-md-4">
-      <div class="prev-dest-title">A day on the slopes just got more affordable</div>
-      <div class="prev-dest-text">At over 90% off rental, spend smart and save more</div></span>
-    <a class="dest-img-wrapper" href="/winter">
-      <img src="/img/snow1.jpg" class="dest-img">
+     <div class="col-md-4">
+      <div class="prev-dest-title">Get off the ground and elevate your outdoor experience</div>
+      <div class="prev-dest-text">Go ahead and grab a seat</div></span>
+    <a class="dest-img-wrapper" href="/">
+      <img src="/img/concert.jpg" class="dest-img">
     </a>
     </div>
     <div class="col-md-4">

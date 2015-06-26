@@ -63,39 +63,93 @@ module.exports = function (app, passport) {
     app.post('/placeOrder', function (req, res) {
         console.log(req.body);
         var newOrder = new Order();
-        //TODO: Make this a random token gen
-        newOrder.orderNumber = Math.floor(Math.random()*1000000);
-        newOrder.orderTimestamp = (new Date()).toISOString();
+
         newOrder.orderDate = req.body.date;
         newOrder.orderLocation = req.body.location;
 
-        var chairOrder = {};
-        chairOrder.type = "chair";
-        chairOrder.price = 10.00;
-        chairOrder.qty = req.body.chair_qty ? req.body.chair_qty : 0;
+        //TODO: not this. Loop through all items from inventory
+        var basicChairOrder = {};
+        basicChairOrder.type = "chair";
+        basicChairOrder.price = 8.00;
+        basicChairOrder.qty = req.body.basicChair_qty ? req.body.basicChair_qty : 0;
 
-        var fancyChairOrder = {};
-        fancyChairOrder.type = "fancy chair";
-        fancyChairOrder.price = 13.00;
-        fancyChairOrder.qty = req.body.fancyChair_qty ? req.body.fancyChair_qty : 0;
+        var deluxeChairOrder = {};
+        deluxeChairOrder.type = "fancy chair";
+        deluxeChairOrder.price = 13.00;
+        deluxeChairOrder.qty = req.body.deluxeChair_qty ? req.body.deluxeChair_qty : 0;
+
+        var basicComboOrder = {};
+        basicComboOrder.type = "basic combo";
+        basicComboOrder.price = 15.00;
+        basicComboOrder.qty = req.body.basicCombo_qty ? req.body.basicCombo_qty: 0;
+
+        var deluxeComboOrder = {};
+        deluxeComboOrder.type = "deluxe combo";
+        deluxeComboOrder.price = 15.00;
+        deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
 
         var umbrellaOrder = {};
         umbrellaOrder.type = "umbrella";
         umbrellaOrder.price = 15.00;
         umbrellaOrder.qty = req.body.umbrella_qty ? req.body.umbrella_qty: 0;
 
-        // var coolerOrder = {};
-        // coolerOrder.type = "cooler";
-        // coolerOrder.price = 10.00;
-        // coolerOrder.qty = req.body.cooler_qty ? req.body.cooler_qty : 0;
+        newOrder.items = [basicChairOrder,deluxeChairOrder,basicComboOrder,deluxeComboOrder, umbrellaOrder];
 
-        newOrder.items = [chairOrder,fancyChairOrder,umbrellaOrder];
-
-        newOrder.total = (chairOrder.price*chairOrder.qty) +
-        (fancyChairOrder.price*fancyChairOrder.qty)+
+        newOrder.orderTotal = (basicChairOrder.price*basicChairOrder.qty) +
+        (deluxeChairOrder.price*deluxeChairOrder.qty)+
+        (basicComboOrder.price*basicComboOrder.qty)+
+        (deluxeComboOrder.price*deluxeComboOrder.qty)+
         (umbrellaOrder.price*umbrellaOrder.qty);
         
+        console.log(newOrder);
 
+        res.render('checkout_1', {order:newOrder});
+    });
+
+    app.post('/saveeOrder', function (req, res) {
+        console.log(req.body);
+        var newOrder = new Order();
+
+        //TODO: Make this a random token gen
+        newOrder.orderNumber = Math.floor(Math.random()*1000000);
+        newOrder.orderTimestamp = (new Date()).toISOString();
+        newOrder.orderDate = req.body.date;
+        newOrder.orderLocation = req.body.location;
+
+        //TODO: not this. Loop through all items from inventory
+        var basicChairOrder = {};
+        basicChairOrder.type = "chair";
+        basicChairOrder.price = 8.00;
+        basicChairOrder.qty = req.body.basicChair_qty ? req.body.basicChair_qty : 0;
+
+        var deluxeChairOrder = {};
+        deluxeChairOrder.type = "fancy chair";
+        deluxeChairOrder.price = 13.00;
+        deluxeChairOrder.qty = req.body.deluxeChair_qty ? req.body.deluxeChair_qty : 0;
+
+        var basicComboOrder = {};
+        basicComboOrder.type = "basic combo";
+        basicComboOrder.price = 15.00;
+        basicComboOrder.qty = req.body.basicCombo_qty ? req.body.basicCombo_qty: 0;
+
+        var deluxeComboOrder = {};
+        deluxeComboOrder.type = "deluxe combo";
+        deluxeComboOrder.price = 15.00;
+        deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
+
+        var umbrellaOrder = {};
+        umbrellaOrder.type = "umbrella";
+        umbrellaOrder.price = 15.00;
+        umbrellaOrder.qty = req.body.umbrella_qty ? req.body.umbrella_qty: 0;
+
+        newOrder.items = [basicChairOrder,deluxeChairOrder,basicComboOrder,deluxeComboOrder, umbrellaOrder];
+
+        newOrder.orderTotal = (basicChairOrder.price*basicChairOrder.qty) +
+        (deluxeChairOrder.price*deluxeChairOrder.qty)+
+        (basicComboOrder.price*basicComboOrder.qty)+
+        (deluxeComboOrder.price*deluxeComboOrder.qty)+
+        (umbrellaOrder.price*umbrellaOrder.qty);
+        
         console.log(newOrder);
 
         newOrder.save(function(err){
@@ -104,14 +158,14 @@ module.exports = function (app, passport) {
                 res.send(err);
             } else {
                 req.session.orderNumber =  newOrder.orderNumber;
-                res.render('payment', {order:newOrder});
-
+                res.render('checkout_2', {order:newOrder});
                 // res.redirect('confirm/:'+newOrder);
-                // res.render('confirm', {order: newOrder, layout: false});
             }
         });
 
     });
+
+
 
     app.get('/getOrderStatus', function(req, res){
         var result = getOrderStatus();
@@ -173,7 +227,7 @@ function getOrderStatus(item, date) {
         }
     });
     
-    // Order.aggregate({ $group:{_id: "$accountActive",total:{$sum:"$total"},num_orders:{$sum:1}} },
+    // Order.aggregate({ $group:{_id: "$accountActive",total:{$sum:"$orderTotal"},num_orders:{$sum:1}} },
     //     function (err, result) {
     //     if (!result) {
     //         //none ordered. max avail.

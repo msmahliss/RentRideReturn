@@ -11,6 +11,7 @@ var orderSchema = mongoose.Schema({
     orderDate: {type: Date},
     orderLocation: String,
     username: String,
+    orderTotal:  {type: Number, default: 0},
     images: {type: Array, default: []},
     items: [
         {
@@ -19,7 +20,6 @@ var orderSchema = mongoose.Schema({
           qty: {type: Number, default: 0}
         }
     ],
-    total:  {type: Number, default: 0},
     account: {
         email: {type: String, trim: true},
         password: String
