@@ -1,40 +1,48 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]> <html class="no-js lt-ie9" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
 
-<html class="no-js" lang="en"> <!--<![endif]-->
-<head>
+	<div class="col-md-5 orderSummary">
+		<p class="list-header">Thanks for renting!</p>
+		<p class="list-header">Here's your order summary.</p>
+		<div>
+			<ul>
+			{{#each order.items}}
+			{{#if this.qty}}
+			<li>
+				<ul>
+					<li class="list-header">Item Name:  {{this.type}}</li>
+					<li class="list-header">Quantity:  {{this.qty}}</li>
+				</ul>
+			</li>
+			{{/if}}
+			{{/each}}
+					<li class="list-header">Order Total:  ${{order.orderTotal}}</li>
+			</ul>	
+		</div> 
+		<p class="list-header">Congrats on being a #RentRider!</p>
+		<hr class="lightline">
+	</div>
 
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title>{{title}}</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta name="description" content="Rent Ride Return" />
+  <section class="section-container dest-prev">
+ 
+    <div class="col-md-4">
+      <div class="prev-dest-title">Remove the cost barrier and gear up the right way</div>
+      <div class="prev-dest-text">At over 90% off retail, skiing just got more affordable</div></span>
+    <a class="dest-img-wrapper" href="/winter">
+      <img src="/img/skis1.jpg" class="dest-img">
+    </a>
+    </div>
+     <div class="col-md-4">
+      <div class="prev-dest-title">Get off the ground and elevate your outdoor experience</div>
+      <div class="prev-dest-text">Go ahead and grab a seat</div></span>
+    <a class="dest-img-wrapper" href="/">
+      <img src="/img/concert.jpg" class="dest-img">
+    </a>
+    </div>
+    <div class="col-md-4">
+      <div class="prev-dest-title">Go ahead.<br>Take back your weekends</div>
+      <div class="prev-dest-text">Tents and sleeping bag rentals starting at 90% off</div></span>
+    <a class="dest-img-wrapper" href="/#">
+      <img src="/img/camping2.jpg" class="dest-img">
+    </a>
+    </div>
 
-</head>
-
-<body>
-
-Thanks for your PAYMENT!
-{{#if order.username}}
-	,{{order.username}}
-{{/if}}
-!
-
-You ordered:
-<ul>
-{{#each order.items}}
-	<li> {{this.type}}s: {{this.qty}}</li>
-{{/each}}
-
-Order Total: ${{order.total}}
-</ul>
-Right now this is all free.
-
-Congrats on being a RentRider! #yourock
-</body>
-
-</html>
+  </section>	

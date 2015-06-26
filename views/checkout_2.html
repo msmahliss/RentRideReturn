@@ -1,60 +1,44 @@
-
-<div id="main">
-
-<div class="orderSummary">
-	ORDER SUMMARY
-	*************
-	<div>
-	Items Ordered:
-	<ul>
-
-	{{#each order.items}}
-	<li>
-	Item: {{this.type}}
-	Qty: {{this.qty}}
-	</li>
-	{{/each}}
-	</ul>		
+ <section class="form-section-container">
+	<div class="col-md-6">
+		<form action="https://www.usaepay.com/gate.php " method="POST" class="checkout-form">
+			<input type="hidden" name="UMkey" value="RF04Bb4732Ra4P18yEuDit7wmb2Ysmu9">
+			<input type="hidden" name="UMredirApproved" value="http://localhost:5000/paymentConfirm">
+			<input type="hidden" name="UMinvoice" value={{order._id}}>
+			<input type="hidden" name="UMamount" value={{order.orderTotal}}>
+			<label>Cardholder Name<input type="text" name="UMname" class="form-control" required></label>
+			<label>Card Number <input type="text" name="UMcard" class="form-control"></label>
+			<label>Expiration <input type="text" placeholder="MMYY" name="UMexpir" class="form-control"></label>
+			<label>Address <input type="text" name="UMstreet" class="form-control"></label>
+			<label>City <input type="text" name="city" class="form-control"></label>
+			<label>State <input type="text" name="state" class="form-control"></label>
+			<label>Zip <input type="text" name="UMzip" class="form-control"></label>
+			<input type="submit" class="pay-button" value="Place Order">
+		</form>
 	</div>
 
-	Order Total: ${{order.total}}
-	
-</div>
-
-
-	<form action="https://www.usaepay.com/gate.php " method="POST">
-	<input type="hidden" name="UMkey" value="RF04Bb4732Ra4P18yEuDit7wmb2Ysmu9">
-	<input type="hidden" name="UMredirApproved"
-	value="http://localhost:5000/paymentConfirm">
-	<input type="hidden" name="UMinvoice" value={{order.orderNumber}}>
-	<input type="hidden" name="UMamount" value={{order.total}}>
-
-	Email address: <input type="text" name="UMemail"><br>
-	Phone number: <input type="text" name="UMphone"><br>
-
-	First Name: <input type="text" name="UMname"><br>
-	Last Name: <input type="text" name="UMname"><br>
-
-	Address: <input type="text" name="UMstreet"><br>
-	City: <input type="text" name="city"><br>
-	State: <input type="text" name="state"><br>
-	Zip: <input type="text" name="UMzip"><br>
-	<br>
-	<br>
-	Credit Card Info:<br>
-	Card Type: <select name=cardtype>
-	<option>Visa
-	<option>Mastercard
-	<option>Amex
-	<option>Discover
-	</select><br>
-	Card Number: <input type="text" name="UMcard"><br>
-	Expiration: <input type="text" placeholder="MMYY" name="UMexpir"><br>
-	Name On Card: <input type="text" name="UMname"><br>
-	<br>
-	<br>
-	<input type="submit" value="Place Order">
-	</form>
-</div>
+	<div class="col-md-6 orderSummary">
+		<p class="list-header">ORDER SUMMARY</p>
+		<div>
+			<ul>
+			{{#each order.items}}
+			{{#if this.qty}}
+			<li>
+				<ul>
+					<li class="list-header">Item Name:  {{this.type}}</li>
+					<li class="list-header">Quantity:  {{this.qty}}</li>
+					<li class="list-header">Price:  ${{this.price}}</li>
+					{{#if this.img}}
+					<li><img class="order-img" src={{this.img}}></li>
+					{{/if}}
+				</ul>
+			</li>
+			<hr class="lightline">
+			{{/if}}
+			{{/each}}
+			</ul>	
+		</div> 
+		<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
+	</div>
+</section>
 
 <script src="js/validate.js" language="javascript"></script>

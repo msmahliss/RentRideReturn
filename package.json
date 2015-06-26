@@ -33,6 +33,8 @@
     "morgan": "~1.0.0",
     "node-static": "^0.7.6",
     "node-uuid": "^1.4.3",
+    "nodemailer": "^1.3.0",
+    "nodemailer-sendgrid-transport": "^0.1.0",
     "request": "~2.27.0",
     "restler": "^3.2.2",
     "underscore": ">= 0.0.0",

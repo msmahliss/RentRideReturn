@@ -3,35 +3,37 @@
 	<div class="col-md-6">
 		<form action="/saveOrder" method="POST" class="checkout-form">
 			<input type="hidden" name="UMamount" value={{order.orderTotal}}>
-			<label>Email address <input type="text" name="UMemail" class="form-control" required></label>
-			<label>Phone number <input type="text" name="UMphone" class="form-control" required></label>
-			<label>First Name <input type="text" name="UMname" class="form-control" required></label>
-			<label>Last Name <input type="text" name="UMname" class="form-control" required></label>
+			<label>Email address <input type="email" name="email" class="form-control" required></label>
+			<label>Phone number <input type="text" name="phone" class="form-control" required></label>
+			<label>First Name <input type="text" name="first_name" class="form-control" required></label>
+			<label>Last Name <input type="text" name="last_name" class="form-control" required></label>
 			<input type="submit" class="pay-button" value="Continue to Checkout">
 		</form>
 	</div>
 
 	<div class="col-md-6 orderSummary">
-		<p class="item-header">ORDER SUMMARY</p>
-
+		<p class="list-header">ORDER SUMMARY</p>
 		<div>
-		<label>Items Ordered
 			<ul>
-
 			{{#each order.items}}
 			{{#if this.qty}}
 			<li>
-			Item: {{this.type}}
-			Qty: {{this.qty}}
+				<ul>
+					<li class="list-header">Item Name:  {{this.type}}</li>
+					<li class="list-header">Quantity:  {{this.qty}}</li>
+					<li class="list-header">Price:  ${{this.price}}</li>
+					{{#if this.img}}
+					<li><img class="order-img" src={{this.img}}></li>
+					{{/if}}
+				</ul>
 			</li>
+			<hr class="lightline">
 			{{/if}}
 			{{/each}}
-			</ul>
-		</label>	
+			</ul>	
 		</div> 
-		<p id="subTotal" class="subTotal-button">ORDER SUBTOTAL: ${{order.orderTotal}}</p>
+		<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
 	</div>
-
 </section>
 
 <script src="js/validate.js" language="javascript"></script>

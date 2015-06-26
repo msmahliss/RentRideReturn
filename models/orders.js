@@ -8,16 +8,19 @@ var orderSchema = mongoose.Schema({
     lastRequestTimestamp: {type: Date},
     orderNumber: {type: Number},
     orderStatus: {type: String, default:"Unpaid"},
-    orderDate: {type: Date},
+    orderDate: {type: String},
     orderLocation: String,
-    username: String,
+    email: String,
+    phone: String,
+    first_name: String,
+    last_name: String,
     orderTotal:  {type: Number, default: 0},
-    images: {type: Array, default: []},
     items: [
         {
           type: {type: String},
           price: {type: Number},
-          qty: {type: Number, default: 0}
+          qty: {type: Number, default: 0},
+          img: {type: String}
         }
     ],
     account: {
