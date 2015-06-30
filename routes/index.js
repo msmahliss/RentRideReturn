@@ -163,25 +163,26 @@ module.exports = function (app, passport) {
 
         var order = req.session.order;
         var newOrder = new Order();
-        console.log("id: "+newOrder._id);
 
         //checkout information
+        newOrder.passengerID = req.body.passengerID;
         newOrder.email = req.body.email;
         newOrder.phone = req.body.phone;
         newOrder.first_name = req.body.first_name;
         newOrder.last_name = req.body.last_name;
 
-        //TODO: Make this a random token gen
+        //TODO: Make this the last 6 digits of id
+        // console.log("id: "+newOrder._id);
+        // console.log("orderNumber: "+newOrder._id.substring(0,6));
+
         newOrder.orderNumber = Math.floor(Math.random()*1000000);
         newOrder.orderDate = order.orderDate;
         newOrder.orderLocation = order.orderLocation;
         newOrder.orderTotal = order.orderTotal;
         newOrder.items = order.items;
 
-        //store the new order
+        //store the updated order
         req.session.order = newOrder;
-
-        console.log(req.session.order);
 
         newOrder.save(function(err){
             if (err){
@@ -194,8 +195,6 @@ module.exports = function (app, passport) {
         });
 
     });
-
-
 
     app.get('/getOrderStatus', function(req, res){
         var result = getOrderStatus();

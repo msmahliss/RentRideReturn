@@ -19,9 +19,13 @@ mongoose.connection.on('open', function() {
 
 // configure express ===========================================================
 var app = express();
+if(process.env.PORT != 5000){
+  // use HTTPS(true) in case you are behind a load balancer (e.g. Heroku)
+  app.use(enforce.HTTPS(true));
+}
 
 app.use(morgan('dev')); // log every request to the console
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 5000);
 app.use(express.static(__dirname + '/static'));
 app.use(cookieParser());
 app.use(bodyParser.json());

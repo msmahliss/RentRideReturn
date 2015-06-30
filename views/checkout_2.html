@@ -1,5 +1,5 @@
  <section class="form-section-container">
-	<div class="col-md-6">
+	<div class="col-md-6 checkout-form-fix">
 		<form action="https://www.usaepay.com/gate.php " method="POST" class="checkout-form">
 			<input type="hidden" name="UMkey" value="RF04Bb4732Ra4P18yEuDit7wmb2Ysmu9">
 			<input type="hidden" name="UMredirApproved" value="http://localhost:5000/paymentConfirm">
@@ -12,6 +12,7 @@
 			<label>City <input type="text" name="city" class="form-control"></label>
 			<label>State <input type="text" name="state" class="form-control"></label>
 			<label>Zip <input type="text" name="UMzip" class="form-control"></label>
+			<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
 			<input type="submit" class="pay-button" value="Place Order">
 		</form>
 	</div>
@@ -37,7 +38,6 @@
 			{{/each}}
 			</ul>	
 		</div> 
-		<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
 	</div>
 </section>
 

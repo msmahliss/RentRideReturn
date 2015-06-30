@@ -14,6 +14,7 @@ var orderSchema = mongoose.Schema({
     phone: String,
     first_name: String,
     last_name: String,
+    passengerID: String,
     orderTotal:  {type: Number, default: 0},
     items: [
         {

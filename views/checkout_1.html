@@ -1,12 +1,13 @@
-
  <section class="form-section-container">
-	<div class="col-md-6">
+	<div class="col-md-6 checkout-form-fix">
 		<form action="/saveOrder" method="POST" class="checkout-form">
 			<input type="hidden" name="UMamount" value={{order.orderTotal}}>
+			<label>NYCBeachBus Passenger ID <input type="text" name="passengerID" class="form-control" required></label>
 			<label>Email address <input type="email" name="email" class="form-control" required></label>
 			<label>Phone number <input type="text" name="phone" class="form-control" required></label>
 			<label>First Name <input type="text" name="first_name" class="form-control" required></label>
 			<label>Last Name <input type="text" name="last_name" class="form-control" required></label>
+			<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
 			<input type="submit" class="pay-button" value="Continue to Checkout">
 		</form>
 	</div>
@@ -32,7 +33,6 @@
 			{{/each}}
 			</ul>	
 		</div> 
-		<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
 	</div>
 </section>
 

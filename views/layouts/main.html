@@ -29,6 +29,16 @@
 
 <nav class="navbar navbar-default" role="navigation" id="universalBar">
     <!-- Brand and toggle get grouped for better mobile display -->
+<!--     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Rent Ride Return</a>
+    </div>
+ -->
     <div class="container">
         <div class="navbar-header">
             <div id="universalBarHotText"><h1></h1>
@@ -78,17 +88,31 @@
 </nav>
 
 
-<header id="globalHeader">
+<header>
   
         <a href="#" id="globalHeaderLogo"><img src="img/logo.png"/></a>
   
   <section id="globalHeaderMenuContainer" class="global-header-section">
-    <nav id="globalHeaderNavContainer" >
-      <ul id="globalHeaderNav">
-              <li >
+    <nav class="navbar navbar-default" id="globalHeaderNavContainer" >
+    <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dest-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">HOME</a>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="dest-navbar">
+      <ul class="nav navbar-nav">
+<!--               <li >
                   <a href="/" name="&lpos=top_nav>women">HOME</a>
-              </li>
-              <li class="dropdown">
+              </li> -->
+              <li class="dropdown">   
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beach<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="/beach">Beach Chairs</a></li>
@@ -107,23 +131,26 @@
                             <li><a href="/winter">Hats</a></li>
                             <li><a href="/winter">Gloves</a></li>
                             <li><a href="/winter">Goggles</a></li>
-                        </ul></li>Accessories -->
+                        </ul>Accessories</li> -->
                   </ul>
               </li>
               <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adventures<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="/camping">Tents</a></li>
-                      <li><a href="/camping">Hiking</a></li>
-                      <li><a href="/camping">Storm King</a></li>
+                      <li><a href="/camping">Sleeping Bags</a></li>
+                      <li><a href="/camping">Backpacks</a></li>
+                      <li><a href="/camping">Coolers</a></li>
                   </ul>
               </li>
       </ul>
+      </div><!--.navbar-collapse-->
+      </div> <!--.container-fluid-->
     </nav>
     
-    <div id="globalHeaderSearchContainer">
+<!--     <div id="globalHeaderSearchContainer">
       <a href="/how-it-works">How it Works</a>
-    </div>
+    </div> -->
     
   </section>
 </header>
