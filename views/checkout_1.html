@@ -1,13 +1,18 @@
  <section class="form-section-container">
 	<div class="col-md-6 checkout-form-fix">
 		<form action="/saveOrder" method="POST" class="checkout-form">
-			<input type="hidden" name="UMamount" value={{order.orderTotal}}>
-			<label>NYCBeachBus Passenger ID <input type="text" name="passengerID" class="form-control" required></label>
+			<label>NYCBeachBus 4-digit ID <input type="text" name="passengerID" class="form-control" required></label>
 			<label>Email address <input type="email" name="email" class="form-control" required></label>
 			<label>Phone number <input type="text" name="phone" class="form-control" required></label>
 			<label>First Name <input type="text" name="first_name" class="form-control" required></label>
 			<label>Last Name <input type="text" name="last_name" class="form-control" required></label>
-			<p id="subTotal" class="subTotal-button">ORDER TOTAL: ${{order.orderTotal}}</p>
+			<p id="subTotal" class="subTotal-button">
+			ORDER SUBTOTAL: ${{orderTotal}}<br>
+			TAX: ${{taxAmt}}<br>
+			DELIVERY: FREE<br>
+			-------------------------<br>
+			ORDER TOTAL: ${{total}}
+			</p>
 			<input type="submit" class="pay-button" value="Continue to Checkout">
 		</form>
 	</div>
@@ -16,11 +21,16 @@
 		<p class="list-header">ORDER SUMMARY</p>
 		<div>
 			<ul>
+				<li class="list-header">Rental Date:  {{order.orderDate}}</li>
+				<li class="list-header">Delivery Method:  NYC Beach Bus</li>
+				<li class="list-header">Delivery Location:  {{order.orderLocation}}</li>
+				<hr class="lightline">
+
 			{{#each order.items}}
 			{{#if this.qty}}
 			<li>
 				<ul>
-					<li class="list-header">Item Name:  {{this.type}}</li>
+					<li class="list-header">Item:  {{this.type}}</li>
 					<li class="list-header">Quantity:  {{this.qty}}</li>
 					<li class="list-header">Price:  ${{this.price}}</li>
 					{{#if this.img}}

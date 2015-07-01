@@ -61,6 +61,10 @@ module.exports = function (app, passport) {
         res.render('faq', {title: 'Rent Ride Return Checkout'});
     });
 
+    app.get('/terms/', function (req, res) {
+        res.render('terms', {title: 'Rent Ride Return Checkout'});
+    });
+
     app.get('/paymentConfirm', function (req, res) {
         
         Order.findOne({_id: req.session.order._id}, function(err,order){
@@ -69,6 +73,25 @@ module.exports = function (app, passport) {
                 //go query the order by ordernum and mark orderStatus as paid
                 order.orderStatus = "Paid";
                 order.save();
+
+                //organize information for order summary in email
+
+                var results = calcNYCTax(order.orderTotal);
+                var orderTotal = results[0];
+                var taxAmt = results[1];
+                var total = results[2];
+
+                var thisOrder;
+                var orderItemTxt="";
+                for (var i=0; i < order.items.length; i++){
+                    thisOrder = order.items[i];
+                    if (thisOrder.qty){
+                        orderItemTxt += "Item: " + thisOrder.type + "\n";
+                        orderItemTxt += "Quantity:  " + thisOrder.qty + "\n";
+                        orderItemTxt += "Price:  " + thisOrder.price + "\n";
+                        orderItemTxt += "******************\n";
+                    }
+                }
 
                 //send user a confirmation email
 
@@ -83,16 +106,37 @@ module.exports = function (app, passport) {
 
                 var email = {
                     to: [order.email],
-                    from: 'hello@rentridereturn.com',
-                    subject: 'Your Rent Ride Return Order',
-                    text: 'Hey there!\n\n' +
-                    'Thanks for renting with RentRideReturn!\n\n' +
-                    'Here\'s your order information:\n\n'+
-                    'Your order number is ' + order.orderNumber + '.\n' +
-                    'You can pick up your gear at the ' + order.orderLocation + ' location ' +
-                    'on ' + order.orderDate + '.\n\n'+
-                    'See you on the beach!\n\n'+
-                    'xoxo, RRR'
+                    from: 'orders@rentridereturn.com',
+                    subject: 'Rent Ride Return Order Confirmation',
+                    text: 'Hey!\n\n' +
+                    'Thanks for renting from RentRideReturn.com!\n' +
+                    'Your order will be delivered to your pick-up location the day of your trip.\n'+
+                    'Save the trees and don\'t print this email.\n\n'+
+                    'Below is your order information:\n\n'+
+                    'Order Date: ' + order.created + '\n' +
+                    'Order Number: ' + order.orderNumber + '\n' +
+                    'Rental Start Date: ' + order.orderDate + '\n'+
+                    'Rental End Date: ' + order.orderDate + '\n'+
+                    'Delivery Method: Bus Pick-up\n'+
+                    'Delivery Address: ' + order.orderLocation + '\n\n'+
+                    'Item Summary:\n\n'+ orderItemTxt +
+                    'Item(s) Subtotal: $' + orderTotal + '\n'+
+                    'Tax: $' + taxAmt + '\n'+
+                    'Delivery: FREE.\n'+
+                    'Order Total: $' + total + '\n\n'+
+
+                    'Rental Terms:\n\n'+
+                    'Rentals must be returned to NYC Beach Bus Staff at your initial Brooklyn departure location.  Rentals cannot be returned to our beach staff.\n\n'+
+                    'In the event you miss the bus, you are still liable for rental fees.\n\n'+
+                    'All  rentals must be returned on the same day. In the event you fail to return the product on your return trip or not at all, a late fee of '+
+                    'forty dollars ($40.00) will be charged to the payment card you used to pay the Rental Fee or to any other payment card included in your '+
+                    'account information that you have provided to RRR for every day that you are late returning the Products, and you agree to pay such late fees, '+
+                    'up to an amount not to exceed the Retail Value plus applicable sales tax (plus the Rental Fee). \n\n'+
+                    'You are responsible for loss, destruction or damage to the Products due to theft, disappearance, fire, major irreparable stains or any other cause, '+
+                    'other than normal wear and tear. Normal wear and tear encompasses minor stains and rips. If You return a Product that is damaged beyond normal wear '+
+                    'and tear then you agree that we shall charge you, and you shall pay, for the price for repairing or replacing the Product, as determined in our '+
+                    'discretion, up to the Retail Value for the Product as indicated on on our site.\n\n'+
+                    'Thanks for renting. See you on the beach!\n\n\n'
                 };
 
                 mailer.sendMail(email, function (err) {
@@ -132,25 +176,25 @@ module.exports = function (app, passport) {
         classicChairOrder.price = 8.00;
         classicChairOrder.id = "B0";
         classicChairOrder.qty = req.body.classicChair_qty ? req.body.classicChair_qty : 0;
-        classicChairOrder.img = 'img/basic_chair.jpeg';
+        classicChairOrder.img = 'img/basic_chair.jpg';
 
         var deluxeChairOrder = {};
         deluxeChairOrder.type = "Deluxe full body chair";
         deluxeChairOrder.price = 14.00;
         deluxeChairOrder.id = "B1";
         deluxeChairOrder.qty = req.body.deluxeChair_qty ? req.body.deluxeChair_qty : 0;
-        deluxeChairOrder.img = 'img/beach_chair.png';
+        deluxeChairOrder.img = 'img/deluxe_chair.jpg';
 
         var classicComboOrder = {};
         classicComboOrder.type = "Classic chair & umbrella";
         classicComboOrder.price = 15.00;
-        classicChairOrder.id = "B2";
+        classicComboOrder.id = "B2";
         classicComboOrder.qty = req.body.classicCombo_qty ? req.body.classicCombo_qty: 0;
 
         var deluxeComboOrder = {};
         deluxeComboOrder.type = "Deluxe chair & umbrella";
         deluxeComboOrder.price = 20.00;
-        deluxeChairOrder.id = "B3";
+        deluxeComboOrder.id = "B3";
         deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
 
         var umbrellaOrder = {};
@@ -170,7 +214,12 @@ module.exports = function (app, passport) {
         //store the new order
         req.session.order = newOrder;
 
-        res.render('checkout_1', {order:newOrder});
+        var results = calcNYCTax(newOrder.orderTotal);
+        var orderTotal = results[0];
+        var taxAmt = results[1];
+        var total = results[2];
+
+        res.render('checkout_1', {order:newOrder, orderTotal: orderTotal, taxAmt: taxAmt, total: total});
     });
 
     app.post('/saveOrder', function (req, res) {
@@ -198,23 +247,35 @@ module.exports = function (app, passport) {
         //store the updated order
         req.session.order = newOrder;
 
+        var results = calcNYCTax(newOrder.orderTotal);
+        var orderTotal = results[0];
+        var taxAmt = results[1];
+        var total = results[2];
+
         newOrder.save(function(err){
             if (err){
                 // send err
                 res.send(err);
             } else {
-                res.render('checkout_2', {order:newOrder});
-                // res.redirect('confirm/:'+newOrder);
+                res.render('checkout_2', {order:newOrder, orderTotal: orderTotal, taxAmt: taxAmt, total: total});
             }
         });
 
     });
 
     app.get('/getOrderStatus', getOrderStatus, function(req, res){
-        console.log(req.orderStatusResult);
-        console.log(inventory.length);
-        console.log(inventory[0]["max_qty"]);
-        res.send(req.orderStatusResult);
+        var result = req.orderStatusResult;
+        //B0 max = 50
+        //B1 max = 40
+        //B2 max  = 15
+        //B3 max = 15
+        //B4 max = 15
+        // for (var i = 0; i < inventory.length; i++) {
+        // inventory[0]["max_qty"];
+        // inventory[0]["id"];
+        // }
+
+        res.send(result);
     });
 
 // =============================================================================
@@ -241,6 +302,19 @@ function getCurrentPath(req, res, next) {
     return next();
 }
 
+function calcNYCTax(subtotal){
+    var NYCtax = .08875;
+    var orderTotal = Math.round(subtotal*100)/100;
+    var total = subtotal * (1+NYCtax);
+    var total = Math.round(total*100)/100;
+    var taxAmt = total - orderTotal;
+    //format for web
+    taxAmt = taxAmt.toFixed(2);
+    orderTotal = orderTotal.toFixed(2);
+    total = total.toFixed(2);
+    return [orderTotal, taxAmt, total];
+}
+
 function formatDate() {
     var date = new Date();
 
@@ -255,10 +329,10 @@ function getOrderStatus(req, res, next) {
     var date = req.query.date;
     Order.aggregate(
         {$unwind:"$items"},
-        {$match:{"orderDate":date}},
+        {$match:{"orderDate":date,"orderStatus":"Paid"}},
         {$group:{
-            _id: "$items.type",
-            // total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
+            _id: "$items.id",
+            total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
             total_ordered:{$sum:"$items.qty"}
         }},
         function (err, result) {

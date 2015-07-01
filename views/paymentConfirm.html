@@ -4,11 +4,17 @@
 		<p class="list-header">Here's your order summary.</p>
 		<div>
 			<ul>
+        <li class="list-header">Order Number:  {{order.orderNumber}}</li>
+        <li class="list-header">Rental Date:  {{order.orderDate}}</li>
+        <li class="list-header">Delivery Method:  NYC Beach Bus</li>
+        <li class="list-header">Delivery Location:  {{order.orderLocation}}</li>
+        <hr class="lightline">
+
 			{{#each order.items}}
 			{{#if this.qty}}
 			<li>
 				<ul>
-					<li class="list-header">Item Name:  {{this.type}}</li>
+					<li class="list-header">Item:  {{this.type}}</li>
 					<li class="list-header">Quantity:  {{this.qty}}</li>
 				</ul>
 			</li>
