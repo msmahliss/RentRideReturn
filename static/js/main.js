@@ -9,19 +9,25 @@ $(document).ready(function () {
 		});
 	});
 
-	$('.js-rental-qty').change(function(){
-		//update order subtotal
-		//TODO: fix this so instead of price array there is a single point of truth from form prices
-		var rentalPrices = [8.00, 13.00, 15.00, 18.00, 10.00];
-		var rentalQtys = $('.js-rental-qty');
-		var subTotal = 0.00;
-		var qty;
-		for (var i=0; i < rentalQtys.length; i++){
-			//same as qty
-			qty = rentalQtys[i].options[rentalQtys[i].selectedIndex].value;
-			subTotal = subTotal + (rentalPrices[i] * qty); 
-		}
-		$('#subTotal').text('ORDER SUBTOTAL: $'+subTotal.toFixed(2));
+	$('#datepicker').change(function(){
+		//check order status based on date
+		var date = $(this).val()
+		// var pickuplocation = $('.js-rental-location');
+		// var temp = pickuplocation[0];
+		// console.log(temp.options[temp.selectedIndex].value);
+
+		$.get('/getOrderStatus?date='+date, function(result, status){
+
+			if(result.length){
+				for (var i=0; i<result.length; i++){
+					console.log(result[i]["_id"] +": "+result[i]["total_ordered"]+" ordered / "+(50-result[i]["total_ordered"])+" available");
+				};				
+			} else {
+				console.log("no orders");
+			}
+
+		});
+
 	});
 
 
@@ -36,10 +42,10 @@ function DisplayValidDates(date) {
  
 
  	//First check if date is before today
-   	var today = new Date();
- 	if (date < today) {
- 		return false;
- 	}
+  //  	var today = new Date();
+ 	// if (date < today) {
+ 	// 	return false;
+ 	// }
  	//Convert the date in to the mm-dd-yyyy format  	
  	var m = date.getMonth(); 
  	var d = date.getDate(); 

@@ -1,30 +1,33 @@
 
   <section class="form-section-container">
-     <div class="col-md-4">
+     <div class="order-form-wrap col-md-4" style="padding-left: 0px; padding-right: 0px;">
      <form method="post" action="/placeOrder" class="order-form">
           <div class="form-title-text">Get Your Gear On</div></span>
           <hr class="lightline">
           <ul class="listmenu calendar-input">
           <li>
-            <div class="input-group date" data-date-format="mm-dd-yyyy">
+            <div class="input-group date datepicker-wrap" data-date-format="mm-dd-yyyy">
                 <input class="form-control" required placeholder="Booking Date" type="text" name="date" id="datepicker">
                 <!-- <span><i class="glyphicon glyphicon-calendar"></i></span> -->
                 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
+<!--                 <span class="hover-tips js-hover-tips glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Available weekends and holidays July 3 through Labor Day"></span> -->
             </div>
+
             <!-- <input name="last_name" placeholder="Last Name"> -->
           </li>
           </ul>
             <ul class="listmenu listheaders clearfix">
               <li><span class="item-width">Pick-up Location</span></li>
+              <li>
+                <span class="hover-tips js-hover-tips glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Rentals are currently for NYC BeachBus Riders only"></span>
+              </li>
             </ul>
 
             <ul class="listmenu">
             <li>
-              <select name="location" required class="rental-location">
-              <option value="Far Rockaway">Far Rockaway</option>
-              <option value="Riis Park / Fort Tilden">Riis Park / Fort Tilden</option>
-              <option value="Jones Beach">Jones Beach</option>
-              <option value="Robert Moses / Fire Island">Robert Moses / Fire Island</option>
+              <select name="location" required class="rental-location js-rental-location">
+              <option value="NYC Beach Bus - Williamsburg" selected="">NYC Beach Bus-Williamsburg</option>
+              <option value="NYC Beach Bus - Barclay's Center">NYC Beach Bus-Barclay's Center</option>
               </select>
             </li>
             </ul>
@@ -36,13 +39,13 @@
             </ul>
             <ul class="listmenu clearfix">
             <li>
-              <p class="rental-item">Basic half body chair</p>
+              <p class="rental-item">Classic half body chair</p>
               </li>
             <li>
               <p class="js-rental-price rental-price">$8</p>
             </li>
               <li>
-                <select name="basicChair_qty" class="rental-qty js-rental-qty" onChange="">
+                <select name="classicChair_qty" class="rental-qty js-rental-qty" onChange="">
               <option value="0" selected="">0</option>
               <option value="1"> 1 </option>
               <option value="2"> 2 </option>
@@ -57,7 +60,7 @@
               <p class="rental-item">Deluxe full body chair</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price" price=13.00 >$13</p>
+              <p class="js-rental-price rental-price">$14</p>
             </li>
               <li>
                 <select name="deluxeChair_qty" class="rental-qty js-rental-qty">
@@ -72,13 +75,13 @@
 
             <ul class="listmenu clearfix">
             <li>
-              <p class="rental-item">Basic chair & umbrella</p>
+              <p class="rental-item">Classic chair & umbrella</p>
               </li>
             <li>
               <p class="js-rental-price rental-price">$15</p>
             </li>
             <li>
-                <select name="basicCombo_qty" class="rental-qty js-rental-qty">
+                <select name="classicCombo_qty" class="rental-qty js-rental-qty">
             <option value="0" selected="">0</option>
             <option value="1" > 1 </option>
             <option value="2"> 2 </option>
@@ -92,7 +95,7 @@
               <p class="rental-item">Deluxe chair & umbrella</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price">$18</p>
+              <p class="js-rental-price rental-price">$20</p>
             </li>
             <li>
                 <select name="deluxeCombo_qty" class="rental-qty js-rental-qty">

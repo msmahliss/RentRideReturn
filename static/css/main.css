@@ -5,8 +5,10 @@
 #globalHeaderLogo {
 	display:block;
 	text-align: center;
-	margin: 10px 0px 1px 0px;
 	padding: 0px;
+	font-size: 32px;
+	font-weight: bold;
+	font-family: "Kanada Sagam";
 }
 
 /* STYLES FOR SLIDESHOW */
@@ -1271,10 +1273,15 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 	/*float: left;*/
 	/*height: 500px;*/
 	margin: 0px 0px 0px 0px; 
-	padding: 10px 15px 0px 10px;
+	padding: 10px 15px 0px 25px;
 	/*border-radius: 4px; */
 	/*background-color: rgb(218, 135, 82);*/
 	background-color: salmon;
+}
+
+.order-form-wrap {
+	padding-left:0px;
+	padding-right:0px;
 }
 
 .order-form-winter{
@@ -1352,7 +1359,7 @@ form ul.listheaders li span{
   position: relative;
   float: left;
   border: 3px solid #eee;
-  width: 175px;
+  width: 180px;
   height: 40px;
   padding: 10px !important;
   margin: 0px !important;
@@ -1384,9 +1391,9 @@ form ul.listheaders li span{
   z-index: 1;
   position: relative;
   border: 3px solid #eee;
-  width: 225px;
+  width: 240px;
   height: 45px;
-  padding: 10px !important;
+  /*padding: 10px !important;*/
   margin: 0px !important;
 }
 
@@ -1444,6 +1451,11 @@ h1 {
   margin-top: 0;
 }
 
+.dropdown-title {
+	text-transform: uppercase;
+}
+
+
 .form-title-text {
   font-size: 26px;
   letter-spacing: 1.4px;
@@ -1497,7 +1509,7 @@ legend { margin-bottom: 5px !important;}
 }
 .panel-beach {
 	background-image: url(/img/beach_chair.png); background-size: cover; background-repeat: no-repeat;	
-	margin-left: -20px;
+	/*margin-left: -20px;*/
 	height: 573px;
 }
 

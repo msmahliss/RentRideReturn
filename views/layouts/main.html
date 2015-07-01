@@ -41,13 +41,12 @@
  -->
     <div class="container">
         <div class="navbar-header">
-            <div id="universalBarHotText"><h1></h1>
-            </div>
+            <div class id="globalHeaderLogo"></div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse"  id="universalBarMenu">
-            <ul class="">
+            <ul>
 
                 <li><a href="http://nycbeachbus.com"><img src="/img/logos/beachbus.png" alt="NYC Beach Bus">BEACH BUS</a></li>
                 <li><a href="http://nycsnowbus.com"><img src="/img/logos/snowbus.png" alt="NYC Snow Bus">SNOW BUS</a></li>
@@ -90,7 +89,7 @@
 
 <header>
   
-        <a href="#" id="globalHeaderLogo"><img src="img/logo.png"/></a>
+  <div class id="globalHeaderLogo">RENT <font color="red">  RIDE </font> RETURN </div>
   
   <section id="globalHeaderMenuContainer" class="global-header-section">
     <nav class="navbar navbar-default" id="globalHeaderNavContainer" >
@@ -103,7 +102,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">HOME</a>
+      <a class="navbar-brand" href="/">HOME</a>
     </div>
 
 
@@ -113,7 +112,7 @@
                   <a href="/" name="&lpos=top_nav>women">HOME</a>
               </li> -->
               <li class="dropdown">   
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beach<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle dropdown-title" data-toggle="dropdown">Beach<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="/beach">Beach Chairs</a></li>
                       <li><a href="/beach">Lounge Chairs</a></li>
@@ -121,7 +120,7 @@
                   </ul>
               </li>
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Snow<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle dropdown-title" data-toggle="dropdown">Snow<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="/winter">Jackets</a></li>
                       <li><a href="/winter">Pants</a></li>
@@ -135,7 +134,7 @@
                   </ul>
               </li>
               <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adventures<span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle dropdown-title" data-toggle="dropdown">Adventures<span class="caret"></span></a>
                   <ul class="dropdown-menu">
                       <li><a href="/camping">Tents</a></li>
                       <li><a href="/camping">Sleeping Bags</a></li>
@@ -158,47 +157,76 @@
 
 {{{body}}}
 </body>
-<footer id="ftr">
+
+<footer>
 
 <nav id="ftrFootNavTop">
 
-  
-  
-  <div class="ftr-foot-col" id="ftrCol1">
+  <div class="ftr-foot-col col-md-4">
   <ul>
       <li>
 CONTACT US
-                    <ul itemscope itemtype="http://schema.org/Organization" class=inner-ul1>
+                    <ul >
                     <li itemprop="telephone">
                 OFFICE: (917)-524-2421
           </li>
                     <li itemprop="telephone">
                 MOBILE: (347)-796-1685
           </li>
+          <li itemprop="telephone">
+                EMAIL: hello@rentridereturn.com
+          </li>
         </ul>
       </li>
     </ul>
-    </div>
-    
-
-  
-  
-  <div class="ftr-foot-col" id="ftrCol2">
+  </div>
+      
+  <div class="ftr-foot-col col-md-4">
     <ul>
       <li>
 ABOUT RENTRIDERETURN
                     <ul class=inner-ul2>
                     <li>
-                  <a href="#">OUR STORY</a>     
+                  <a href="/about">OUR STORY</a>     
           </li>
                     <li>
-                    <a href="#">CAREERS</a>
+                    <a href="/faq">FAQ</a>
           </li>
         </ul>
       </li>
     </ul>
     </div>
-    
+
+<div class="ftr-foot-col col-md-4">
+  <ul class="nav navbar-nav">
+      <li>
+          <a href="https://twitter.com/rentridereturn" title="Twitter" rel="nofollow" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+          </a>
+      </li>
+      <li>
+          <a href="http://instagram.com/therentridereturn" title="Instagram" rel="nofollow" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+          </a>
+      </li>
+      <li>
+          <a href="https://www.facebook.com/rentridereturn" title="Facebook" rel="nofollow" target="_blank">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+          </a>
+      </li>
+  </ul>  
+</div>
+
+<!--     
   <div class="ftr-foot-col" id="ftrCol3">
   <ul>
       <li>
@@ -220,29 +248,20 @@ DROPOFF LOCATIONS
         </ul>
       </li>
     </ul>
-    </div>
-    
-  <div class="ftr-foot-col" id="ftrCol5">
-  <ul>
+    </div> -->
 
+<!--   <div class="ftr-foot-col">
+  <ul>
       <li>
 LIKE BEING FIRST?
-
                     <ul class=inner-ul1>
-                
                     <li>
                             <span class="ftr-signup-txt">Subscribe to our mailing list<br>to get the inside scoop on deals, new gear, and more</span>
-
-                        
           </li>
-
         </ul>
-
       </li>
-
     </ul>
-    </div>
-    
+    </div> -->
 
 </nav>
 
@@ -251,31 +270,6 @@ LIKE BEING FIRST?
 
 <nav id="ftrFootNavBottom">
 <ul>
-
-<!--     <li class="ftr-first-li">
-    <a href="#"/></a>
-    </li>
-
-    <li class="ftr-mid-li">
-    <a href="#" target="">CONTACT US</a>
-    </li>
-    <li class="ftr-divider">|</li>
-
-    <li class="ftr-mid-li">
-    <a href="#" target="">TERMS OF USE</a>
-    </li>
-    <li class="ftr-divider">|</li>
-
-    <li class="ftr-mid-li">
-    <a href="#" target=""><span style="font-weight: 900;">PRIVACY POLICY</span></a>
-    </li>
-    <li class="ftr-divider">|</li>
-
-    <li class="ftr-mid-li">
-    <a href="#" target="">SITE MAP</a>
-    </li>
-    <li class="ftr-divider">|</li>
- -->
   <li class="ftr-last-li">&copy; 2015 RentRideReturn</li>
 </ul>
 

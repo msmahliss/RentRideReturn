@@ -11,7 +11,9 @@ var mongoose = require("mongoose");
 var Order = require('../models/orders');
 var ObjectID = require('mongodb').ObjectID;
 
+//order constats
 var max_orders = 100;
+var inventory = require('../config/inventory');
 
 module.exports = function (app, passport) {
 
@@ -19,7 +21,6 @@ module.exports = function (app, passport) {
 // HOME, PROFILE, GALLERY AND SHARE ROUTES =====================================
 // =============================================================================
 
-    // show the home page (will also have our login links)
     app.get('/', function (req, res) {
         if (req.user) {
             res.redirect('/intro');
@@ -33,7 +34,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/beach', function (req, res) {
-        res.render('beach', {title: 'Rent Ride Return'});
+        res.render('index', {title: 'Rent Ride Return'});
     });
 
     app.get('/winter', function (req, res) {
@@ -50,6 +51,14 @@ module.exports = function (app, passport) {
 
     app.get('/checkout2/', function (req, res) {
         res.render('checkout_2', {title: 'Rent Ride Return Checkout'});
+    });
+
+    app.get('/about/', function (req, res) {
+        res.render('about', {title: 'Rent Ride Return Checkout'});
+    });
+
+    app.get('/faq/', function (req, res) {
+        res.render('faq', {title: 'Rent Ride Return Checkout'});
     });
 
     app.get('/paymentConfirm', function (req, res) {
@@ -118,38 +127,43 @@ module.exports = function (app, passport) {
         newOrder.orderLocation = req.body.location;
 
         //TODO: not this. Loop through all items from inventory
-        var basicChairOrder = {};
-        basicChairOrder.type = "Basic half body chair";
-        basicChairOrder.price = 8.00;
-        basicChairOrder.qty = req.body.basicChair_qty ? req.body.basicChair_qty : 0;
-        basicChairOrder.img = 'img/basic_chair.jpeg';
+        var classicChairOrder = {};
+        classicChairOrder.type = "Classic half body chair";
+        classicChairOrder.price = 8.00;
+        classicChairOrder.id = "B0";
+        classicChairOrder.qty = req.body.classicChair_qty ? req.body.classicChair_qty : 0;
+        classicChairOrder.img = 'img/basic_chair.jpeg';
 
         var deluxeChairOrder = {};
         deluxeChairOrder.type = "Deluxe full body chair";
-        deluxeChairOrder.price = 13.00;
+        deluxeChairOrder.price = 14.00;
+        deluxeChairOrder.id = "B1";
         deluxeChairOrder.qty = req.body.deluxeChair_qty ? req.body.deluxeChair_qty : 0;
         deluxeChairOrder.img = 'img/beach_chair.png';
 
-        var basicComboOrder = {};
-        basicComboOrder.type = "Basic chair & umbrella";
-        basicComboOrder.price = 15.00;
-        basicComboOrder.qty = req.body.basicCombo_qty ? req.body.basicCombo_qty: 0;
+        var classicComboOrder = {};
+        classicComboOrder.type = "Classic chair & umbrella";
+        classicComboOrder.price = 15.00;
+        classicChairOrder.id = "B2";
+        classicComboOrder.qty = req.body.classicCombo_qty ? req.body.classicCombo_qty: 0;
 
         var deluxeComboOrder = {};
         deluxeComboOrder.type = "Deluxe chair & umbrella";
-        deluxeComboOrder.price = 18.00;
+        deluxeComboOrder.price = 20.00;
+        deluxeChairOrder.id = "B3";
         deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
 
         var umbrellaOrder = {};
         umbrellaOrder.type = "Umbrella";
         umbrellaOrder.price = 10.00;
+        umbrellaOrder.id = "B4";
         umbrellaOrder.qty = req.body.umbrella_qty ? req.body.umbrella_qty: 0;
 
-        newOrder.items = [basicChairOrder,deluxeChairOrder,basicComboOrder,deluxeComboOrder, umbrellaOrder];
+        newOrder.items = [classicChairOrder,deluxeChairOrder,classicComboOrder,deluxeComboOrder, umbrellaOrder];
 
-        newOrder.orderTotal = (basicChairOrder.price*basicChairOrder.qty) +
+        newOrder.orderTotal = (classicChairOrder.price*classicChairOrder.qty) +
         (deluxeChairOrder.price*deluxeChairOrder.qty)+
-        (basicComboOrder.price*basicComboOrder.qty)+
+        (classicComboOrder.price*classicComboOrder.qty)+
         (deluxeComboOrder.price*deluxeComboOrder.qty)+
         (umbrellaOrder.price*umbrellaOrder.qty);
         
@@ -196,9 +210,11 @@ module.exports = function (app, passport) {
 
     });
 
-    app.get('/getOrderStatus', function(req, res){
-        var result = getOrderStatus();
-        res.send(result);
+    app.get('/getOrderStatus', getOrderStatus, function(req, res){
+        console.log(req.orderStatusResult);
+        console.log(inventory.length);
+        console.log(inventory[0]["max_qty"]);
+        res.send(req.orderStatusResult);
     });
 
 // =============================================================================
@@ -234,25 +250,26 @@ function formatDate() {
     return m + "-" + d + "-" + y;
 }
 
-function getOrderStatus(item, date) {
+function getOrderStatus(req, res, next) {
     //find out how many of each item has been booked for this date and location
-
-    db.orders.aggregate(
+    var date = req.query.date;
+    Order.aggregate(
         {$unwind:"$items"},
-        {$match:{"items.type":"cooler"}},
+        {$match:{"orderDate":date}},
         {$group:{
             _id: "$items.type",
-            total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
+            // total_cost:{ $sum:{ $multiply:["$items.qty","$items.price"] } },
             total_ordered:{$sum:"$items.qty"}
         }},
         function (err, result) {
         if (!result) {
             //none ordered. max avail.
-            return null;
+            req.orderStatusResult = null;
+            return next();
         } else {
             //aggregate by this item
-            console.log(result);
-            return result;
+            req.orderStatusResult = result;
+            return next();
         }
     });
     
