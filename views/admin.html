@@ -1,0 +1,58 @@
+<div class="admin-section-container orderSummary">
+	<div class="orderSummary">
+		<p class="list-header">Sup, Ayo</p>
+		<p class="list-header">Here are all your orders.</p>
+		<div class="sticky-wrap">
+			<table class="sticky-enabled">
+				<thead>
+					<tr>
+						<th class="th-padding">First Name</th>
+						<th class="th-padding">Last Name</th>
+						<th class="th-padding">Email</th>
+						<th class="th-padding">Phone #</th>
+						<th class="th-padding">BeachBus ID</th>
+						<!-- <th>Order Date</th> -->
+						<th class="th-padding">Order #</th>
+						<th class="th-padding">Order Status</th>
+						<th class="th-padding">Rental Date</th>
+						<th class="th-padding">Delivery Method</th>
+						<th class="th-padding">Bus Pick-up</th>
+						<th class="th-padding">Order Items</th>
+						<th class="th-padding">Order Total</th>
+					</tr>
+				</thead>
+				<tbody>
+
+			{{#each orders}}
+			{{this.length}}
+		<tr>
+	        <td class="td-center td-padding">{{this.first_name}}</td>
+	        <td class="td-center td-padding">{{this.last_name}}</td>
+	        <td class="td-center td-padding">{{this.email}}</td>
+	        <td class="td-center td-padding">{{this.phone}}</td>
+	        <td class="td-center td-padding">{{this.passengerID}}</td>	        
+	        <!-- <td class="">{{this.created}}</td> -->
+	        <td class="td-center">{{this.orderNumber}}</td>
+	        <td class="td-center">{{this.orderStatus}}</td>
+	        <td class="td-center">{{this.orderDate}}</td>
+	        <td class="td-center td-padding">NYC Beach Bus</td>
+	        <td class="td-center td-padding">{{this.orderLocation}}</td>
+	        <td class="td-center td-padding">
+				<ul>
+				{{#each this.items}}
+					{{#if this.qty}}
+						<li class="list-header"><span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span> {{this.type}}: {{this.qty}}</li>
+					{{/if}}
+				{{/each}}
+				</ul>
+			</td>
+			<td class="td-center td-padding list-header">${{this.orderTotal}}</td>
+		</tr>
+			{{/each}}
+				</tbody>
+			</table>
+		</div> 
+		<p class="list-header">xoxo, MSH</p>
+		<hr class="lightline">
+	</div>
+</div>

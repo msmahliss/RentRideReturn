@@ -18,7 +18,7 @@ var inventory = require('../config/inventory');
 module.exports = function (app, passport) {
 
 // =============================================================================
-// HOME, PROFILE, GALLERY AND SHARE ROUTES =====================================
+// HOME, DETINATION, AND CHECKOUT ROUTES =====================================
 // =============================================================================
 
     app.get('/', function (req, res) {
@@ -66,7 +66,15 @@ module.exports = function (app, passport) {
     });
 
     app.get('/paymentConfirm', function (req, res) {
-        
+        if (!req.session.order){
+            res.redirect('/');
+            return;
+        }
+ 
+        //TODO: Put all of this in a helper function
+        // getOrder(req.session.order._id, function (order) {
+        //     console.log(order);
+        // });       
         Order.findOne({_id: req.session.order._id}, function(err,order){
 
             if(order){
@@ -86,10 +94,10 @@ module.exports = function (app, passport) {
                 for (var i=0; i < order.items.length; i++){
                     thisOrder = order.items[i];
                     if (thisOrder.qty){
-                        orderItemTxt += "Item: " + thisOrder.type + "\n";
-                        orderItemTxt += "Quantity:  " + thisOrder.qty + "\n";
-                        orderItemTxt += "Price:  $" + thisOrder.price + "\n";
-                        orderItemTxt += "******************\n";
+                        orderItemTxt += "Item: " + thisOrder.type + " | \n";
+                        orderItemTxt += "Quantity:  " + thisOrder.qty + " | \n";
+                        orderItemTxt += "Price:  $" + thisOrder.price + " | \n";
+                        orderItemTxt += "******************\n\n";
                     }
                 }
 
@@ -113,16 +121,16 @@ module.exports = function (app, passport) {
                     'Your order will be delivered to your pick-up location the day of your trip.\n'+
                     'Save the trees and don\'t print this email.\n\n'+
                     'Below is your order information:\n\n'+
-                    'Order Date: ' + order.created + '\n' +
-                    'Order Number: ' + order.orderNumber + '\n' +
-                    'Rental Start Date: ' + order.orderDate + '\n'+
-                    'Rental End Date: ' + order.orderDate + '\n'+
-                    'Delivery Method: Bus Pick-up\n'+
+                    'Order Date: ' + order.created + '\n\n' +
+                    'Order Number: ' + order.orderNumber + '\n\n' +
+                    'Rental Start Date: ' + order.orderDate + '\n\n'+
+                    'Rental End Date: ' + order.orderDate + '\n\n'+
+                    'Delivery Method: Bus Pick-up\n\n'+
                     'Delivery Address: ' + order.orderLocation + '\n\n'+
                     'Item Summary:\n\n'+ orderItemTxt +
-                    'Item(s) Subtotal: $' + orderTotal + '\n'+
-                    'Tax: $' + taxAmt + '\n'+
-                    'Delivery: FREE\n'+
+                    'Item(s) Subtotal: $' + orderTotal + ' | \n'+
+                    'Tax: $' + taxAmt + '| \n'+
+                    'Delivery: FREE | \n'+
                     'Order Total: $' + total + '\n\n'+
 
                     'Rental Terms:\n\n'+
@@ -145,7 +153,7 @@ module.exports = function (app, passport) {
                         console.log(err);
                     }
                 });
-
+                console.log(email.text);
                 res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
             } else {
                 res.send(err);
@@ -158,11 +166,10 @@ module.exports = function (app, passport) {
         res.render('paymentError', {title: 'Rent Ride Return'});
     });
 
-    app.get('/paymentTest', function (req, res) {
-        res.render('paymentConfirm', {title: 'Rent Ride Return'});
-    });
+// =============================================================================
+// ORDER FLOW ROUTES =====================================================
+// =============================================================================
 
-    // ORDER SECTION =========================
     app.post('/placeOrder', function (req, res) {
 
         var newOrder = new Order();
@@ -278,6 +285,18 @@ module.exports = function (app, passport) {
         res.send(result);
     });
 
+
+// =============================================================================
+// ADMIN =====================================================
+// =============================================================================
+
+
+    app.get('/admin', getAllOrders, function(req, res){
+        console.log(req.allOrders);
+        res.render('admin', {orders: req.allOrders, title: 'Admin Panel'});
+    });
+
+
 // =============================================================================
 // ROUTE TO PAGE NOT FOUND =====================================================
 // =============================================================================
@@ -324,6 +343,13 @@ function formatDate() {
     return m + "-" + d + "-" + y;
 }
 
+function getAllOrders(req, res, next){
+    
+    Order.find({"orderStatus":"Paid"}, function(err, orders){
+        req.allOrders = orders;
+        return next();
+    });
+}
 function getOrderStatus(req, res, next) {
     //find out how many of each item has been booked for this date and location
     var date = req.query.date;
