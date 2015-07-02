@@ -1567,12 +1567,6 @@ legend { margin-bottom: 5px !important;}
 	height: 600px;
 }
 
-label span{
-  display: inline-block;
-  width  : 120px;
-  text-align: right;
-}
-
 input[type="text"], textarea {
   border: 1px solid #999;  
 }
