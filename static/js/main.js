@@ -1,22 +1,25 @@
 $(document).ready(function () {
 
-
-
-	$( "#datepicker" ).datepicker({
-		beforeShowDay: DisplayValidDates
-		// beforeShowDay: $.datepicker.noWeekends
-		// showOn: "button",
-		// buttonImage: "/img/cal.png" 
-	});
-
-	$('.carousel').carousel({
-	 	interval: 10000
-	});
+	var validDates = ["06/28/2015","07/03/2015","07/04/2015","07/05/2015","07/11/2015","07/12/2015",
+				"07/18/2015","07/19/2015","07/25/2015","07/26/2015","08/01/2015","08/02/2015",
+				"08/8/2015","08/09/2015","08/15/2015","08/16/2015","08/22/2015","08/23/2015",
+				"08/29/2015","08/30/2015","09/5/2015","09/6/2015"];
 
 	//terms and conditions checkbox 
 	$('.js-terms-check').click(function(){
 		$(this).toggleClass('is-checked');
 		$('.js-terms-check-graphic').toggleClass('is-hidden');
+	});
+
+	//datepicker setup 
+	var firstDate = findFirstDate();
+	$('#datepicker').val(firstDate);
+
+	$("#datepicker").datepicker({
+		beforeShowDay: DisplayValidDates
+		// beforeShowDay: $.datepicker.noWeekends
+		// showOn: "button",
+		// buttonImage: "/img/cal.png" 
 	});
 
 	$('#datepicker').change(function(){
@@ -76,28 +79,36 @@ $(document).ready(function () {
 
 	});
 
+
+function findFirstDate() {
+ 	//First check if date is before today
+ 	var date;
+   	var today = new Date();
+
+   	for (var i=0; i < validDates.length; i++){
+   		date = new Date(validDates[i]);
+
+   		if (date >= today) {
+   			return validDates[i];
+   		}
+   	}
+ }
  
 function DisplayValidDates(date) {
-
-	var validDates = ["6-28-2015","7-3-2015","7-4-2015","7-5-2015","7-11-2015","7-12-2015",
-				"7-18-2015","7-19-2015","7-25-2015","7-26-2015",
-				"8-1-2015","8-2-2015","8-8-2015","8-9-2015","8-15-2015","8-16-2015",
-				"8-22-2015","8-23-2015","8-29-2015","8-30-2015","9-6-2015","9-6-2015"	
-			];
- 
-
  	//First check if date is before today
    	var today = new Date();
  	if (date < today) {
  		return false;
  	}
  	//Convert the date in to the mm-dd-yyyy format  	
- 	var m = date.getMonth(); 
+ 	var m = date.getMonth() + 1;
+ 	(m < 10) ? (m = "0" + m) : (m=m);
  	var d = date.getDate(); 
+ 	(d < 10) ? (d = "0" + d) : (d=d);
  	var y = date.getFullYear(); 
- 	var currentDate = (m + 1) + '-' + d + '-' + y ; 
+ 	var currentDate = m + '/' + d + '/' + y ; 
  
- 	return [ validDates.indexOf(currentDate) > -1 ] 
+ 	return [ validDates.indexOf(currentDate) > -1 ];
  }
 
 });

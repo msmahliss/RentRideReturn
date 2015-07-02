@@ -88,7 +88,7 @@ module.exports = function (app, passport) {
                     if (thisOrder.qty){
                         orderItemTxt += "Item: " + thisOrder.type + "\n";
                         orderItemTxt += "Quantity:  " + thisOrder.qty + "\n";
-                        orderItemTxt += "Price:  " + thisOrder.price + "\n";
+                        orderItemTxt += "Price:  $" + thisOrder.price + "\n";
                         orderItemTxt += "******************\n";
                     }
                 }
@@ -122,7 +122,7 @@ module.exports = function (app, passport) {
                     'Item Summary:\n\n'+ orderItemTxt +
                     'Item(s) Subtotal: $' + orderTotal + '\n'+
                     'Tax: $' + taxAmt + '\n'+
-                    'Delivery: FREE.\n'+
+                    'Delivery: FREE\n'+
                     'Order Total: $' + total + '\n\n'+
 
                     'Rental Terms:\n\n'+
@@ -146,7 +146,7 @@ module.exports = function (app, passport) {
                     }
                 });
 
-                res.render('paymentConfirm', {order:order, title: 'Rent Ride Return'});
+                res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
             } else {
                 res.send(err);
             }

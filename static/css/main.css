@@ -1111,19 +1111,17 @@ a.invisButton{ cursor: hand; cursor: pointer;};
   padding: 5px 14px;
 }
 
-.section-container .dest-img {
+.dest-img {
 	width: 100%;
 	float: left;
 }
 
 
-
-.section-container .dest-img-wrapper {
+.dest-img-wrapper {
 	height: 223px;
 	overflow-y: hidden;
 	display: block;
 }
-
 
 .section-container a {
   color: #000;
@@ -1287,7 +1285,7 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 	/*float: left;*/
 	/*height: 500px;*/
 	margin: 0px -15px 0px 0px; 
-	padding: 10px 15px 0px 25px;
+	padding: 10px 15px 0px 12px;
 	/*border-radius: 4px; */
 	/*background-color: rgb(218, 135, 82);*/
 	background-color: salmon;
@@ -1465,6 +1463,9 @@ form ul.listheaders li span{
 	.rental-qty{
 		height: 60px;
 	}
+}
+
+@media (max-width: 710px){
 	.panel-beach{
 		display: none;
 	}
@@ -1549,7 +1550,7 @@ legend { margin-bottom: 5px !important;}
   margin-bottom: 0px !important;
 }
 .panel-beach {
-	background-image: url(/img/beach_chair.png); background-size: cover; background-repeat: no-repeat;	
+	background-image: url(/img/beach_chair_text.png); background-size: cover; background-repeat: no-repeat;	
 	/*margin-left: -20px;*/
 	height: 573px;
 }
