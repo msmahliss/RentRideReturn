@@ -1149,6 +1149,19 @@ a.invisButton{ cursor: hand; cursor: pointer;};
 }
 
 
+.hover-tips{
+    cursor: pointer;
+    margin-left: 12px;
+    font-size: 1.3em;
+    vertical-align: middle;
+    color: rgb(196, 119, 190);
+}
+
+.hover-tips:hover{
+    color:rgb(161, 97, 156);
+}
+
+
 .my-navbar-brand {
 	font-size: 12px;
 }

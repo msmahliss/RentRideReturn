@@ -11,6 +11,8 @@ $(document).ready(function () {
 		$('.js-terms-check-graphic').toggleClass('is-hidden');
 	});
 
+	$('[data-toggle="tooltip"]').tooltip()
+
 	//datepicker setup 
 	var firstDate = findFirstDate();
 	$('#datepicker').val(firstDate);
