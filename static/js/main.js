@@ -13,6 +13,32 @@ $(document).ready(function () {
 
 	$('[data-toggle="tooltip"]').tooltip()
 
+	$('.order-form').submit(function(e){
+		// If  no field has been selected, display an error message
+	    //text: "You must select at least 1 item";
+
+		var selection = 0;
+
+		$('.js-rental-qty option:selected').each(function(){
+			if ( parseFloat($(this).val()) ) {
+				selection += parseFloat($(this).val());
+				console.log("selection made!");
+				return;
+			}
+		});
+
+		if (!selection){
+		    $('.error-message').removeClass('is-hidden');
+		    // And we prevent the form to be sent by canceling the event
+		    e.preventDefault();
+		}	 
+	});
+
+	$('.js-rental-qty').change(function(){
+		//remove error message when selection is made
+		$('.error-message').addClass('is-hidden');
+	});
+
 	//datepicker setup 
 	var firstDate = findFirstDate();
 	$('#datepicker').val(firstDate);
@@ -53,9 +79,7 @@ $(document).ready(function () {
 				// 	    $('.rental-qty').append('<option value="'+j+'">'+j+'</option>');
 				// 	}					
 				// }
-				if (!result.length){
-					console.log('no orders');
-				}
+
 				for (var i=0; i<result.length; i++){
 
 					// var itemID = result[i]["_id"];
