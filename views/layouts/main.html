@@ -16,7 +16,7 @@
 <meta name="description" content="Rent Ride Return" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" href="/css/main.css" />
+<link rel="stylesheet" href="/css/main.css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">  
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -28,33 +28,18 @@
 <body>
 
 <nav class="navbar navbar-default" role="navigation" id="universalBar">
-    <!-- Brand and toggle get grouped for better mobile display -->
-<!--     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Rent Ride Return</a>
-    </div>
- -->
     <div class="container">
-        <div class="navbar-header">
-<!--             <div class id="universalBarHotText"><h1>RENT <font color="red">  RIDE </font> RETURN </h1></div>
-            <div class id="globalHeaderLogo"></div> -->
-        </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse"  id="universalBarMenu">
             <ul>
-
                 <li><a href="http://nycbeachbus.com" target="_blank"><img src="/img/logos/beachbus.png" alt="NYC Beach Bus">BEACH BUS</a></li>
                 <li><a href="http://nycsnowbus.com" target="_blank"><img src="/img/logos/snowbus.png" alt="NYC Snow Bus">SNOW BUS</a></li>
                 <li id="universalBarCurrent"><a href="#"  target="_blank" style="padding-top:10px; line-height:110%;">RENT <br \><font color="red">  RIDE </font><br \> RETURN</a></li>
-
-
             </ul>
+
+<!--             <div>
+                <div class="globalHeader">RENT <font color="red">  RIDE </font> RETURN</div>
+            </div> -->
 
             <ul class="nav navbar-nav navbar-right" id="universalBarMenuRight">
                 <li>
@@ -90,10 +75,10 @@
 
 <header>
   
-  <div class id="globalHeaderLogo">RENT <font color="red">  RIDE </font> RETURN </div>
+  <div class="globalHeader">RENT <font color="red">  RIDE </font> RETURN </div>
   
   <section id="globalHeaderMenuContainer" class="global-header-section">
-    <nav class="navbar navbar-default" id="globalHeaderNavContainer" >
+    <nav class="navbar navbar-default" style="margin-bottom: 0px">
     <div class="container-fluid">
 
     <div class="navbar-header">
@@ -103,7 +88,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand my-navbar-brand" href="/">HOME</a>
+      <a class="navbar-brand my-navbar-brand" href="/" style="font-size: 14px;">HOME</a>
     </div>
 
 
@@ -178,7 +163,7 @@ CONTACT US
                 MOBILE: (347)-796-1685
           </li>
           <li itemprop="telephone">
-                EMAIL: info@rentridereturn.com
+              <a href="mailto:info@rentridereturn.com"><div class="item">info@rentridereturn.com</div></a>
           </li>
         </ul>
       </li>

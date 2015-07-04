@@ -290,12 +290,9 @@ module.exports = function (app, passport) {
 // ADMIN =====================================================
 // =============================================================================
 
-
     app.get('/admin', getAllOrders, function(req, res){
-        console.log(req.allOrders);
         res.render('admin', {orders: req.allOrders, title: 'Admin Panel'});
     });
-
 
 // =============================================================================
 // ROUTE TO PAGE NOT FOUND =====================================================

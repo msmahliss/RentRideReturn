@@ -86,10 +86,13 @@ function findFirstDate() {
  	//First check if date is before today
  	var date;
    	var today = new Date();
-
+ 	var m = today.getMonth() + 1;
+ 	var d = today.getDate(); 
+ 	var y = today.getFullYear(); 
+ 	today = new Date(m + '/' + d + '/' + y);
+ 	console.log(today);
    	for (var i=0; i < validDates.length; i++){
    		date = new Date(validDates[i]);
-
    		if (date >= today) {
    			return validDates[i];
    		}
