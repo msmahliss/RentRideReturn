@@ -14,13 +14,6 @@
 			<label>City <input type="text" name="city" class="form-control" required></label>
 			<label>State <input type="text" name="state" class="form-control" required></label>
 			<label>Zip <input type="text" name="UMzip" class="form-control" required></label>
-			<p id="subTotal" class="subTotal-button">
-			ORDER SUBTOTAL: ${{orderTotal}}<br>
-			TAX: ${{taxAmt}}<br>
-			DELIVERY: FREE<br>
-			-------------------------<br>
-			ORDER TOTAL: ${{total}}
-			</p>
 	        <div class="btn-group check-group" role="group" aria-label="Default button group">
 	            <button type="button" class="btn btn-default single-check sign-in-check js-terms-check"><span class="js-terms-check-graphic inner-btn-graphic">☐</span><span class="js-terms-check-graphic inner-btn-graphic is-hidden">✔</span>I agree to the <strong><a href="/terms" target="_blank">Terms of Service</a></strong></button>
 	        </div>
@@ -56,6 +49,13 @@
 			{{/if}}
 			{{/each}}
 			</ul>	
+			<p id="subTotal" class="subTotal-button">
+			ORDER SUBTOTAL: ${{orderTotal}}<br>
+			TAX: ${{taxAmt}}<br>
+			DELIVERY: FREE<br>
+			-------------------------<br>
+			ORDER TOTAL: ${{total}}
+			</p>
 		</div> 
 	</div>
 </section>
