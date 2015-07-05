@@ -1356,7 +1356,7 @@ form ul.listheaders li span{
 }
 
 .pay-button {
-	margin: 10px 25px 10px 0px;
+	margin: 10px 5px 10px 0px;
 	border: 3px solid rgb(56, 111, 111);
 	border-radius: 2px;
 	padding: 12px;
@@ -1500,6 +1500,15 @@ h1 {
   margin-top: 0;
 }
 
+.error-message-wrap {
+	display: inline-block;
+}
+
+.error-message{
+
+}
+
+
 /*****carousel styling*************/
 
 .carousel-img {
@@ -1631,7 +1640,7 @@ legend { margin-bottom: 5px !important;}
 .panel-beach {
 	background-image: url(/img/beach_chair_text.png); background-size: cover; background-repeat: no-repeat;	
 	/*margin-left: -20px;*/
-	height: 573px;
+	height: 579px;
 }
 
 .panel-winter {

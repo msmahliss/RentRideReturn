@@ -22,13 +22,13 @@ $(document).ready(function () {
 		$('.js-rental-qty option:selected').each(function(){
 			if ( parseFloat($(this).val()) ) {
 				selection += parseFloat($(this).val());
-				console.log("selection made!");
 				return;
 			}
 		});
 
 		if (!selection){
-		    $('.error-message').removeClass('is-hidden');
+		    // $('.error-message').removeClass('is-hidden');
+		    $('.error-message').show("slow");
 		    // And we prevent the form to be sent by canceling the event
 		    e.preventDefault();
 		}	 
@@ -36,7 +36,9 @@ $(document).ready(function () {
 
 	$('.js-rental-qty').change(function(){
 		//remove error message when selection is made
-		$('.error-message').addClass('is-hidden');
+		// $('.error-message').addClass('is-hidden');
+		$('.error-message').hide("slow");
+		//update qtys and check availability
 	});
 
 	//datepicker setup 
