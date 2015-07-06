@@ -35,99 +35,63 @@ $(document).ready(function () {
 	});
 
 	$('.js-rental-qty').change(function(){
-		//remove error message when selection is made
-		// $('.error-message').addClass('is-hidden');
+		//remove "no selection" error message when selection is made
 		$('.error-message').hide("slow");
 		//update qtys and check availability
+		//TODO: improve helper function to update selected quantitiess
+		// console.log( parseFloat($(this).val()) );
+		var date = $('#datepicker').val();
+		fetchOrderData(date);
 	});
 
 	//datepicker setup 
-	var firstDate = findFirstDate();
-	$('#datepicker').val(firstDate);
 
 	$("#datepicker").datepicker({
-		beforeShowDay: DisplayValidDates
-		// beforeShowDay: $.datepicker.noWeekends
-		// showOn: "button",
-		// buttonImage: "/img/cal.png" 
+		beforeShowDay: displayValidDates
 	});
+
+	findFirstDate();
 
 	$('#datepicker').change(function(){
 		//check order status based on date
 		var date = $(this).val();
-		// var pickuplocation = $('.js-rental-location');
-		// var temp = pickuplocation[0];
-		// console.log(temp.options[temp.selectedIndex].value);
-
-		$.get('/getOrderStatus?date='+date, function(result, status){
-				//update QTY option dropdown for each item
-				 var max = 20;
-				 var avail = 4;
-				//remove options
-				// $('#Field10 option').each(function(){
-				    // max = Math.max($(this).val(), max);
-				    // if ($(this).val()>rem_seats) { $(this).remove(); }
-				// })
-
-				//add options
-				// for (var i=max+1; i<=limit;i++){
-				    // $('#Field10').append('<option value="'+i+'">'+i+'</option>');
-				// }
-
-				//reset all options
-
-				// for (var i = 0; i < allSelectElems.length; i++){
-				// 	for (var j=0; j<=4;j++){
-				// 	    $('.rental-qty').append('<option value="'+j+'">'+j+'</option>');
-				// 	}					
-				// }
-
-				for (var i=0; i<result.length; i++){
-
-					// var itemID = result[i]["_id"];
-					// var avail = Math.max(0,max-result[i]["total_ordered"]);
-					// console.log(itemID+": "+result[i]["total_ordered"]+" ordered / "+avail+" available" +
-					// 	"/ $"+result[i]["total_cost"]+" in orders");
-
-					// var currentMax=0;
-					// $('#'+itemID + ' option').each(function(){
-					//     currentMax = Math.max($(this).val(), currentMax);
-					//     if ($(this).val()>avail) {
-					//     	$(this).remove();
-					//     }
-					// });
-
-					// var upperLimit = Math.min(4,avail);
-					// for (var j=currentMax+1; j<=upperLimit;j++){
-					//     $('#'+itemID+' option').append('<option value="'+j+'">'+j+'</option>');
-					// }
-				};
-
-		});
-
+		fetchOrderData(date);
 	});
 
-
 function findFirstDate() {
- 	//First check if date is before today
+	//If no date is selected, choose first valid rental date
  	var date;
+ 	var currentDate = $("#datepicker").val();
+ 	if (currentDate){
+	 	if (currentDate.length){
+	 		return;
+	 	} 		
+ 	}
+ 	
+ 	//Check if date is before today
    	var today = new Date();
  	var m = today.getMonth() + 1;
  	var d = today.getDate(); 
  	var y = today.getFullYear(); 
  	today = new Date(m + '/' + d + '/' + y);
- 	console.log(today);
    	for (var i=0; i < validDates.length; i++){
    		date = new Date(validDates[i]);
    		if (date >= today) {
-   			return validDates[i];
+			$('#datepicker').val(validDates[i]);
+			fetchOrderData(validDates[i]);
+			return;
    		}
    	}
  }
  
-function DisplayValidDates(date) {
+function displayValidDates(date) {
  	//First check if date is before today
    	var today = new Date();
+ 	var m = today.getMonth() + 1;
+ 	var d = today.getDate(); 
+ 	var y = today.getFullYear(); 
+ 	today = new Date(m + '/' + d + '/' + y);
+
  	if (date < today) {
  		return false;
  	}
@@ -141,5 +105,76 @@ function DisplayValidDates(date) {
  
  	return [ validDates.indexOf(currentDate) > -1 ];
  }
+
+function fetchOrderData(date){
+	$.get('/getOrderStatus?date='+date, function(result, status){
+		//update QTY select dropdown for each item
+		var max; 
+		var total_ordered; 
+		var avail; 
+		var currentMax; 
+		var upperLimit; 
+		var max_dd = 4; 
+
+		// get individual item totals
+		// for classic chairs. sum b0, b2 | for deluxe chairs. sum b1, b3 | for umbrellas. sum b2, b3, b4
+		total_ordered = result["B0"]["total_ordered"] ? result["B0"]["total_ordered"] : 0; 
+		total_ordered += result["B2"]["total_ordered"] ? result["B2"]["total_ordered"] : 0;''
+		var total_classic = total_ordered;
+
+		total_ordered = result["B1"]["total_ordered"] ? result["B1"]["total_ordered"] : 0;
+		total_ordered += result["B3"]["total_ordered"] ? result["B3"]["total_ordered"] : 0;
+		var total_deluxe = total_ordered; 
+
+		total_ordered = result["B2"]["total_ordered"] ? result["B2"]["total_ordered"] : 0; 
+		total_ordered += result["B3"]["total_ordered"] ? result["B3"]["total_ordered"] : 0; 
+		total_ordered += result["B4"]["total_ordered"] ? result["B4"]["total_ordered"] : 0; 
+		var total_umbrella = total_ordered;
+
+		for (var i in result){
+			max = result[i]["max_qty"];
+
+			if ((i=="B0")||(i=="B2")){
+				total_ordered = total_classic;
+			} else if ( (i=="B1")||(i=="B3") ){
+				total_ordered = total_deluxe;
+			} else if ( (i=="B4") ){
+				total_ordered = total_umbrella;
+			} else {
+				total_ordered = result[i]["total_ordered"] ? result[i]["total_ordered"] : 0;
+			}
+
+			//for B2 avail = Math.min(B0, B4)
+			//for B3 avail = Math.min(B1, B4)
+			if (i=="B2"){
+				avail = result["B0"]["max_qty"] - total_classic;
+				avail = Math.min(avail,(result["B4"]["max_qty"] - total_umbrella));
+			} else if (i=="B3"){
+				avail = result["B1"]["max_qty"] - total_deluxe;
+				avail = Math.min(avail,(result["B4"]["max_qty"] - total_umbrella));
+			} else {
+				avail = max-total_ordered;
+			}
+
+			avail = Math.max(0, avail);
+
+			// console.log(i+": "+total_ordered+" ordered / "+ max+" max / "+avail+" available" );
+
+			currentMax=0;
+			$('#'+i + ' option').each(function(){
+			    currentMax = Math.max($(this).val(), currentMax);
+			    if ($(this).val()>avail) {
+			    	$(this).remove();
+			    }
+			});
+
+			upperLimit = Math.min(max_dd,avail);
+			for (var j=currentMax+1; j<=upperLimit;j++){
+			    $('#'+i).append('<option value="'+j+'">'+j+'</option>');
+			}
+		};
+
+	});
+}
 
 });

@@ -271,16 +271,22 @@ module.exports = function (app, passport) {
     });
 
     app.get('/getOrderStatus', getOrderStatus, function(req, res){
-        var result = req.orderStatusResult;
-        //B0 max = 50
-        //B1 max = 40
-        //B2 max  = 15
-        //B3 max = 15
-        //B4 max = 15
-        // for (var i = 0; i < inventory.length; i++) {
-        // inventory[0]["max_qty"];
-        // inventory[0]["id"];
-        // }
+        //return inventoryID, total_ordered, max_qty
+        var orderStatus = req.orderStatusResult;
+        var result = {};
+        var thisItem;
+
+        for (var i = 0; i < inventory.length; i++){
+            thisItem = inventory[i];
+            result[thisItem["id"]] = {};
+            result[thisItem["id"]]["max_qty"] = thisItem["max_qty"];
+
+            for (var j = 0; j < orderStatus.length; j++){
+                if (orderStatus[j]["_id"] == thisItem["id"]){
+                    result[thisItem["id"]]["total_ordered"] = orderStatus[j]["total_ordered"];
+                }
+            }
+        }
 
         res.send(result);
     });
