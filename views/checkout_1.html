@@ -23,6 +23,14 @@
 				<li class="list-header">Rental Date:  {{order.orderDate}}</li>
 				<li class="list-header">Delivery Method:  NYC Beach Bus</li>
 				<li class="list-header">Delivery Location:  {{order.orderLocation}}</li>
+
+				<p id="subTotal" class="subTotal-button">
+				ORDER SUBTOTAL: ${{orderTotal}}<br>
+				TAX: ${{taxAmt}}<br>
+				DELIVERY: FREE<br>
+				-------------------------<br>
+				ORDER TOTAL: ${{total}}
+				</p>
 				<hr class="lightline">
 
 			{{#each order.items}}
@@ -41,13 +49,6 @@
 			{{/if}}
 			{{/each}}
 			</ul>	
-			<p id="subTotal" class="subTotal-button">
-			ORDER SUBTOTAL: ${{orderTotal}}<br>
-			TAX: ${{taxAmt}}<br>
-			DELIVERY: FREE<br>
-			-------------------------<br>
-			ORDER TOTAL: ${{total}}
-			</p>
 		</div> 
 	</div>
 </section>
