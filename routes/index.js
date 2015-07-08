@@ -67,8 +67,9 @@ module.exports = function (app, passport) {
 
     app.get('/paymentConfirm', function (req, res) {
         if (!req.session.order){
-            res.redirect('/');
-            return;
+            console.log('no order');
+            // res.redirect('/');
+            // return;
         }
  
         //TODO: Put all of this in a helper function
