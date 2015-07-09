@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongoose = require('mongoose');
+var redis = require('redis');
 var url = require('url');
 var morgan = require('morgan');
 
@@ -16,6 +17,20 @@ mongoose.connect(configDB.url);
 mongoose.connection.on('open', function() {
   console.log("Connected to Mongoose...");
 });
+
+// configure redis =============================================================
+var redisSessionsClient;
+if (process.env.REDISCLOUD_URL) {
+
+  var redisURL = url.parse(process.env.REDISCLOUD_URL);
+  redisSessionsClient = redis.createClient(redisURL.port, redisURL.hostname, {no_ready_check: true});
+  redisSessionsClient.auth(redisURL.auth.split(":")[1]);
+
+} else {
+    redisSessionsClient = redis.createClient();
+}
+
+var RedisStore = require('connect-redis')(session);
 
 // configure express ===========================================================
 var app = express();
@@ -31,6 +46,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(session({
+    store: new RedisStore({ client: redisSessionsClient }),
     secret: 'secret kitty',
     maxAge: 1000 * 60 * 60 * 24 * 7,
     resave: true,

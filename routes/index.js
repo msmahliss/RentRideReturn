@@ -66,10 +66,12 @@ module.exports = function (app, passport) {
     });
 
     app.get('/paymentConfirm', function (req, res) {
+        console.log(req.session);
         if (!req.session.order){
             console.log('no order');
+            res.render('paymentConfirm', {total: total, title: 'Rent Ride Return'});
             // res.redirect('/');
-            // return;
+            return;
         }
  
         //TODO: Put all of this in a helper function
@@ -83,78 +85,82 @@ module.exports = function (app, passport) {
                 order.orderStatus = "Paid";
                 order.save();
 
-                //organize information for order summary in email
-
                 var results = calcNYCTax(order.orderTotal);
                 var orderTotal = results[0];
                 var taxAmt = results[1];
                 var total = results[2];
+                //organize information for order summary in email
+                if (!order.emailConfirm){
 
-                var thisOrder;
-                var orderItemTxt="";
-                for (var i=0; i < order.items.length; i++){
-                    thisOrder = order.items[i];
-                    if (thisOrder.qty){
-                        orderItemTxt += "Item: " + thisOrder.type + " | \n";
-                        orderItemTxt += "Quantity:  " + thisOrder.qty + " | \n";
-                        orderItemTxt += "Price:  $" + thisOrder.price + " | \n";
-                        orderItemTxt += "******************\n\n";
+                    var thisOrder;
+                    var orderItemTxt="";
+                    for (var i=0; i < order.items.length; i++){
+                        thisOrder = order.items[i];
+                        if (thisOrder.qty){
+                            orderItemTxt += "Item: " + thisOrder.type + " | \n";
+                            orderItemTxt += "Quantity:  " + thisOrder.qty + " | \n";
+                            orderItemTxt += "Price:  $" + thisOrder.price + " | \n";
+                            orderItemTxt += "******************\n\n";
+                        }
                     }
+
+                    //send user a confirmation email
+
+                    var sendgridOptions = {
+                        auth: {
+                            api_user: process.env.SENDGRID_USERNAME,
+                            api_key: process.env.SENDGRID_PASSWORD
+                        }
+                    };
+
+                    var mailer = nodemailer.createTransport(sgTransport(sendgridOptions));
+
+                    var email = {
+                        to: [order.email],
+                        from: 'orders@rentridereturn.com',
+                        subject: 'Rent Ride Return Order Confirmation',
+                        text: 'Hey!\n\n' +
+                        'Thanks for renting from RentRideReturn.com!\n' +
+                        'Your order will be delivered to your pick-up location the day of your trip.\n'+
+                        'Save the trees and don\'t print this email.\n\n'+
+                        'Below is your order information:\n\n'+
+                        'Order Date: ' + order.created + '\n\n' +
+                        'Order Number: ' + order.orderNumber + '\n\n' +
+                        'Rental Start Date: ' + order.orderDate + '\n\n'+
+                        'Rental End Date: ' + order.orderDate + '\n\n'+
+                        'Delivery Method: Bus Pick-up\n\n'+
+                        'Delivery Address: ' + order.orderLocation + '\n\n'+
+                        'Item Summary:\n\n'+ orderItemTxt +
+                        'Item(s) Subtotal: $' + orderTotal + ' | \n'+
+                        'Tax: $' + taxAmt + ' | \n'+
+                        'Delivery: FREE | \n'+
+                        'Order Total: $' + total + '\n\n'+
+
+                        'Rental Terms:\n\n'+
+                        'Rentals must be returned to NYC Beach Bus Staff at your initial Brooklyn departure location.  Rentals cannot be returned to our beach staff.\n\n'+
+                        'In the event you miss the bus, you are still liable for rental fees.\n\n'+
+                        'All  rentals must be returned on the same day. In the event you fail to return the product on your return trip or not at all, a late fee of '+
+                        'forty dollars ($40.00) will be charged to the payment card you used to pay the Rental Fee or to any other payment card included in your '+
+                        'account information that you have provided to RRR for every day that you are late returning the Products, and you agree to pay such late fees, '+
+                        'up to an amount not to exceed the Retail Value plus applicable sales tax (plus the Rental Fee). \n\n'+
+                        'You are responsible for loss, destruction or damage to the Products due to theft, disappearance, fire, major irreparable stains or any other cause, '+
+                        'other than normal wear and tear. Normal wear and tear encompasses minor stains and rips. If You return a Product that is damaged beyond normal wear '+
+                        'and tear then you agree that we shall charge you, and you shall pay, for the price for repairing or replacing the Product, as determined in our '+
+                        'discretion, up to the Retail Value for the Product as indicated on on our site.\n\n'+
+                        'Thanks for renting. See you on the beach!\n\n\n'
+                    };
+
+                    mailer.sendMail(email, function (err) {
+                        if (err) {
+                            console.log('error sending mail');
+                            console.log(err);
+                        } else {
+                            order.emailConfirm = true;
+                            order.save();
+                        }
+                    });                    
                 }
 
-                //send user a confirmation email
-
-                var sendgridOptions = {
-                    auth: {
-                        api_user: process.env.SENDGRID_USERNAME,
-                        api_key: process.env.SENDGRID_PASSWORD
-                    }
-                };
-
-                var mailer = nodemailer.createTransport(sgTransport(sendgridOptions));
-
-                var email = {
-                    to: [order.email],
-                    from: 'orders@rentridereturn.com',
-                    subject: 'Rent Ride Return Order Confirmation',
-                    text: 'Hey!\n\n' +
-                    'Thanks for renting from RentRideReturn.com!\n' +
-                    'Your order will be delivered to your pick-up location the day of your trip.\n'+
-                    'Save the trees and don\'t print this email.\n\n'+
-                    'Below is your order information:\n\n'+
-                    'Order Date: ' + order.created + '\n\n' +
-                    'Order Number: ' + order.orderNumber + '\n\n' +
-                    'Rental Start Date: ' + order.orderDate + '\n\n'+
-                    'Rental End Date: ' + order.orderDate + '\n\n'+
-                    'Delivery Method: Bus Pick-up\n\n'+
-                    'Delivery Address: ' + order.orderLocation + '\n\n'+
-                    'Item Summary:\n\n'+ orderItemTxt +
-                    'Item(s) Subtotal: $' + orderTotal + ' | \n'+
-                    'Tax: $' + taxAmt + '| \n'+
-                    'Delivery: FREE | \n'+
-                    'Order Total: $' + total + '\n\n'+
-
-                    'Rental Terms:\n\n'+
-                    'Rentals must be returned to NYC Beach Bus Staff at your initial Brooklyn departure location.  Rentals cannot be returned to our beach staff.\n\n'+
-                    'In the event you miss the bus, you are still liable for rental fees.\n\n'+
-                    'All  rentals must be returned on the same day. In the event you fail to return the product on your return trip or not at all, a late fee of '+
-                    'forty dollars ($40.00) will be charged to the payment card you used to pay the Rental Fee or to any other payment card included in your '+
-                    'account information that you have provided to RRR for every day that you are late returning the Products, and you agree to pay such late fees, '+
-                    'up to an amount not to exceed the Retail Value plus applicable sales tax (plus the Rental Fee). \n\n'+
-                    'You are responsible for loss, destruction or damage to the Products due to theft, disappearance, fire, major irreparable stains or any other cause, '+
-                    'other than normal wear and tear. Normal wear and tear encompasses minor stains and rips. If You return a Product that is damaged beyond normal wear '+
-                    'and tear then you agree that we shall charge you, and you shall pay, for the price for repairing or replacing the Product, as determined in our '+
-                    'discretion, up to the Retail Value for the Product as indicated on on our site.\n\n'+
-                    'Thanks for renting. See you on the beach!\n\n\n'
-                };
-
-                mailer.sendMail(email, function (err) {
-                    if (err) {
-                        console.log('error sending mail');
-                        console.log(err);
-                    }
-                });
-                console.log(email.text);
                 res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
             } else {
                 res.send(err);
@@ -349,7 +355,7 @@ function formatDate() {
 
 function getAllOrders(req, res, next){
     
-    Order.find({"orderStatus":"Paid"}, function(err, orders){
+    Order.find({}, function(err, orders){
         req.allOrders = orders;
         return next();
     });

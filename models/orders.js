@@ -29,6 +29,7 @@ var orderSchema = mongoose.Schema({
         email: {type: String, trim: true},
         password: String
     },
+    emailConfirm: {type: Boolean, default: false},
     accountActive: {type: Boolean, default: true}
 });
 
