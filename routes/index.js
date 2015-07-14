@@ -10,7 +10,7 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 var mongoose = require("mongoose");
 var Order = require('../models/orders');
 var ObjectID = require('mongodb').ObjectID;
-
+var AdminUser = require('../models/adminUsers');
 //order constats
 var max_orders = 100;
 var inventory = require('../config/inventory');
@@ -69,7 +69,7 @@ module.exports = function (app, passport) {
         console.log(req.session);
         if (!req.session.order){
             console.log('no order');
-            res.render('paymentConfirm', {total: total, title: 'Rent Ride Return'});
+            res.render('paymentConfirm', {title: 'Rent Ride Return'});
             // res.redirect('/');
             return;
         }
@@ -300,12 +300,29 @@ module.exports = function (app, passport) {
 
 
 // =============================================================================
-// ADMIN =====================================================
+// ADMIN PAGES =====================================================
 // =============================================================================
 
-    app.get('/admin', getAllOrders, function(req, res){
-        res.render('admin', {orders: req.allOrders, title: 'Admin Panel'});
+    app.get('/admin', function(req, res){
+        res.render('adminSignin', {title: 'Admin Page'});
     });
+
+    app.post('/admin', getAllOrders, function(req, res){
+        var pw = req.body.password;
+        if (pw=="Ilovemyself1!"){
+            req.session.admin = true;
+            res.redirect('/adminPanel');
+        } else {
+            res.send('You do not have access to the admin panel. Who do you think you are, anyway??');
+        }
+    });
+
+    app.get('/adminPanel', isAdmin, getAllOrders, function(req, res){
+        res.render('admin', {orders: req.allOrders, title: 'Admin Order Panel'});
+    }); 
+
+
+
 
 // =============================================================================
 // ROUTE TO PAGE NOT FOUND =====================================================
@@ -329,6 +346,14 @@ module.exports = function (app, passport) {
 function getCurrentPath(req, res, next) {
     req.session.redirectTo = req.path;
     return next();
+}
+
+function isAdmin(req, res, next) {
+    if (req.session.admin) {
+        return next();
+    } else {
+        res.redirect('/admin');
+    }
 }
 
 function calcNYCTax(subtotal){

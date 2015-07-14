@@ -1,6 +1,5 @@
 // load the things we need
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
 
 // define the schema for our order model
 var orderSchema = mongoose.Schema({
@@ -32,11 +31,6 @@ var orderSchema = mongoose.Schema({
     emailConfirm: {type: Boolean, default: false},
     accountActive: {type: Boolean, default: true}
 });
-
-// generating a hash
-orderSchema.methods.generateHash = function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-};
 
 // create the model for orders and expose it to our app
 module.exports = mongoose.model('Order', orderSchema);
