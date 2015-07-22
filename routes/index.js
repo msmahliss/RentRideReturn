@@ -159,6 +159,7 @@ module.exports = function (app, passport) {
                             order.save();
                         }
                     });                    
+                    //send Ayo confirm email as well. orders@rentridereturn.com
                 }
 
                 res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
@@ -398,7 +399,7 @@ function getOrderStatus(req, res, next) {
         }},
         function (err, result) {
         if (!result) {
-            //none ordered. max avail.
+            //none ordered. max avail
             req.orderStatusResult = null;
             return next();
         } else {
