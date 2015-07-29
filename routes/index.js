@@ -66,7 +66,6 @@ module.exports = function (app, passport) {
     });
 
     app.get('/paymentConfirm', function (req, res) {
-        console.log(req.session);
         if (!req.session.order){
             console.log('no order');
             res.render('paymentConfirm', {title: 'Rent Ride Return'});
@@ -221,7 +220,7 @@ module.exports = function (app, passport) {
         deluxeComboOrder.price = 20.00;
         deluxeComboOrder.id = "B3";
         deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
-        // deluxeComboOrder.img = 'img/deluxe_combo.jpg';
+        deluxeComboOrder.img = '/img/deluxe_combo.jpg';
 
         var umbrellaOrder = {};
         umbrellaOrder.type = "Umbrella";
