@@ -124,7 +124,6 @@ module.exports = function (app, passport) {
                         'Your order will be delivered to your pick-up location the day of your trip.\n'+
                         'Save the trees and don\'t print this email.\n\n'+
                         'Below is your order information:\n\n'+
-                        'Order Date: ' + order.created + '\n\n' +
                         'Order Number: ' + order.orderNumber + '\n\n' +
                         'Rental Start Date: ' + order.orderDate + '\n\n'+
                         'Rental End Date: ' + order.orderDate + '\n\n'+
@@ -150,6 +149,7 @@ module.exports = function (app, passport) {
                         'Thanks for renting. See you on the beach!\n\n\n'
                     };
 
+                    //send customer confirm email
                     mailer.sendMail(email, function (err) {
                         if (err) {
                             console.log('error sending mail');
@@ -159,7 +159,17 @@ module.exports = function (app, passport) {
                             order.save();
                         }
                     });                    
+
                     //send Ayo confirm email as well. orders@rentridereturn.com
+                    var adminEmail = email;
+                    adminEmail.subject = 'Rent Ride Booking';
+                    adminEmail.to = "orders@rentridereturn.com";
+                    mailer.sendMail(email, function (err) {
+                        if (err) {
+                            console.log('error sending mail');
+                            console.log(err);
+                        }
+                    });        
                 }
 
                 res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
@@ -191,14 +201,14 @@ module.exports = function (app, passport) {
         classicChairOrder.price = 8.00;
         classicChairOrder.id = "B0";
         classicChairOrder.qty = req.body.classicChair_qty ? req.body.classicChair_qty : 0;
-        classicChairOrder.img = 'img/basic_chair.jpg';
+        classicChairOrder.img = '/img/basic_chair.jpg';
 
         var deluxeChairOrder = {};
         deluxeChairOrder.type = "Deluxe full body chair";
         deluxeChairOrder.price = 14.00;
         deluxeChairOrder.id = "B1";
         deluxeChairOrder.qty = req.body.deluxeChair_qty ? req.body.deluxeChair_qty : 0;
-        deluxeChairOrder.img = 'img/deluxe_chair.jpg';
+        deluxeChairOrder.img = '/img/deluxe_chair.jpg';
 
         var classicComboOrder = {};
         classicComboOrder.type = "Classic chair & umbrella";
@@ -211,6 +221,7 @@ module.exports = function (app, passport) {
         deluxeComboOrder.price = 20.00;
         deluxeComboOrder.id = "B3";
         deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
+        // deluxeComboOrder.img = 'img/deluxe_combo.jpg';
 
         var umbrellaOrder = {};
         umbrellaOrder.type = "Umbrella";
@@ -249,10 +260,7 @@ module.exports = function (app, passport) {
         newOrder.first_name = req.body.first_name;
         newOrder.last_name = req.body.last_name;
 
-        //TODO: Make this the last 6 digits of id
-        // console.log("id: "+newOrder._id);
-        // console.log("orderNumber: "+newOrder._id.substring(0,6));
-
+        //TODO: Make the order numbers count
         newOrder.orderNumber = Math.floor(Math.random()*1000000);
         newOrder.orderDate = order.orderDate;
         newOrder.orderLocation = order.orderLocation;

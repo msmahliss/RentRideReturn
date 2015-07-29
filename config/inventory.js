@@ -14,19 +14,19 @@ var inventory = [{
       'name' : 'Classic chair & umbrella',
       'price' : 15.00,
       'id': "B2",
-      'max_qty' : 14
+      'max_qty' : 38
     },
     {
       'name' : 'Deluxe chair & umbrella',
       'price' : 20.00,
       'id': "B3",
-      'max_qty' : 14
+      'max_qty' : 38
     },
     {
       'name' : 'Umbrella',
       'price' : 10.00,
       'id': "B4",
-      'max_qty' : 14
+      'max_qty' : 38
     }
 ];
 
