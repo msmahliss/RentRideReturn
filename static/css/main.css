@@ -1504,10 +1504,10 @@ h1 {
 	display: inline-block;
 }
 
-.error-message{
-
+.close-message {
+	font-size: 12px;
+	font-weight: bold;
 }
-
 
 /*****carousel styling*************/
 

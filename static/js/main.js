@@ -39,7 +39,7 @@ $(document).ready(function () {
 		$('.error-message').hide("slow");
 		//update qtys and check availability
 		//TODO: improve helper function to update selected quantitiess
-		// console.log( parseFloat($(this).val()) );
+
 		var date = $('#datepicker').val();
 		fetchOrderData(date);
 	});
@@ -55,6 +55,7 @@ $(document).ready(function () {
 	$('#datepicker').change(function(){
 		//check order status based on date
 		var date = $(this).val();
+		closeBookings(date);
 		fetchOrderData(date);
 	});
 
@@ -78,6 +79,7 @@ function findFirstDate() {
    		date = new Date(validDates[i]);
    		if (date >= today) {
 			$('#datepicker').val(validDates[i]);
+			closeBookings(validDates[i]);
 			fetchOrderData(validDates[i]);
 			return;
    		}
@@ -105,6 +107,23 @@ function displayValidDates(date) {
  
  	return [ validDates.indexOf(currentDate) > -1 ];
  }
+
+function closeBookings(date){
+	if (date=="08/01/2015"){
+		console.log('closed for today');
+		$('.close-message').show();
+		$('.js-rental-qty option').each(function(){
+			console.log($(this));
+			 $(this).attr('disabled', true);
+		});
+	} else {
+		$('.close-message').hide();		
+		$('.js-rental-qty option').each(function(){
+			console.log($(this));
+			 $(this).attr('disabled', false);
+		});
+	}
+}
 
 function fetchOrderData(date){
 	$.get('/getOrderStatus?date='+date, function(result, status){
