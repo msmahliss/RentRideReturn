@@ -112,13 +112,11 @@ function closeBookings(date){
 	if (date=="08/08/2015"){
 		$('.close-message').show();
 		$('.js-rental-qty option').each(function(){
-			console.log($(this));
 			 $(this).attr('disabled', true);
 		});
 	} else {
 		$('.close-message').hide();		
 		$('.js-rental-qty option').each(function(){
-			console.log($(this));
 			 $(this).attr('disabled', false);
 		});
 	}
