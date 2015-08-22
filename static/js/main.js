@@ -109,7 +109,7 @@ function displayValidDates(date) {
  }
 
 function closeBookings(date){
-	if (date=="08/15/2015"){
+	if (date=="08/22/2015"){
 		$('.close-message').show();
 		$('.js-rental-qty option').each(function(){
 			 $(this).attr('disabled', true);
