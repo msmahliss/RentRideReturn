@@ -78,6 +78,7 @@ function findFirstDate() {
    	for (var i=0; i < validDates.length; i++){
    		date = new Date(validDates[i]);
    		if (date >= today) {
+
 			$('#datepicker').val(validDates[i]);
 			closeBookings(validDates[i]);
 			fetchOrderData(validDates[i]);
@@ -93,7 +94,7 @@ function displayValidDates(date) {
  	var d = today.getDate(); 
  	var y = today.getFullYear(); 
  	today = new Date(m + '/' + d + '/' + y);
-
+ 	console.log(today);
  	if (date < today) {
  		return false;
  	}
@@ -109,7 +110,9 @@ function displayValidDates(date) {
  }
 
 function closeBookings(date){
-	if (date=="08/30/2015"){
+ 	//Close bookings if date is  today
+
+	if (date=="09/05/2015"){
 		$('.close-message').show();
 		$('.js-rental-qty option').each(function(){
 			 $(this).attr('disabled', true);
