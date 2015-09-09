@@ -110,19 +110,12 @@ function displayValidDates(date) {
  }
 
 function closeBookings(date){
- 	//Close bookings if date is  today
-
-	if (date=="09/07/2015"){
+ 	//Close bookings if date is today
 		$('.close-message').show();
 		$('.js-rental-qty option').each(function(){
 			 $(this).attr('disabled', true);
 		});
-	} else {
-		$('.close-message').hide();		
-		$('.js-rental-qty option').each(function(){
-			 $(this).attr('disabled', false);
-		});
-	}
+
 }
 
 function fetchOrderData(date){
