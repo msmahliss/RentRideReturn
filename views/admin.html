@@ -2,49 +2,43 @@
 	<div class="orderSummary" id="orders">
 		<p class="list-header">Sup, Ayo</p>
 		<p class="list-header">Here are all your orders.</p>
-	  <!-- <input class="search" placeholder="Search" /> -->
-	  <button class="sort" data-sort="last_name">
-	    Sort by Last Name
-	  </button>
-	  <button class="sort" data-sort="order_id">
-	    Sort by Order #
-	  </button>
+		<p class="list-header">Click on the headers to sort 'em or search with box below.</p>
+
+	  <input class="search" placeholder="Search">
 		<div class="sticky-wrap">
 			<table class="sticky-enabled">
 				<thead>
 					<tr>
-						<th class="th-padding">First Name</th>
-						<th class="th-padding">Last Name</th>
-						<th class="th-padding">Email</th>
-						<th class="th-padding">Phone #</th>
-						<th class="th-padding">BeachBus ID</th>
-						<!-- <th>Order Date</th> -->
-						<th class="th-padding">Order #</th>
-						<th class="th-padding">Order Status</th>
-						<th class="th-padding">Rental Date</th>
-						<th class="th-padding">Delivery Method</th>
-						<th class="th-padding">Bus Pick-up</th>
-						<th class="th-padding">Order Items</th>
-						<th class="th-padding">Order Total</th>
-						<th class="th-padding">Checked In</th>
+						<th class="th-padding sort" data-sort="first_name">First Name</th>
+						<th class="th-padding sort" data-sort="last_name">Last Name</th>
+						<th class="th-padding sort" data-sort="email">Email</th>
+						<th class="th-padding sort" data-sort="phone_number">Phone #</th>
+						<th class="th-padding sort" data-sort="pass_id">Passenger ID</th>
+						<th class="th-padding sort" data-sort="order_id">Order #</th>
+						<th class="th-padding sort" data-sort="order_status">Order Status</th>
+						<th class="th-padding sort" data-sort="order_date">Rental Date</th>
+						<th class="th-padding sort" data-sort="delivery_method">Delivery Method</th>
+						<th class="th-padding sort" data-sort="order_location">Bus Pick-up</th>
+						<th class="th-padding sort" data-sort="order_items">Order Items</th>
+						<th class="th-padding sort" data-sort="order_total">Order Total</th>
+						<th class="th-padding sort" data-sort="checked_in">Checked In</th>
 					</tr>
 				</thead>
-				<tbody>
-
+				<tbody class="list">
 			{{#each orders}}
 			{{this.length}}
-		<tr>
-	        <td class="td-center td-padding">{{this.first_name}}</td>
+		<tr id="{{this.orderNumber}}">
+	        <td class="td-center td-padding first_name">{{this.first_name}}</td>
 	        <td class="td-center td-padding last_name">{{this.last_name}}</td>
-	        <td class="td-center td-padding">{{this.email}}</td>
-	        <td class="td-center td-padding">{{this.phone}}</td>
-	        <td class="td-center td-padding">{{this.passengerID}}</td>	        
+	        <td class="td-center td-padding email">{{this.email}}</td>
+	        <td class="td-center td-padding phone_number">{{this.phone}}</td>
+	        <td class="td-center td-padding pass_id">{{this.passengerID}}</td>	        
 	        <!-- <td class="">{{this.created}}</td> -->
 	        <td class="td-center order_id">{{this.orderNumber}}</td>
-	        <td class="td-center">{{this.orderStatus}}</td>
-	        <td class="td-center">{{this.orderDate}}</td>
-	        <td class="td-center td-padding">NYC Beach Bus</td>
-	        <td class="td-center td-padding">{{this.orderLocation}}</td>
+	        <td class="td-center order_status">{{this.orderStatus}}</td>
+	        <td class="td-center order_date">{{this.orderDate}}</td>
+	        <td class="td-center delivery_method">NYC Beach Bus</td>
+	        <td class="td-center order_location">{{this.orderLocation}}</td>
 	        <td class="td-center td-padding">
 				<ul>
 				{{#each this.items}}
@@ -54,10 +48,17 @@
 				{{/each}}
 				</ul>
 			</td>
-			<td class="td-center td-padding list-header">${{this.orderTotal}}</td>
+			<td class="td-center td-padding list-header order_total">${{this.orderTotal}}</td>
 
-			<td class="td-center td-padding list-header">
-            	<button type="button" class="btn btn-default single-check sign-in-check js-terms-check"><span class="js-terms-check-graphic inner-btn-graphic">☐</span><span class="js-terms-check-graphic inner-btn-graphic is-hidden">✔</span></button>
+			<td class="td-center td-padding list-header checked_in">
+
+				<div class="checkbox">
+				  <label>
+				    <input id="{{this.orderNumber}}-checked-in" type="checkbox" value="">
+				  </label>
+				</div>
+<!-- 
+            	<button type="button" class="btn btn-default single-check sign-in-check js-terms-check"><span class="js-terms-check-graphic inner-btn-graphic">☐</span><span class="js-terms-check-graphic inner-btn-graphic is-hidden">✔</span></button> -->
 			</td>
 		</tr>
 			{{/each}}
@@ -69,12 +70,13 @@
 	</div>
 </div>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js"></script>
+<script src="/js/list.js"></script>
 
 <script>
 	
 var options = {
-  valueNames: [ 'last_name', 'order_id' ]
+  valueNames: [ 'first_name', 'last_name', 'email', 'phone_number', 'pass_id', 'order_id',
+  				'order_status', 'order_date', 'delivery_method', 'order_location', 'order_items', 'order_total', 'checked_in']
 };
 
 var orderList = new List('orders', options);

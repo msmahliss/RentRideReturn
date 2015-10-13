@@ -1577,6 +1577,12 @@ tbody tr:hover {
 	padding: 0px 5px 0px 5px;
 }
 
+.sort:hover {
+	background-color: rgba(202, 224, 221, 0.94);
+  	cursor: pointer;	
+}
+
+
 /****END ADMIN PAGE STYLING****/
 
 
