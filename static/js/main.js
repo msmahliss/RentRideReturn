@@ -60,7 +60,7 @@ $(document).ready(function () {
 	});
 
 	//checked-in checkboxes
-	//find the order for which this is true and update that orderID
+	//TOODO:find the order for which this is true and update that orderID
 
 function findFirstDate() {
 	//If no date is selected, choose first valid rental date

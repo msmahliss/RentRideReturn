@@ -319,6 +319,7 @@ module.exports = function (app, passport) {
         var pw = req.body.password;
         if (pw=="Ilovemyself1!"){
             req.session.admin = true;
+            //TODO: use req.path
             res.redirect('/adminPanel');
         } else {
             res.send('You do not have access to the admin panel. Who do you think you are, anyway??');
@@ -330,9 +331,9 @@ module.exports = function (app, passport) {
     }); 
 
 
-    app.get('/adminCheckIn', isAdmin, getAllOrders, function(req, res){
+    app.get('/inventory', getAllOrders, function(req, res){
         //separate winter from summer orders
-        res.render('admin', {orders: req.allOrders, title: 'Admin Order Panel'});
+        res.render('inventory', {items: inventory, title: 'Inventory Panel'});
     }); 
 
 

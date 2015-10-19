@@ -1,0 +1,58 @@
+<div class="admin-section-container orderSummary">
+	<div class="orderSummary" id="orders">
+		<p class="list-header">Sup, Ayo</p>
+		<p class="list-header">Here is all your inventory.</p>
+		<p class="list-header">Click on the headers to sort 'em or search with box below.</p>
+
+	  <input class="search" placeholder="Search">
+		<div class="sticky-wrap">
+			<table class="sticky-enabled">
+				<thead>
+					<tr>
+						<th class="th-padding sort" data-sort="item_name">Item Name</th>
+						<th class="th-padding sort" data-sort="sku">SKU</th>
+						<th class="th-padding sort" data-sort="category">Category</th>
+						<th class="th-padding sort" data-sort="sub_category">Subcategory</th>
+						<th class="th-padding sort" data-sort="color">Color</th>
+						<th class="th-padding sort" data-sort="size">Size</th>
+						<th class="td-padding sort" data-sort="price">Price</th>
+						<th class="th-padding sort" data-sort="max_qty">Total Count</th>
+						<th class="th-padding sort" data-sort="qty_ordered">Qty Ordered</th>
+						<th class="th-padding sort" data-sort="qty_avail">Qty Available</th>
+					</tr>
+				</thead>
+				<tbody class="list">
+			{{#each items}}
+			{{this.length}}
+		<tr id="{{this.orderNumber}}">
+	        <td class="td-center td-padding item_name">{{this.name}}</td>
+	        <td class="td-center td-padding sku">{{this.sku}}</td>
+	        <td class="td-center td-padding category">{{this.category}}</td>
+	        <td class="td-center td-padding sub_category">{{this.subcategory}}</td>
+	        <td class="td-center td-padding color">{{this.color}}</td>	        
+	        <td class="td-center td-padding size">{{this.size}}</td>	        
+			<td class="td-center td-padding price">${{this.price}}</td>
+			<td class="td-center td-padding max_qty">{{this.max_qty}}</td>
+			<td class="td-center td-padding qty_ordered">0</td>
+			<td class="td-center td-padding qty_avail">{{this.max_qty}}</td>
+		</tr>
+			{{/each}}
+				</tbody>
+			</table>
+		</div> 
+		<p class="list-header">xoxo, MSH</p>
+		<hr class="lightline">
+	</div>
+</div>
+
+<script src="/js/list.js"></script>
+
+<script>
+	
+var options = {
+  valueNames: [ 'item_name', 'sku', 'category', 'sub_category', 'color', 'size', 'price', 'max_qty', 'qty_ordered', 'qty_avail']
+};
+
+var orderList = new List('orders', options);
+
+</script>
