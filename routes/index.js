@@ -22,11 +22,7 @@ module.exports = function (app, passport) {
 // =============================================================================
 
     app.get('/', function (req, res) {
-        if (req.user) {
-            res.redirect('/intro');
-        } else {
-            res.render('index', {title: 'Rent Ride Return'});
-        }
+        res.render('temp', {title: 'Rent Ride Return'});
     });
 
     app.get('/how-it-works', function (req, res) {
