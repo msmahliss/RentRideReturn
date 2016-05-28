@@ -1,16 +1,20 @@
 
   <section class="form-section-container">
-     <div class="order-form-wrap col-md-4" style="padding-left: 0px; padding-right: 0px;">
+     <div class="order-form-wrap col-md-4" style="padding-left: 0px;">
      <form method="post" action="/placeOrder" class="order-form">
           <div class="form-title-text">Get Your Gear On</div></span>
           <hr class="lightline">
           <ul class="listmenu calendar-input">
           <li>
             <div class="input-group date datepicker-wrap" data-date-format="mm-dd-yyyy">
-                <input class="form-control" required placeholder="Booking Date" type="text" name="date" id="datepicker">
+                <input class="form-control" readonly required placeholder="Booking Date" type="text" name="date" id="datepicker">
                 <!-- <span><i class="glyphicon glyphicon-calendar"></i></span> -->
                 <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span> -->
 <!--                 <span class="hover-tips js-hover-tips glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Available weekends and holidays July 3 through Labor Day"></span> -->
+              <div class="close-message-wrap">
+                <p class="close-message" style="display: none;">Bookings are now closed for today.</p>                         
+              </div>
+
             </div>
 
             <!-- <input name="last_name" placeholder="Last Name"> -->
@@ -19,7 +23,7 @@
             <ul class="listmenu listheaders clearfix">
               <li><span class="item-width">Pick-up Location</span></li>
               <li>
-                <span class="hover-tips js-hover-tips glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Rentals are currently for NYC BeachBus Riders only"></span>
+                <span class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="bottom" title="Rentals are currently for NYC Beach Bus Riders only"></span>
               </li>
             </ul>
 
@@ -28,6 +32,7 @@
               <select name="location" required class="rental-location js-rental-location">
               <option value="NYC Beach Bus - Williamsburg" selected="">NYC Beach Bus-Williamsburg</option>
               <option value="NYC Beach Bus - Barclay's Center">NYC Beach Bus-Barclay's Center</option>
+              <option value="NYC Beach Bus - Union Square">NYC Beach Bus-Union Square</option>
               </select>
             </li>
             </ul>
@@ -42,10 +47,10 @@
               <p class="rental-item">Classic half body chair</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price">$8</p>
+              <p class="js-rental-price rental-price">$10</p>
             </li>
               <li>
-                <select name="classicChair_qty" class="rental-qty js-rental-qty" onChange="">
+                <select name="classicChair_qty" id="B0" class="rental-qty js-rental-qty">
               <option value="0" selected="">0</option>
               <option value="1"> 1 </option>
               <option value="2"> 2 </option>
@@ -63,7 +68,7 @@
               <p class="js-rental-price rental-price">$14</p>
             </li>
               <li>
-                <select name="deluxeChair_qty" class="rental-qty js-rental-qty">
+                <select name="deluxeChair_qty" id="B1" class="rental-qty js-rental-qty">
               <option value="0" selected="">0</option>
               <option value="1"> 1 </option>
               <option value="2"> 2 </option>
@@ -78,10 +83,10 @@
               <p class="rental-item">Classic chair & umbrella</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price">$15</p>
+              <p class="js-rental-price rental-price">$18</p>
             </li>
             <li>
-                <select name="classicCombo_qty" class="rental-qty js-rental-qty">
+                <select name="classicCombo_qty" id="B2" class="rental-qty js-rental-qty">
             <option value="0" selected="">0</option>
             <option value="1" > 1 </option>
             <option value="2"> 2 </option>
@@ -95,10 +100,10 @@
               <p class="rental-item">Deluxe chair & umbrella</p>
               </li>
             <li>
-              <p class="js-rental-price rental-price">$20</p>
+              <p class="js-rental-price rental-price">$22</p>
             </li>
             <li>
-                <select name="deluxeCombo_qty" class="rental-qty js-rental-qty">
+                <select name="deluxeCombo_qty" id="B3" class="rental-qty js-rental-qty">
             <option value="0" selected="">0</option>
             <option value="1" > 1 </option>
             <option value="2"> 2 </option>
@@ -115,7 +120,7 @@
               <p class="js-rental-price rental-price">$10</p>
             </li>
             <li>
-                <select name="umbrella_qty" class="rental-qty js-rental-qty">
+                <select name="umbrella_qty" id="B4" class="rental-qty js-rental-qty">
             <option value="0" selected="">0</option>
             <option value="1" > 1 </option>
             <option value="2"> 2 </option>
@@ -123,13 +128,43 @@
             <option value="4"> 4 </option>
             </select></li>
             </ul>
-              <!-- <p id="subTotal" class="pay-button">ORDER SUBTOTAL: $0.00</p>            -->
               <input type="submit" value="RENT NOW" class="button pay-button">
+              <div class="error-message-wrap">
+                <p class="error-message" style="display: none;">Please select an item.</p>                         
+              </div>
         </form>
 
 
               </div>
       <div class="col-md-8 panel-beach">
+        <!-- <div id="beachCarousel" class="carousel slide"> -->
+          <!-- <ol class="carousel-indicators"> -->
+<!--             <li data-target="#beachCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#beachCarousel" data-slide-to="1"></li> -->
+          <!-- </ol> -->
+          <!-- <div class="carousel-inner"> -->
+<!--               <div class="active item">
+                  <div class="my-carousel-caption"><h2>Welcome to your new elevated beach experience</h2></div>
+                <div class="carousel-img-wrap"> -->
+                  <!-- <img class="carousel-img" src="/img/beach_chair_main.jpg"> -->
+              <!-- </div> -->
+            <!-- </div> -->
+<!--             <div class="item">
+                <div class="my-carousel-caption"><h2>Lightweight chair and umbrella rentals starting at $8</h2></div>
+              <div class="carousel-img-wrap">
+                <img class="carousel-img" src="/img/basic_chair.jpg">
+              </div>
+            </div> -->
+          <!-- </div> -->
+<!--           <a class="carousel-control left" href="#beachCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control right" href="#beachCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a> -->
+        </div>
       </div>
 
   </section>   

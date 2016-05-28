@@ -1,6 +1,6 @@
 var inventory = [{
       'name' : 'Classic half body chair',
-      'price' : 8.00,
+      'price' : 10.00,
       'id': "B0",
       'max_qty' : 48
     },
@@ -12,13 +12,13 @@ var inventory = [{
     },
     {
       'name' : 'Classic chair & umbrella',
-      'price' : 15.00,
+      'price' : 18.00,
       'id': "B2",
       'max_qty' : 38
     },
     {
       'name' : 'Deluxe chair & umbrella',
-      'price' : 20.00,
+      'price' : 22.00,
       'id': "B3",
       'max_qty' : 38
     },

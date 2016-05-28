@@ -22,11 +22,7 @@ module.exports = function (app, passport) {
 // =============================================================================
 
     app.get('/', function (req, res) {
-        if (req.user) {
-            res.redirect('/intro');
-        } else {
-            res.render('index', {title: 'Rent Ride Return'});
-        }
+        res.render('index', {title: 'Rent Ride Return'});
     });
 
     app.get('/how-it-works', function (req, res) {
@@ -34,7 +30,7 @@ module.exports = function (app, passport) {
     });
 
     app.get('/beach', function (req, res) {
-        res.render('index', {title: 'Rent Ride Return'});
+        res.render('beach', {title: 'Rent Ride Return'});
     });
 
     app.get('/winter', function (req, res) {
