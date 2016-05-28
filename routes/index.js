@@ -197,7 +197,7 @@ module.exports = function (app, passport) {
         //TODO: not this. Loop through all items from inventory
         var classicChairOrder = {};
         classicChairOrder.type = "Classic half body chair";
-        classicChairOrder.price = 8.00;
+        classicChairOrder.price = 10.00;
         classicChairOrder.id = "B0";
         classicChairOrder.qty = req.body.classicChair_qty ? req.body.classicChair_qty : 0;
         classicChairOrder.img = '/img/basic_chair.jpg';
@@ -211,13 +211,13 @@ module.exports = function (app, passport) {
 
         var classicComboOrder = {};
         classicComboOrder.type = "Classic chair & umbrella";
-        classicComboOrder.price = 15.00;
+        classicComboOrder.price = 18.00;
         classicComboOrder.id = "B2";
         classicComboOrder.qty = req.body.classicCombo_qty ? req.body.classicCombo_qty: 0;
 
         var deluxeComboOrder = {};
         deluxeComboOrder.type = "Deluxe chair & umbrella";
-        deluxeComboOrder.price = 20.00;
+        deluxeComboOrder.price = 22.00;
         deluxeComboOrder.id = "B3";
         deluxeComboOrder.qty = req.body.deluxeCombo_qty ? req.body.deluxeCombo_qty: 0;
         deluxeComboOrder.img = '/img/deluxe_combo.jpg';
