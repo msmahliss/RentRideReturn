@@ -60,6 +60,9 @@ $(document).ready(function () {
 		fetchOrderData(date);
 	});
 
+	//checked-in checkboxes
+	//find the order for which this is true and update that orderID
+
 function findFirstDate() {
 	//If no date is selected, choose first valid rental date
  	var date;
@@ -89,12 +92,12 @@ function findFirstDate() {
  
 function displayValidDates(date) {
  	//First check if date is before today
+
    	var today = new Date();
  	var m = today.getMonth() + 1;
  	var d = today.getDate(); 
  	var y = today.getFullYear(); 
  	today = new Date(m + '/' + d + '/' + y);
-
  	if (date < today) {
  		return false;
  	}
@@ -110,17 +113,29 @@ function displayValidDates(date) {
  }
 
 function closeBookings(date){
-	if (date=="08/08/2015"){
-		$('.close-message').show();
-		$('.js-rental-qty option').each(function(){
-			 $(this).attr('disabled', true);
-		});
-	} else {
+
+	//Normalize formatting for given date and today
+	date = new Date(date);
+   	var today = new Date();
+ 	var m = today.getMonth() + 1;
+ 	var d = today.getDate(); 
+ 	var y = today.getFullYear(); 
+ 	today = new Date(m + '/' + d + '/' + y);
+
+ 	//Close bookings if date is today
+
+	// if (date==today){
+	// 	$('.close-message').show();
+	// 	$('.js-rental-qty option').each(function(){
+	// 		 $(this).attr('disabled', true);
+	// 	});
+	// } else {
 		$('.close-message').hide();		
 		$('.js-rental-qty option').each(function(){
 			 $(this).attr('disabled', false);
 		});
-	}
+	// }
+
 }
 
 function fetchOrderData(date){

@@ -1577,6 +1577,12 @@ tbody tr:hover {
 	padding: 0px 5px 0px 5px;
 }
 
+.sort:hover {
+	background-color: rgba(202, 224, 221, 0.94);
+  	cursor: pointer;	
+}
+
+
 /****END ADMIN PAGE STYLING****/
 
 
@@ -1592,6 +1598,43 @@ tbody tr:hover {
   text-align: left;
   margin-left: 10px;
   color: #fff;
+}
+
+.title-text {
+  font-size: 26px;
+  letter-spacing: 1.4px;
+  text-align: center;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.sub-title-text {
+  font-size: 22px;
+  letter-spacing: 1.4px;
+  text-align: center;
+  margin-left: 10px;
+  color: #fff;
+}
+
+.item-title {
+	text-align: center;
+	font-size: 1.8em;
+}
+.item-container{
+	-webkit-box-shadow: 4px 6px 33px -1px  rgba(128, 163, 220, 0.5);
+	height: 135px;
+	margin-bottom: 30px;
+
+}
+
+.call-out-text{
+	font-size: 2em;
+}
+
+.bold-link{
+	color: #fff;
+	font-size: 1.2em;
+	text-decoration: none!important;
 }
 
 #card{
@@ -1786,6 +1829,21 @@ html.ie9 .trueblue1 input {
   clear: both;
   width: 100%;
   float: left;
+}
+
+.main-container
+{
+    margin: 0 auto 5px;
+    padding: 10px 0px 10px 0px;
+    width: 92%;
+    background-color: #33B79F;
+    /*background-color: rgb(36, 58, 103);*/
+}
+
+.sub-container
+{
+    margin: 0 auto 55px;
+    width: 92%;
 }
 
 /*--------------------*/

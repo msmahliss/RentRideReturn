@@ -18,11 +18,11 @@ var inventory = require('../config/inventory');
 module.exports = function (app, passport) {
 
 // =============================================================================
-// HOME, DETINATION, AND CHECKOUT ROUTES =====================================
+// HOME, DESTINATION, AND CHECKOUT ROUTES =====================================
 // =============================================================================
 
     app.get('/', function (req, res) {
-        res.render('index', {title: 'Rent Ride Return'});
+        res.render('temp', {title: 'Rent Ride Return'});
     });
 
     app.get('/how-it-works', function (req, res) {
@@ -326,6 +326,10 @@ module.exports = function (app, passport) {
     }); 
 
 
+    app.get('/adminCheckIn', isAdmin, getAllOrders, function(req, res){
+        //separate winter from summer orders
+        res.render('admin', {orders: req.allOrders, title: 'Admin Order Panel'});
+    }); 
 
 
 // =============================================================================
