@@ -22,7 +22,7 @@ module.exports = function (app, passport) {
 // =============================================================================
 
     app.get('/', function (req, res) {
-        res.render('temp', {title: 'Rent Ride Return'});
+        res.render('beach', {title: 'Rent Ride Return'});
     });
 
     app.get('/how-it-works', function (req, res) {
@@ -119,6 +119,7 @@ module.exports = function (app, passport) {
                         'Your order will be delivered to your pick-up location the day of your trip.\n'+
                         'Save the trees and don\'t print this email.\n\n'+
                         'Below is your order information:\n\n'+
+                        'Full Name: ' + order.first_name + ' ' + order.last_name + '\n\n' +
                         'Order Number: ' + order.orderNumber + '\n\n' +
                         'Rental Start Date: ' + order.orderDate + '\n\n'+
                         'Rental End Date: ' + order.orderDate + '\n\n'+
