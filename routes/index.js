@@ -390,8 +390,32 @@ function formatDate() {
 }
 
 function getAllOrders(req, res, next){
+
+    var page = parseInt(req.query.page) || 1;
+    var page_size = 100;
+    var skip = Math.max(0, (page - 1) * page_size);
+
+
+    var options = {
+        "limit": page_size,
+        "skip": skip,
+        "sort": {"created":-1}
+    };
     
-    Order.find({}, function(err, orders){
+    Order.find(null, {
+        "created":true,
+        "orderNumber": true,
+        "orderStatus": true,
+        "orderDate": true,
+        "orderLocation": true,
+        "email": true,
+        "phone": true,
+        "first_name": true,
+        "last_name": true,
+        "passengerID": true,
+        "orderTotal": true,
+        "items": true
+    }, options, function(err, orders){
         req.allOrders = orders;
         return next();
     });
