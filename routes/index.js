@@ -154,18 +154,20 @@ module.exports = function (app, passport) {
                             order.emailConfirm = true;
                             order.save();
                         }
-                    });                    
 
-                    //send Ayo confirm email as well. orders@rentridereturn.com
-                    var adminEmail = email;
-                    adminEmail.subject = 'Rent Ride Booking';
-                    adminEmail.to = "orders@rentridereturn.com";
-                    mailer.sendMail(email, function (err) {
-                        if (err) {
-                            console.log('error sending mail');
-                            console.log(err);
-                        }
-                    });        
+                        // //send Ayo confirm email as well. orders@rentridereturn.com
+                        // var adminEmail = email;
+                        // adminEmail.subject = 'Rent Ride Booking';
+                        // adminEmail.to = "orders@rentridereturn.com";
+                        // mailer.sendMail(email, function (err) {
+                        //     if (err) {
+                        //         console.log('error sending mail');
+                        //         console.log(err);
+                        //     }
+                        // }); 
+
+                    });                    
+       
                 }
 
                 res.render('paymentConfirm', {order: order, total: total, title: 'Rent Ride Return'});
